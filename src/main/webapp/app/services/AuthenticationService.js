@@ -14,11 +14,13 @@
 
         return service;
 
-        function Authorize(email, accessToken) {
+        function Authorize(email, accessToken, name) {
+            debugger;
             $rootScope.globals = {
                 currentUser: {
-                    email: email,
-                    token: accessToken
+                    name: name,
+                    token: accessToken,
+                    email: email
                 }
             };
 
