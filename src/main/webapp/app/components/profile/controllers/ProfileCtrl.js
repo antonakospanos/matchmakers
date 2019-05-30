@@ -67,7 +67,7 @@
           $state.go("jobs");
           // Reload footer's img to switch from alert to check-mark!
           $scope.createToast(
-            response.data.result + "! " + response.data.description
+             response.data.description
           );
           if ($rootScope.jobs === 0) {
             location.reload();
@@ -77,7 +77,7 @@
         },
         function errorCallback(response) {
           $scope.createToast(
-            response.data.result + "! " + response.data.description
+             response.data.description
           );
         }
       );
