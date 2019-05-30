@@ -18,6 +18,14 @@
 				</md-input-container>
 
 				<md-input-container>
+					<label for="cv">Upload your Curriculum</label>
+					<input type="file" name="cv" id="cv" class="form-control" onchange="angular.element(this).scope().ctrl.cvChanged(this)" ng-model="cv" required />
+					<div ng-messages="profileForm.title.$error">
+						<div ng-message="required">Our service couldn't part the CV. Upload a valid file</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container>
 					<label>Description</label>
 					<input name="description" ng-model="candidate.description">
 				</md-input-container>
