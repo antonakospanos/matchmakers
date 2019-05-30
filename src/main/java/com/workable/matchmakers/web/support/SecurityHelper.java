@@ -1,6 +1,5 @@
 package com.workable.matchmakers.web.support;
 
-import com.workable.matchmakers.configuration.SecurityConfiguration;
 import com.workable.matchmakers.web.security.exception.MatchmakersAuthenticationException;
 import org.apache.commons.lang3.StringUtils;
 
@@ -8,25 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 public class SecurityHelper {
-
-    /**
-     * Checks if is url protected.
-     *
-     * @param url the url
-     * @return true, if is url protected
-     */
-    public static boolean isPublicApiUrl(String url) {
-        boolean result = false;
-
-        for (String pattern : SecurityConfiguration.getPublicApis()) {
-            if (url.matches(pattern)) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
-    }
 
     /**
      * Gets the request url.
