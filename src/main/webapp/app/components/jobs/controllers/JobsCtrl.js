@@ -42,6 +42,7 @@
 
     // Initialization
     ctrl.init = function() {
+      $scope.loading = Boolean($rootScope.globals.currentUser);
       ctrl.listJobs();
     };
 
@@ -171,11 +172,13 @@
       }).then(
         function successCallback(response) {
           $scope.model = { data: response.data };
+          $scope.loading = false;
           ctrl.sortLikesDesc();
         },
         function errorCallback(response) {
           //response.data
           console.error("Jobs request failed");
+          $scope.loading = false;
         }
       );
     };
