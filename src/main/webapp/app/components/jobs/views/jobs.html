@@ -1,7 +1,13 @@
 <div ng-controller="JobsCtrl as ctrl" ng-init="ctrl.init()">
   <div class="config-control-panel config-panel-margin main-width ">
     <div class="pageTitle">
-      {{ model.data.length > 0 ? "Matching Jobs" : loading  ? "Loading..."  :"No Jobs Found. :(" }}
+      {{
+        model.data.length > 0
+          ? "Matching Jobs"
+          : loading
+          ? "Loading..."
+          : "No Jobs Found. :("
+      }}
     </div>
     <div
       ng-repeat="item in model.data"
@@ -68,12 +74,11 @@
                 id="voting-buttons"
               >
                 <button
-                  ng-hide="ctrl.hideApplyButton(item)"
                   type="button"
                   class="pull-right btn btn-default review-control-button"
                   data-toggle="modal"
                   data-target="#myModal"
-                  ng-click="ctrl.apply(item);"
+                  ng-click="ctrl.applyLastItem(item);"
                 >
                   View Job
                 </button>
@@ -81,10 +86,15 @@
                   ng-hide="ctrl.hideApplyButton(item)"
                   type="button"
                   class="pull-right btn btn-default review-control-button"
-                  ng-click="ctrl.apply(item)"
+                  ng-click="ctrl.apply(item);"
                 >
                   Apply
                 </button>
+                <span
+                  class="pull-right span-applied"
+                  ng-hide="!ctrl.hideApplyButton(item)"
+                  >Applied</span
+                >
                 <!--<button ng-hide="ctrl.hideRetractButton(item)" type="button" class="pull-right btn btn-danger review-control-button" ng-click="ctrl.retract(item)">Retract Application</button>-->
               </div>
             </div>

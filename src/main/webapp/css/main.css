@@ -1426,6 +1426,12 @@ md-menu.menu-flows {
   font-family: "Open Sans", sans-serif;
 }
 
+.span-applied {
+  color: #00756a;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
 .publish-info {
   margin-top: 5px;
   float: left;
@@ -1652,10 +1658,11 @@ div.form-nested-content > sf-decorator.ng-scope > md-content.ng-scope > span {
 }
 
 md-toolbar.menu-width:not(.md-menu-toolbar) {
-   background-color: transparent !important;
+  background-color: transparent !important;
 }
 
-.md-button.md-default-theme.md-accent, .md-button.md-accent {
+.md-button.md-default-theme.md-accent,
+.md-button.md-accent {
   color: #00756a;
 }
 

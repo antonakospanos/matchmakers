@@ -186,6 +186,31 @@
       );
     };
 
+    ctrl.apply = function(item) {
+      console.log(
+        `${matchingUrl}/${item.jobId}?account=${item.company_subdomain}`
+      );
+      $http({
+        method: "POST",
+        url: `${matchingUrl}/${item.jobId}?account=${item.company_subdomain}`,
+        headers: {
+          Authorization: $http.defaults.headers.common["Authorization"]
+        }
+      }).then(
+        function successCallback(response) {
+          $scope.createToast(response.data.description);
+          item.applied = true;
+        },
+        function errorCallback(response) {
+          //response.data
+          $scope.createToast(
+            "The application for Job " + item.title + " failed!"
+          );
+          $scope.loading = false;
+        }
+      );
+    };
+
     ctrl.enrichCode = function(code) {
       return text
         .replace("<p>", "")
@@ -310,15 +335,11 @@
             };
             $http.put(applyUrl, body, { headers: headers }).then(
               function successCallback(response) {
-                $scope.createToast(
-                   response.data.description
-                );
+                $scope.createToast(response.data.description);
                 //ctrl.listJobs();
               },
               function errorCallback(response) {
-                $scope.createToast(
-                   response.data.description
-                );
+                $scope.createToast(response.data.description);
               }
             );
           }
@@ -346,17 +367,13 @@
               .then(
                 function successCallback(response) {
                   console.log("INFO:" + response.data);
-                  $scope.createToast(
-                     response.data.description
-                  );
+                  $scope.createToast(response.data.description);
                   //ctrl.listJobs();
                   $scope.scrollTop();
                 },
                 function errorCallback(response) {
                   console.log("ERROR: " + response.data);
-                  $scope.createToast(
-                     response.data.description
-                  );
+                  $scope.createToast(response.data.description);
                   $scope.scrollTop();
                 }
               );
@@ -369,7 +386,7 @@
      *
      * @param item
      */
-    ctrl.apply = function(item) {
+    ctrl.applyLastItem = function(item) {
       // TODO
       $scope.lastItem = item;
     };
@@ -402,7 +419,7 @@
      * @param item
      */
     ctrl.hideApplyButton = function(item) {
-      return item.like !== undefined && item.like === true;
+      return item.applied;
     };
 
     /**
