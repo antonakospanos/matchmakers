@@ -291,7 +291,7 @@ public class CandidateController extends MatchmakersBaseController {
 			@ApiResponse(code = 500, message = "server error")})
 	public ResponseEntity<ResponseBase> createCV(UriComponentsBuilder uriBuilder, @PathVariable UUID id, @Valid @RequestBody MultipartFile request) throws IOException {
 		service.validateCandidate(id);
-		validator.validateCV(request);
+//		validator.validateCV(request);
 
 		Candidate candidate = service.find(id);
 		candidate.setCv(new Blob(request.getOriginalFilename(), request.getContentType(), request.getBytes()));
