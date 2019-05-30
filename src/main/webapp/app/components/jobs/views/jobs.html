@@ -15,7 +15,11 @@
 
   <div
     ng-repeat="item in model.data"
-    class="panel panel-default control-panel config-control-panel config-panel-margin main-width md-whiteframe-6dp review-panel review-item-container"
+    class="job panel panel-default control-panel config-control-panel config-panel-margin main-width md-whiteframe-6dp review-panel review-item-container"
+    ng-style="{'border-radius': '20px',
+      'border-style': 'solid',
+      'border-width': '1px',
+      'border-color': ctrl.decideColor(item)}"
   >
     <button
       class="md-button-toggle md-button md-ink-ripple review-item-button"
@@ -26,18 +30,19 @@
       aria-label="item.id"
     >
       <div flex layout="row" class="ng-binding ng-scope layout-row flex">
-        <img
-          src="{{ item.logo }}"
-          width="50"
-          height="50"
-          style="margin-right:50px;"
-        />
-        <h4 class="title">{{ item.title }}</h4>
-        <div class="company">{{ item.company }}</div>
-        <div class="percentage" style="float:right;">{{ item.match }}</div>
+        <img class="job-image" src="{{ item.logo }}" width="50" height="50" />
+        <div class="job-info">
+          <h4 class="title">{{ item.title }}</h4>
+          <div class="company">{{ item.company }}</div>
+        </div>
 
-        <!--{{item.publicationDate | date }}: &nbsp;&nbsp; {{item.title}}-->
         <span flex class="flex"></span>
+        <div
+          class="row job-percentage float-right"
+          ng-style="{background: ctrl.decideColor(item)}"
+        >
+          {{ item.match }}%
+        </div>
         <span
           aria-hidden="true"
           class="md-toggle-icon"
@@ -56,16 +61,20 @@
       <div class="config-overview-contents">
         <div class="panel-body">
           <div>
-            Published by
-            <a
-              aria-pressed="true"
-              role="button"
-              ng-click="ctrl.filterByPublisher(item)"
-            >
-              {{ item.publisher.name }}</a
-            >
-            on {{ item.publicationDate | date: "d LLLL yyyy, HH:mm"
-            }}<br /><br />
+            <div class="description">
+              {{ item.description }}
+            </div>
+            <div class="publish-info">
+              By
+              <a
+                aria-pressed="true"
+                role="button"
+                ng-click="ctrl.filterByPublisher(item)"
+              >
+                {{ item.publisher.name }}</a
+              >
+              on {{ item.publisher.date | date: "d LLLL yyyy, HH:mm" }}
+            </div>
             <div
               ng-init="ctrl.findVote(item)"
               ng-hide="ctrl.hideVotingButtons()"
@@ -77,11 +86,18 @@
                 class="pull-right btn btn-default review-control-button"
                 ng-click="ctrl.apply(item)"
               >
+                View Job
+              </button>
+              <button
+                ng-hide="ctrl.hideApplyButton(item)"
+                type="button"
+                class="pull-right btn btn-default review-control-button"
+                ng-click="ctrl.apply(item)"
+              >
                 Apply
               </button>
               <!--<button ng-hide="ctrl.hideRetractButton(item)" type="button" class="pull-right btn btn-danger review-control-button" ng-click="ctrl.retract(item)">Retract Application</button>-->
             </div>
-            {{ item.description }}
           </div>
         </div>
       </div>
