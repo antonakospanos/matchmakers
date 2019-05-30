@@ -1,5 +1,6 @@
 package com.workable.matchmakers.adapter;
 
+import com.google.common.collect.Lists;
 import com.workable.matchmakers.adapter.dto.JobQueryDto;
 import com.workable.matchmakers.dao.model.Candidate;
 import com.workable.matchmakers.dao.model.CandidateEducation;
@@ -18,22 +19,29 @@ import java.util.stream.Collectors;
 public class JobsAdapter extends AtsAdapter {
 
     public List<JobDto> list(Candidate candidate) {
-        ResponseEntity<List> jobs =  rest.postForEntity( atsUrl + "/matchmakers/matching_jobs", toDto(candidate), List.class);
+        ResponseEntity<Object> jobs =  rest.postForEntity( atsUrl + "/matchmakers/matching_jobs", toDto(candidate), Object.class);
 
-        return jobs.getBody();
+        return (List<JobDto>) jobs.getBody();
     }
 
     private JobQueryDto toDto(Candidate candidate) {
+        String title = "";//candidate.getCandidateObjective().getRoles().stream().findFirst().orElse(null);
+        String city = "";//candidate.getCandidateObjective().getCity();
+        String country = ""; //candidate.getCandidateObjective().getCountry();
+        List<String> education = Lists.newArrayList(); // candidate.getEducation().stream().map(CandidateEducation::getUniversity).collect(Collectors.toList())
+        List<String> experience = Lists.newArrayList(); // candidate.getExperience().getWorkExperiences().stream().map(CandidateExperienceWork::getRole).collect(Collectors.toList())
+        List<String> skills = Lists.newArrayList(); // new ArrayList<>(candidate.getExperience().getSkills())
+
         return JobQueryDto.builder()
-                .title(candidate.getCandidateObjective().getRoles().stream().findFirst().orElse(null))
-                .city(candidate.getCandidateObjective().getCity())
-                .country(candidate.getCandidateObjective().getCountry())
+                .title(title)
+                .city(city)
+                .country(country)
                 .candidate(JobQueryDto.CandidateDto.builder()
                         .name(candidate.getName())
                         .email(candidate.getEmail())
-                        .education(candidate.getEducation().stream().map(CandidateEducation::getUniversity).collect(Collectors.toList()))
-                        .experience(candidate.getExperience().getWorkExperiences().stream().map(CandidateExperienceWork::getRole).collect(Collectors.toList()))
-                        .experience(new ArrayList<>(candidate.getExperience().getSkills()))
+                        .education(education)
+                        .experience(experience)
+                        .experience(skills)
                         .build())
                 .build();
     }

@@ -18,7 +18,7 @@ import java.util.List;
 public class CandidateAdapter extends AtsAdapter {
 
     public void upload(Candidate candidate) {
-        rest.postForEntity( atsUrl + "/matchmakers/sourcing_flow/trigger", toDto(candidate), Void.class);
+        rest.postForEntity( atsUrl + "/matchmakers/sourcing_flow", toDto(candidate), Void.class);
     }
 
     protected CandidateDto toDto(Candidate candidate) {

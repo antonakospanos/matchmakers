@@ -48,7 +48,7 @@ application:
   url:
     frontend: "http://localhost:8080"
     backend: "http://localhost:8080/api"
-    ats: "https://www.workablestg5.com"
+    ats: "http://localhost:3000" # "https://www.workablestg5.com"
   roles:
     admin:
       access-token: admin # Change in PRD with a UUID
