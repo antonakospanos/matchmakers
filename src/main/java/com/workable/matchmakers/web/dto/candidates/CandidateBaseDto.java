@@ -14,24 +14,20 @@ import java.util.List;
 /**
  * CandidateBaseDto
  */
-@JsonPropertyOrder({ "username", "password", "name", "email", "cellphone", "linkedInUrl", "facebookUrl", "education", "experience", "objective" })
+@JsonPropertyOrder({ "password", "name", "email", "cellphone", "linkedInUrl", "facebookUrl", "education", "experience", "objective" })
 @Getter
 @Setter
 public class CandidateBaseDto {
 
 	@NotEmpty
-	@ApiModelProperty(example = "panto", required = true)
-	private String username;
+	@Pattern(regexp=RegexValidator.EMAIL_VALIDATOR, flags = Pattern.Flag.CASE_INSENSITIVE, message="Invalid email address!")
+	@ApiModelProperty(example = "panos@antonakos.com", required = true)
+	private String email;
 
 	// @NotEmpty
 	@ApiModelProperty(example = "password", required = true)
 	@ToString.Exclude
 	private String password;
-
-	@NotEmpty
-	@Pattern(regexp=RegexValidator.EMAIL_VALIDATOR, flags = Pattern.Flag.CASE_INSENSITIVE, message="Invalid email address!")
-	@ApiModelProperty(example = "panos@antonakos.com", required = true)
-	private String email;
 
 	@ApiModelProperty(example = "Panos Antonakos")
 	private String name;
@@ -61,10 +57,9 @@ public class CandidateBaseDto {
 	public CandidateBaseDto() {
 	}
 
-	public CandidateBaseDto(String username, String password, String name, String email,
+	public CandidateBaseDto(String password, String name, String email,
 							String cellphone, String linkedInUrl, String facebookUrl, String cvUrl,
 							List<EducationDto> education, ExperienceDto experience, ObjectiveDto objective) {
-		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.email = email;

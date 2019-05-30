@@ -14,10 +14,10 @@
 
         return service;
 
-        function Authorize(username, accessToken) {
+        function Authorize(email, accessToken) {
             $rootScope.globals = {
                 currentUser: {
-                    username: username,
+                    email: email,
                     token: accessToken
                 }
             };
@@ -33,9 +33,9 @@
             $cookies.putObject('globals', $rootScope.globals, { expires: cookieExp });
         }
 
-        function Login(username, password) {
+        function Login(email, password) {
             return $http
-                .get(UserService.GetUrl() + "/id?username=" + username + "&password=" + password)
+                .get(UserService.GetUrl() + "/id?email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password))
                 .then(function successCallback(response) {
                     return response;
                 }, function errorCallback(response) {

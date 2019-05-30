@@ -162,9 +162,9 @@ public class CandidateController extends MatchmakersBaseController {
 			@ApiResponse(code = 401, message = "The credentials are invalid"),
 			@ApiResponse(code = 404, message = "No user found!"),
 			@ApiResponse(code = 500, message = "Server Error")})
-	public ResponseEntity<IdentityDto> listAccount(UriComponentsBuilder uriBuilder, @RequestParam String username, @RequestParam String password) throws NotFoundException {
+	public ResponseEntity<IdentityDto> listAccount(UriComponentsBuilder uriBuilder, @RequestParam String email, @RequestParam String password) throws NotFoundException {
 		ResponseEntity<IdentityDto> response;
-		CandidateDto account = service.find(username, password);
+		CandidateDto account = service.find(email, password);
 
 		if (account == null) {
 			response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -215,10 +215,10 @@ public class CandidateController extends MatchmakersBaseController {
 	@RequestMapping(value = "/password", produces = {"application/json"},	method = RequestMethod.DELETE)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<ResponseBase> resetPassword(@RequestParam String username) {
-		service.validateCandidate(username);
+	public ResponseEntity<ResponseBase> resetPassword(@RequestParam String email) {
+		service.validateCandidate(email);
 
-        Candidate candidate = candidateRepository.findByUsername(username);
+        Candidate candidate = candidateRepository.findByEmail(email);
 		service.resetPassword(candidate);
 
 		ResponseBase responseBase = ResponseBase.Builder().build(Result.SUCCESS);

@@ -22,7 +22,7 @@ public class User extends ResourceBase {
     // Exposed resource ID
     private UUID externalId;
 
-    private String username;
+    private String email;
 
     /**
      * Hashed password
@@ -30,8 +30,6 @@ public class User extends ResourceBase {
     private String password;
 
     private String name;
-
-    private String email;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name="IMAGE_ID")

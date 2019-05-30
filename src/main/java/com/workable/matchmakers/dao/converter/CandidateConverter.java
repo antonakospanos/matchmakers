@@ -47,9 +47,7 @@ public class CandidateConverter {
         String field = patchDto.getField();
         String value = patchDto.getValue();
 
-        if ("username".equals(field)) {
-            candidate.setUsername(value);
-        } else if ("password".equals(field)) {
+        if ("password".equals(field)) {
             String hashedPassword = hashService.bCryptPassword(value);
             candidate.setPassword(hashedPassword);
             candidate.setExternalId(UUID.randomUUID()); // Update externalId used in Authentication Bearer too!

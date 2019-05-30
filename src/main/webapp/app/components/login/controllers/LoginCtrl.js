@@ -16,13 +16,13 @@
         })();
 
         function login() {
-            AuthenticationService.Login(ctrl.username, ctrl.password)
+            AuthenticationService.Login(ctrl.email, ctrl.password)
                 .then(function successCallback(response) {
                     console.log(response)
                     if (response.data && response.data.id !== undefined) {
-                        AuthenticationService.Authorize(ctrl.username, response.data.id);
+                        AuthenticationService.Authorize(ctrl.email, response.data.id);
                         $scope.loggedIn();
-                        $scope.createToast("User '" + ctrl.username + "' logged in successfully")
+                        $scope.createToast("User '" + ctrl.email + "' logged in successfully")
                         $state.go("jobs");
                         // $location.path("/");
                     } else {

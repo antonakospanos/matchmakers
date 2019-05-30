@@ -10,7 +10,7 @@ public class PatchValidator {
 
 	public static void validatePatchRequest(PatchRequest request, List<String> fields) {
 
-		request.getPatches().stream().forEach(patchDto -> {
+		request.getPatches().forEach(patchDto -> {
 
 			String field = patchDto.getField();
 			PatchOperation operation = patchDto.getOperation();

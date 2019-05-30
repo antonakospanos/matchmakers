@@ -44,10 +44,10 @@ public class CandidateService {
 	@Transactional
 	public Candidate create(CandidateBaseDto candidateBaseDto) {
 		CandidateDto candidateDto = new CandidateDto(candidateBaseDto);
-		Candidate candidate = candidateRepository.findByUsername(candidateDto.getUsername());
+		Candidate candidate = candidateRepository.findByEmail(candidateDto.getEmail());
 
 		if (candidate != null) {
-			throw new IllegalArgumentException("Candidate with username '" + candidate.getUsername() + "' already exists!");
+			throw new IllegalArgumentException("Candidate with email '" + candidate.getEmail() + "' already exists!");
 		} else {
 			// Add new Candidate in DB
 			candidate = candidateDto.toEntity();
@@ -61,12 +61,12 @@ public class CandidateService {
 	}
 
 	// @Transactional
-	public void replace(String username, CandidateBaseDto candidateBaseDto) {
-		validateCandidate(username);
+	public void replace(String email, CandidateBaseDto candidateBaseDto) {
+		validateCandidate(email);
 
 		// Update Candidate in DB
 		CandidateDto candidateDto = new CandidateDto(candidateBaseDto);
-		Candidate candidate = candidateRepository.findByUsername(username);
+		Candidate candidate = candidateRepository.findByEmail(email);
 		replace(candidateDto, candidate);
 	}
 
@@ -82,7 +82,7 @@ public class CandidateService {
 
 	// @Transactional
 	public void replace(CandidateDto candidateDto, Candidate candidate) {
-		validateNewUsername(candidate.getUsername(), candidateDto.getUsername());
+		validateNewEmail(candidate.getEmail(), candidateDto.getEmail());
 
 		Candidate cleanedCandidate = candidateConverter.cleanDependencies(candidate);
  		Candidate updatedCandidate = candidateDto.toEntity(cleanedCandidate);
@@ -91,9 +91,9 @@ public class CandidateService {
 	}
 
 	@Transactional
-	public CreateResponseData update(String username, List<PatchDto> patches) {
-		validateCandidate(username);
-		Candidate candidate = candidateRepository.findByUsername(username);
+	public CreateResponseData update(String email, List<PatchDto> patches) {
+		validateCandidate(email);
+		Candidate candidate = candidateRepository.findByEmail(email);
 
 		CreateResponseData data = update(candidate, patches);
 		logger.info("Candidate updated: " + candidate);
@@ -116,8 +116,8 @@ public class CandidateService {
 	private CreateResponseData update(Candidate candidate, List<PatchDto> patches) {
 		patches.forEach(patchDto -> {
 			// Validate Candidate patches
-			if (patchDto.getField().equals("username")) {
-				validateNewUsername(candidate.getUsername(), patchDto.getValue());
+			if (patchDto.getField().equals("email")) {
+				validateNewEmail(candidate.getEmail(), patchDto.getValue());
 			}
 			// Update Candidate in DB
 			candidateConverter.updateCandidate(patchDto, candidate);
@@ -129,10 +129,10 @@ public class CandidateService {
 	}
 
 	@Transactional
-	public void delete(String username) {
-		Candidate candidate = candidateRepository.findByUsername(username);
+	public void delete(String email) {
+		Candidate candidate = candidateRepository.findByEmail(email);
 		if (candidate == null) {
-			throw new IllegalArgumentException("Candidate '" + username + "' does not exist!");
+			throw new IllegalArgumentException("Candidate '" + email + "' does not exist!");
 		} else {
 			candidateRepository.delete(candidate);
 		}
@@ -164,13 +164,13 @@ public class CandidateService {
 		mailService.sendPasswordReset(candidate, newPassword);
 	}
 
-	public CandidateDto find(String username, String password) throws NotFoundException {
-		List<CandidateDto> candidates = list(username);
+	public CandidateDto find(String email, String password) throws NotFoundException {
+		List<CandidateDto> candidates = list(email);
 
 		if (candidates == null || candidates.isEmpty()) {
-			throw new NotFoundException("No user found with username '" + username + "'");
+			throw new NotFoundException("No user found with email '" + email + "'");
 		} else if (candidates.size() > 1) {
-			throw new RuntimeException("Multiple candidates found with username '" + username + "'");
+			throw new RuntimeException("Multiple candidates found with email '" + email + "'");
 		} else {
 			CandidateDto candidateDto = candidates.get(0);
 			if (!hashService.matches(password, candidateDto.getPassword())) {
@@ -181,11 +181,11 @@ public class CandidateService {
 		}
 	}
 
-	public List<CandidateDto> list(String username) {
+	public List<CandidateDto> list(String email) {
 		List<CandidateDto> candidateDtos;
 
-		if (StringUtils.isNotBlank(username)) {
-			Candidate candidate = candidateRepository.findByUsername(username);
+		if (StringUtils.isNotBlank(email)) {
+			Candidate candidate = candidateRepository.findByEmail(email);
 			candidateDtos = list(candidate);
 		} else {
 			candidateDtos = listAll();
@@ -248,11 +248,11 @@ public class CandidateService {
 	}
 
 	// ************************ Validations ************************ //
-	public void validateCandidate(String username) {
-		if (StringUtils.isNotBlank(username)) {
-			Candidate candidate = candidateRepository.findByUsername(username);
+	public void validateCandidate(String email) {
+		if (StringUtils.isNotBlank(email)) {
+			Candidate candidate = candidateRepository.findByEmail(email);
 			if (candidate == null) {
-				throw new IllegalArgumentException("Candidate with username '" + username + "' does not exist!");
+				throw new IllegalArgumentException("Candidate with email '" + email + "' does not exist!");
 			}
 		}
 	}
@@ -266,13 +266,13 @@ public class CandidateService {
 		}
 	}
 
-	public void validateNewUsername(String oldUsername, String newUsername) {
-		if (StringUtils.isNotBlank(newUsername)) {
+	public void validateNewEmail(String oldEmail, String newEmail) {
+		if (StringUtils.isNotBlank(newEmail)) {
 			// Check that resource does not conflict
-			Candidate candidate = candidateRepository.findByUsername(newUsername);
-			if (!oldUsername.equals(newUsername) && candidate != null) {
-				// Illegal username replacement
-				throw new IllegalArgumentException("Candidate with username '" + newUsername + "' already exists!");
+			Candidate candidate = candidateRepository.findByEmail(newEmail);
+			if (!oldEmail.equals(newEmail) && candidate != null) {
+				// Illegal email replacement
+				throw new IllegalArgumentException("Candidate with email '" + newEmail + "' already exists!");
 			}
 		}
 	}

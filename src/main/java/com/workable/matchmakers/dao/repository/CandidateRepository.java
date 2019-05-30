@@ -13,7 +13,7 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
 
 	Candidate findByExternalId(UUID externalId);
 
-	Candidate findByUsername(String username);
+	Candidate findByEmail(String email);
 
 	List<Candidate> findByCandidateObjective_Roles(String role);
 

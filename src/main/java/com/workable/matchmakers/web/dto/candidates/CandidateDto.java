@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 /**
  * AccountDto
  */
-@JsonPropertyOrder({ "id", "username", "password", "name", "email", "cellphone", "linkedInUrl", "facebookUrl", "cvUrl", "education", "experience", "objective" })
+@JsonPropertyOrder({ "id", "password", "name", "email", "cellphone", "linkedInUrl", "facebookUrl", "cvUrl", "education", "experience", "objective" })
 @ToString
 @Getter
 @Setter
@@ -41,11 +41,10 @@ public class CandidateDto extends CandidateBaseDto implements Dto<Candidate> {
 	public CandidateDto() {
 	}
 
-	public CandidateDto(UUID id, String username, String password, String name, String email,
+	public CandidateDto(UUID id, String password, String name, String email,
 						String cellphone, String linkedInUrl, String facebookUrl, String cvUrl,
 						List<EducationDto> education, ExperienceDto experience, ObjectiveDto objective) {
 		this.id = id;
-		setUsername(username);
 		setPassword(password);
 		setName(name);
 		setEmail(email);
@@ -64,7 +63,7 @@ public class CandidateDto extends CandidateBaseDto implements Dto<Candidate> {
 	}
 
 	public CandidateDto(CandidateBaseDto candidateBaseDto) {
-		super(candidateBaseDto.getUsername(), candidateBaseDto.getPassword(), candidateBaseDto.getName(),
+		super(candidateBaseDto.getPassword(), candidateBaseDto.getName(),
 				candidateBaseDto.getEmail(), candidateBaseDto.getCellphone(),
 				candidateBaseDto.getLinkedInUrl(), candidateBaseDto.getFacebookUrl(), candidateBaseDto.getCvUrl(),
 				candidateBaseDto.getEducation(), candidateBaseDto.getExperience(), candidateBaseDto.getObjective());
@@ -88,7 +87,6 @@ public class CandidateDto extends CandidateBaseDto implements Dto<Candidate> {
 	public CandidateDto fromEntity(Candidate candidate) {
 		this.id = candidate.getExternalId();
 
-		setUsername(candidate.getUsername());
 		setPassword(candidate.getPassword());
 		setEmail(candidate.getEmail());
 		setName(candidate.getName());
@@ -127,7 +125,6 @@ public class CandidateDto extends CandidateBaseDto implements Dto<Candidate> {
 	@Override
 	public Candidate toEntity(Candidate candidate) {
 		// Do not pass this.getId(), CANDIDATE_EXTERNAL_ID is auto-generated!
-		candidate.setUsername(this.getUsername());
 		candidate.setName(this.getName());
 		candidate.setEmail(this.getEmail());
 		candidate.setCellphone(this.getCellphone());

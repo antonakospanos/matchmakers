@@ -16,7 +16,7 @@
                     console.log(response)
                     $scope.createToast(response.data.result + "! " + response.data.description)
                     if (response.data.result === 'SUCCESS') {
-                        AuthenticationService.Authorize(ctrl.username, response.data.data.id);
+                        AuthenticationService.Authorize(ctrl.email, response.data.data.id);
                         $scope.loggedIn();
                         $state.go("jobs");
                         // $location.path("/");
