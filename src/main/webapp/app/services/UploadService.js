@@ -55,8 +55,7 @@
       var formData = new FormData();
 
       var blob = new Blob([file], { type: "multipart/form-data" });
-    //   formData.append('file', blob);
-      formData.append("file", file, file.name);
+      formData.append(file.name, blob);
 
       return $http
         .post(service.GetResumeUrl(userToken), formData, {
@@ -65,7 +64,6 @@
           responseType: "application/json",
           headers: {
             "Content-Type": undefined,
-            "Access-Control-Allow-Headers": "*",
             "Access-Control-Allow-Methods": "*",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "*"
