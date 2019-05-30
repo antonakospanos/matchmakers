@@ -1653,7 +1653,11 @@ div.form-nested-content > sf-decorator.ng-scope > md-content.ng-scope > span {
 
 md-toolbar.menu-width:not(.md-menu-toolbar) {
    background-color: transparent !important;
- }
+}
+
+.md-button.md-default-theme.md-accent, .md-button.md-accent {
+  color: #00756a;
+}
 
 /************
  * Defaults

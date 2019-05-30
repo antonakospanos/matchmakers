@@ -87,7 +87,7 @@
         }
       };
 
-      $scope.modalWarning(message, "ADD").then(function(response) {
+      $scope.modalWarning(message, "SAVE").then(function(response) {
         if (response === true) {
           CandidateService.Update(requestData).then(
             function successCallback(response) {
