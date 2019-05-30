@@ -163,7 +163,6 @@
     // }
 
     ctrl.listJobs = function() {
-      console.log($http.defaults.headers.common["Authorization"]);
       $http({
         url: matchingUrl,
         headers: {
@@ -175,7 +174,8 @@
           ctrl.sortLikesDesc();
         },
         function errorCallback(response) {
-          $scope.model = { data: response.data };
+          //response.data
+          console.error("Jobs request failed");
         }
       );
     };
