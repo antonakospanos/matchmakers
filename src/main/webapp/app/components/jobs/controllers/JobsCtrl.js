@@ -173,72 +173,74 @@
      *  List Matchmakers jobs!
      */
     ctrl.listJobsMock = function() {
-      $scope.model = {
-        data: [
-          {
-            logo: "https://alternative.me/icons/workable.jpg",
-            company: "Workable",
-            title: "Software Engineer (Remote)",
-            description: `We are looking for a passionate Software Engineer to design, develop and install software solutions.
+      $scope.model = $http.defaults.headers.common.Authorization
+        ? {
+            data: [
+              {
+                logo: "https://alternative.me/icons/workable.jpg",
+                company: "Workable",
+                title: "Software Engineer (Remote)",
+                description: `We are looking for a passionate Software Engineer to design, develop and install software solutions.
 
             Software Engineer responsibilities include gathering user requirements, defining system functionality and writing code in various languages, like Java, Ruby on Rails or .NET programming languages (e.g. C++ or JScript.NET.) Our ideal candidates are familiar with the software development life cycle (SDLC) from preliminary system analysis to tests and deployment.
             
             Ultimately, the role of the Software Engineer is to build high-quality, innovative and fully performing software that complies with coding standards and technical design.`,
-            jobUrl: "https://careers.workable.com/j/9525118267?viewed=true",
-            match: 90,
-            publisher: {
-              name: "Workable",
-              date: "21/5/2019"
-            }
-          },
-          {
-            logo: "https://alternative.me/icons/workable.jpg",
-            company: "Workable",
-            title: "Test title",
-            description: "Test description",
-            jobUrl: "https://careers.workable.com/j/9525118267?viewed=true",
-            match: 90,
+                jobUrl: "https://careers.workable.com/j/9525118267?viewed=true",
+                match: 90,
+                publisher: {
+                  name: "Workable",
+                  date: "21/5/2019"
+                }
+              },
+              {
+                logo: "https://alternative.me/icons/workable.jpg",
+                company: "Workable",
+                title: "Test title",
+                description: "Test description",
+                jobUrl: "https://careers.workable.com/j/9525118267?viewed=true",
+                match: 90,
 
-            publisher: {
-              name: "Workable",
-              date: "21/5/2019"
-            }
-          },
-          {
-            logo: "https://alternative.me/icons/workable.jpg",
-            company: "Workable",
-            title: "Test title",
-            description: "Test description",
-            match: 80,
-            jobUrl: "https://workable.com",
-            publisher: {
-              name: "Workable"
-            }
-          },
-          {
-            logo: "https://alternative.me/icons/workable.jpg",
-            company: "Workable",
-            title: "Test title",
-            description: "Test description",
-            jobUrl: "",
-            match: 78,
-            publisher: {
-              name: "Workable"
-            }
-          },
-          {
-            logo: "https://alternative.me/icons/workable.jpg",
-            company: "Workable",
-            title: "Test title",
-            description: "Test description",
-            jobUrl: "",
-            match: 60,
-            publisher: {
-              name: "Workable"
-            }
+                publisher: {
+                  name: "Workable",
+                  date: "21/5/2019"
+                }
+              },
+              {
+                logo: "https://alternative.me/icons/workable.jpg",
+                company: "Workable",
+                title: "Test title",
+                description: "Test description",
+                match: 80,
+                jobUrl: "https://workable.com",
+                publisher: {
+                  name: "Workable"
+                }
+              },
+              {
+                logo: "https://alternative.me/icons/workable.jpg",
+                company: "Workable",
+                title: "Test title",
+                description: "Test description",
+                jobUrl: "",
+                match: 78,
+                publisher: {
+                  name: "Workable"
+                }
+              },
+              {
+                logo: "https://alternative.me/icons/workable.jpg",
+                company: "Workable",
+                title: "Test title",
+                description: "Test description",
+                jobUrl: "",
+                match: 60,
+                publisher: {
+                  name: "Workable"
+                }
+              }
+            ]
           }
-        ]
-      };
+        : {};
     };
 
     /**

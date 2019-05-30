@@ -22,11 +22,11 @@
     };
 
     $scope.initFooter = function initFooter() {
-      // setConfigCheck("none");
-      // setConfigAlert("initial");
-      // setConfigPrompt("The backend server is starting...");
-      // setProgressBar("none");
-      // refreshJobs();
+      setConfigCheck("none");
+      setConfigAlert("initial");
+      setConfigPrompt("The backend server is starting...");
+      setProgressBar("none");
+      refreshJobs();
     };
 
     function refreshJobs() {
@@ -41,23 +41,23 @@
         "/jobs";
 
       // Lookup for /jobs
-      // $http.get(jobsUrl).then(
-      //   function successCallback(response) {
-      //     $rootScope.jobs = response.data.length;
-      //     setConfigCheck("initial");
-      //     setConfigAlert("none");
-      //     setConfigPrompt($rootScope.jobs + " jobs matched to your profile");
-      //   },
-      //   function errorCallback(response) {
-      //     $rootScope.jobs = response.data.length;
-      //     setConfigCheck("none");
-      //     setConfigAlert("initial");
-      //     if ($rootScope.jobs === undefined) {
-      //     } else {
-      //       setConfigPrompt($rootScope.jobs + " jobs matched to your profile");
-      //     }
-      //   }
-      // );
+      $http.get(jobsUrl).then(
+        function successCallback(response) {
+          $rootScope.jobs = response.data.length;
+          setConfigCheck("initial");
+          setConfigAlert("none");
+          setConfigPrompt($rootScope.jobs + " jobs matched to your profile");
+        },
+        function errorCallback(response) {
+          $rootScope.jobs = response.data.length;
+          setConfigCheck("none");
+          setConfigAlert("initial");
+          if ($rootScope.jobs === undefined) {
+          } else {
+            setConfigPrompt($rootScope.jobs + " jobs matched to your profile");
+          }
+        }
+      );
     }
 
     function setConfigCheck(display) {
@@ -83,17 +83,5 @@
       var actions = document.getElementById("progressBar");
       actions.style.display = display;
     }
-
-    $scope.createToast = function(message) {
-      $mdToast.show(
-        $mdToast
-          .simple()
-          .textContent(message)
-          .parent(document.querySelectorAll("#toaster"))
-          .hideDelay(5000)
-          .action("x")
-          .capsule(true)
-      );
-    };
   }
 })();

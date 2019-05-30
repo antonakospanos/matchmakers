@@ -255,6 +255,18 @@
       });
       $scope.initHeader();
 
+      $rootScope.createToast = function(message) {
+        $mdToast.show(
+          $mdToast
+            .simple()
+            .textContent(message)
+            .parent(document.querySelectorAll("#toaster"))
+            .hideDelay(5000)
+            .action("x")
+            .capsule(true)
+        );
+      };
+
       // State transition marker
       $scope.$on("$stateChangeSuccess", function(ev, to, toParams, from) {
         $scope.previousState = from.name;
