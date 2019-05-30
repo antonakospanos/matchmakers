@@ -180,6 +180,14 @@
       );
     };
 
+    ctrl.removeCode = function(text) {
+      return text
+        .replace("<p>", "")
+        .replace("</p>", "")
+        .replace("<li>", "")
+        .replace("</li>", "");
+    };
+
     /**
      *  List Matchmakers jobs!
      */

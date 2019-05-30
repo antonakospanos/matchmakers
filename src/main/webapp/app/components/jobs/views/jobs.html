@@ -50,9 +50,7 @@
         <div class="config-overview-contents">
           <div class="panel-body">
             <div>
-              <div class="description">
-                {{ item.description }}
-              </div>
+              <div class="description" ng-bind-html="item.description"></div>
               <div class="publish-info">
                 By
                 <a
