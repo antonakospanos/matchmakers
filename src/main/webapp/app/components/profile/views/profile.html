@@ -1,0 +1,38 @@
+<div ng-controller="ProfileCtrl as ctrl" ng-init="ctrl.init()">
+	<div class="panel panel-body panel-default config-panel config-control-panel main-width md-whiteframe-6dp">
+
+		<!-- Header Start -->
+		<div class="controls controls-row">
+			<h3 class="panel-title add-panel-title">Profile</h3>
+		</div>
+
+		<!-- Form Start -->
+		<form name="profileForm" class="panel-body form-group margin-row">
+			<md-content layout="column" class="md-padding">
+				<md-input-container>
+					<label>Title</label>
+					<input required="" name="title" ng-model="candidate.title">
+					<div ng-messages="profileForm.title.$error">
+						<div ng-message="required">This is required</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container>
+					<label>Description</label>
+					<input name="description" ng-model="candidate.description">
+				</md-input-container>
+			</md-content>
+		</form>
+
+		<!-- Buttons Start -->
+		<div class="controls controls-row">
+			<div class="pull-left">
+				<md-button class="md-accent" ng-click="ctrl.cancel()">Close</md-button>
+				<md-button class="md-accent" ng-click="ctrl.reset()">Reset</md-button>
+			</div>
+			<div class="pull-right" layout="row">
+				<md-button class="md-accent md-primary" type="button" ng-click="ctrl.add()">ADD</md-button>
+			</div>
+		</div>
+	</div>
+</div>

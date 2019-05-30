@@ -1,7 +1,7 @@
 (function () {
 
     var app = angular
-        .module("MovieRamaUi", ["ui.bootstrap", "ui.router", "ngSanitize", "ngTable", "ngCookies",
+        .module("Matchmakers", ["ui.bootstrap", "ui.router", "ngSanitize", "ngTable", "ngCookies",
                                 "ngCookies", "ngMaterial", "ui.sortable", "ngMessages", "md.time.picker"])
         .config(config)
         .run(run);
@@ -12,28 +12,23 @@
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
     function config($stateProvider, $urlRouterProvider) {
 
-        // Movies Review (homepage)
-        $stateProvider.state("movies_review", {
+        // Matching Jobs Review (homepage)
+        $stateProvider.state("jobs", {
             url: "/",
-            templateUrl: "app/components/movies-review/views/moviesReview.html",
+            templateUrl: "app/components/jobs/views/jobs.html",
+            // controller: "JobsCtrl",
+            // params: {
+            //     publisher: {
+            //         id: undefined,
+            //         name: undefined
+            //     }
+            // }
         });
 
-        // Movies Review (specified publisher)
-        $stateProvider.state("movies_publisher_review", {
-            url: "/publisher",
-            templateUrl: "app/components/movies-review/views/moviesReview.html",
-            controller: "MoviesReviewCtrl",
-            params: {
-                publisher: {
-                    id: undefined,
-                    name: undefined
-                }
-            }
-        });
-        // Movies Add after login
-        $stateProvider.state("movies_add", {
-            url: "/add",
-            templateUrl: "app/components/movies-add/views/moviesAdd.html",
+        // Create Profile after login
+        $stateProvider.state("profile", {
+            url: "/profile",
+            templateUrl: "app/components/profile/views/profile.html",
         });
 
         // User Login form
@@ -46,10 +41,9 @@
             url: "/register",
             templateUrl: "app/components/register/views/register.html",
         });
-        // Movies Review after logout
+        // Matching Jobs Review after logout
         $stateProvider.state("logout", {
             url: "/",
-            templateUrl: "app/components/movies-review/views/moviesReview.html",
             controller: "LogoutCtrl" ,
         });
 

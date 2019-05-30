@@ -19,8 +19,8 @@ spring:
   jpa:
     generate-ddl: true
     show-sql: true
-    #hibernate:
-      #ddl-auto: create-drop # create | update | validate | create-drop
+    hibernate:
+      ddl-auto: create-drop # create | update | validate | create-drop
     properties:
       net.sf.ehcache.configurationResourceName: matchmakers-ehcache.xml
       hibernate:
@@ -45,6 +45,24 @@ flyway:
   sqlMigrationSuffix: .sql
   schemas: matchmakers
 application:
+  url:
+    frontend: "http://localhost:8080"
+    backend: "http://localhost:8080/api"
   roles:
     admin:
       access-token: admin # Change in PRD with a UUID
+  mail:
+    from:
+      address: "no-reply@workable.com"
+      host: "auth.smtp.1and1.co.uk"
+      port: 587 # 25
+      username: "antonakos@workable.com"
+      password: "Password!"
+    to:
+      registration:
+        pending: "antonakos@workable.com"
+        validated: "antonakos@workable.com"
+        completed: "antonakos@workable.com"
+      interview:
+        requested: "antonakos@workable.com"
+      admins: "antonakos@workable.com"

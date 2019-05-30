@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y vim less telnet
 LABEL maintainer="antonakos@workable.com"
 
 # Provision Tomcat with matchmakers webapp and server confs
-COPY src/main/resources/ssl/matchmakers.keystore $CATALINA_HOME/conf/localhost-rsa.jks
+COPY src/main/resources/ssl/matchmakers.keystore $CATALINA_HOME/conf/keystores/rsa.keystore
 COPY src/conf/tomcat/server.xml $CATALINA_HOME/conf/server.xml
 COPY src/conf/tomcat/tomcat-users.xml $CATALINA_HOME/conf/tomcat-users.xml
 COPY src/conf/tomcat/setenv.sh $CATALINA_HOME/bin/setenv.sh

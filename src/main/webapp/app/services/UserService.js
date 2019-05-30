@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('MovieRamaUi')
+        .module('Matchmakers')
         .factory('UserService', UserService);
 
     UserService.$inject = ['$http', "$rootScope"];
@@ -15,7 +15,7 @@
         return service;
 
         function GetUrl() {
-            return $rootScope.backend_protocol + "://" + $rootScope.backend_ip + ":" + $rootScope.backend_port + "/" + $rootScope.backend_context_path + "/users";
+            return $rootScope.backend_protocol + "://" + $rootScope.backend_ip + ":" + $rootScope.backend_port + "/" + $rootScope.backend_context_path + "/candidates";
         }
 
         function GetById(id) {

@@ -2,7 +2,7 @@
 (function () {
     "use strict";
     angular
-        .module("MovieRamaUi")
+        .module("Matchmakers")
         .controller("HeaderCtrl", ["$scope", "$http", HeaderCtrl]);
 
     function HeaderCtrl($scope, $http) {

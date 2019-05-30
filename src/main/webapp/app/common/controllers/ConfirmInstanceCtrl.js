@@ -5,7 +5,7 @@
      * Application wide Confirmation Message Controller
      */
     angular
-        .module('MovieRamaUi')
+        .module('Matchmakers')
         .controller('ConfirmInstanceCtrl', function ($scope, $modalInstance, message, choice, $sce) {
 
             $scope.message = $sce.trustAsHtml(message);

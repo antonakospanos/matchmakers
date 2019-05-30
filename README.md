@@ -1,6 +1,7 @@
 # Matchmakers
 
-Matchmakers is a social sharing platform where users can share their favorite movies. Users can express their opinion about a movie by either likes​ or hates​!
+Matchmakers is a web application matching candidates with Jobs published by Workable.
+
 
 ##### Technology Stack
 
@@ -47,4 +48,8 @@ $CATALINA_HOME/bin/startup.sh --Dspring.config.location=/path/to/conf/
 ```
 docker build -t matchmakers .
 docker run -p 8080:8080 -p 443:443 -p 80:80 --name matchmakers --link db -d matchmakers
+```
+or simply execute to run all containers:
+```
+docker-compose up -d
 ```

@@ -2,18 +2,18 @@
 (function () {
     "use strict";
     angular
-        .module("MovieRamaUi")
+        .module("Matchmakers")
         .controller("FooterCtrl", ["$rootScope", "$scope", "$http", "$mdToast", FooterCtrl]);
 
     function FooterCtrl($rootScope, $scope, $http, $mdToast) {
 
         // Auto refresh footer every 5 seconds to re-calculate backend changes
         // $scope.intervalTimer = setInterval(function () {
-        //     $scope.refreshMovies()
+        //     $scope.refreshJobs()
         // }, 5000);
 
-        $scope.refreshMovies = function() {
-            refreshMovies();
+        $scope.refreshJobs = function() {
+            refreshJobs();
         }
 
         $scope.initFooter = function initFooter() {
@@ -21,27 +21,27 @@
             setConfigAlert('initial')
             setConfigPrompt("The backend server is starting...");
             setProgressBar('none')
-            refreshMovies();
+            refreshJobs();
         }
 
-        function refreshMovies() {
-            var moviesUrl = $rootScope.backend_protocol + "://" + $rootScope.backend_ip + ":" + $rootScope.backend_port + "/" + $rootScope.backend_context_path + "/movies";
+        function refreshJobs() {
+            var jobsUrl = $rootScope.backend_protocol + "://" + $rootScope.backend_ip + ":" + $rootScope.backend_port + "/" + $rootScope.backend_context_path + "/jobs";
 
-            // Lookup for /movies
-            $http.get(moviesUrl)
+            // Lookup for /jobs
+            $http.get(jobsUrl)
                 .then(function successCallback(response) {
-                    $rootScope.movies = response.data.length;
+                    $rootScope.jobs = response.data.length;
                     setConfigCheck('initial')
                     setConfigAlert('none')
-                    setConfigPrompt($rootScope.movies + " movies stored in Matchmakers");
+                    setConfigPrompt($rootScope.jobs + " jobs matched to your profile");
                 }, function errorCallback(response) {
-                   $rootScope.movies = response.data.length;
+                   $rootScope.jobs = response.data.length;
                     setConfigCheck('none')
                     setConfigAlert('initial')
-                    if ($rootScope.movies === undefined) {
-                        setConfigPrompt("Could not find movies in Matchmakers");
+                    if ($rootScope.jobs === undefined) {
+                        setConfigPrompt("Couldn't find jobs for your profile");
                     } else {
-                        setConfigPrompt($rootScope.movies + " movies stored in Matchmakers");
+                        setConfigPrompt($rootScope.jobs + " jobs matched to your profile");
                     }
                 });
         }

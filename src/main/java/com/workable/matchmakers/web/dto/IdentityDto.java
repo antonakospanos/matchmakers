@@ -2,43 +2,25 @@ package com.workable.matchmakers.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Identity DTO
  */
-@JsonPropertyOrder({ "id"})
-public class IdentityDto {
+@JsonPropertyOrder({ "id", "name"})
+@Getter
+@Setter
+public class IdentityDto extends IdentityBaseDto {
 
-    @ApiModelProperty(example = "identity")
-    private String id;
+    @ApiModelProperty(example = "Panos Antonakos")
+    String name;
 
     public IdentityDto() {
     }
 
-    public IdentityDto(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof IdentityDto)) return false;
-
-        IdentityDto identityDto = (IdentityDto) o;
-
-        return id != null ? id.equals(identityDto.id) : identityDto.id == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+    public IdentityDto(String id, String name) {
+        super(id);
+        this.name = name;
     }
 }

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html class="full" ng-app="MovieRamaUi">
+<html class="full" ng-app="Matchmakers">
 <head>
     <meta charset="utf-8"/>
+    <title>Matchmakers</title>
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <link href="css/jquery.dataTables.css" rel="stylesheet"/>
@@ -50,8 +51,8 @@
 
     <script src="app/components/header/controllers/Header.js"></script>
     <script src="app/components/footer/controllers/Footer.js"></script>
-    <script src="app/components/movies-review/controllers/MoviesReviewCtrl.js"></script>
-    <script src="app/components/movies-add/controllers/MoviesAddCtrl.js"></script>
+    <script src="app/components/jobs/controllers/JobsCtrl.js"></script>
+    <script src="app/components/profile/controllers/ProfileCtrl.js"></script>
     <script src="app/components/login/controllers/LoginCtrl.js"></script>
     <script src="app/components/logout/controllers/LogoutCtrl.js"></script>
     <script src="app/components/register/controllers/RegisterCtrl.js"></script>
@@ -65,13 +66,13 @@
         <div class="md-toolbar-tools main-width">
 
             <!-- Home Page Logo -->
-            <md-button ui-sref="movies_review" ng-click=reloadState() "title="Homepage">
+            <md-button ui-sref="jobs" ng-click=reloadState() "title="Homepage">
                 <img src="images/logo.png" height="g" width="100"/>
             </md-button>
 
             <!-- Menu Items -->
             <div id="subscription-menus">
-                <md-button class="menu-width" ui-sref="movies_add">Add Movie</md-button>
+                <md-button class="menu-width" ui-sref="profile">Profile</md-button>
             </div>
 
             <!-- Login and Logout Button -->

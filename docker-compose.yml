@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile-db
+    image: matchmakers-db-image
+    ports:
+    - "5432:5432"
+    container_name: db
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: matchmakers-app-image
+    ports:
+    - "8080:8080"
+    - "8444:8443"
+    depends_on:
+    - "db"
+    links:
+    - db
+    container_name: matchmakers

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('MovieRamaUi')
+        .module('Matchmakers')
         .controller('LogoutCtrl', LogoutCtrl);
 
     LogoutCtrl.$inject = ['$location', '$scope', 'AuthenticationService'];

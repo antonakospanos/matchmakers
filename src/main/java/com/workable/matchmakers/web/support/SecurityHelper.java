@@ -1,6 +1,6 @@
 package com.workable.matchmakers.web.support;
 
-import com.workable.matchmakers.web.configuration.SecurityConfiguration;
+import com.workable.matchmakers.configuration.SecurityConfiguration;
 import com.workable.matchmakers.web.security.exception.MatchmakersAuthenticationException;
 import org.apache.commons.lang3.StringUtils;
 
@@ -50,8 +50,19 @@ public class SecurityHelper {
      * @param authorizationHeader
      * @return The UUID access-token
      */
-    public static UUID getAccessToken(String authorizationHeader) {
-        String token = StringUtils.substringAfter(authorizationHeader, "Bearer ");
+    public static String getAccessToken(String authorizationHeader) {
+        return StringUtils.substringAfter(authorizationHeader, "Bearer ");
+    }
+
+
+    /**
+     * Parses the HTTP Authorization header and returns, if found, the user's access token
+     *
+     * @param authorizationHeader
+     * @return The UUID access-token
+     */
+    public static UUID getUuidToken(String authorizationHeader) {
+        String token =  getAccessToken(authorizationHeader);
         return convertAccessToken(token);
     }
 

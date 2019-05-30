@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('MovieRamaUi')
+        .module('Matchmakers')
         .controller('RegisterCtrl', RegisterCtrl);
 
     RegisterCtrl.$inject = ['UserService', 'AuthenticationService', '$location', '$scope', "$state"];
@@ -18,7 +18,7 @@
                     if (response.data.result === 'SUCCESS') {
                         AuthenticationService.Authorize(ctrl.username, response.data.data.id);
                         $scope.loggedIn();
-                        $state.go("movies_review");
+                        $state.go("jobs");
                         // $location.path("/");
                     }
                 });

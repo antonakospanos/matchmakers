@@ -1,0 +1,6 @@
+FROM library/postgres
+COPY src/main/resources/db/import.sql /docker-entrypoint-initdb.d/
+
+# Super User
+# ENV POSTGRES_USER postgres
+ENV POSTGRES_PASSWORD postgres

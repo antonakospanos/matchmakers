@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('MovieRamaUi')
+        .module('Matchmakers')
         .controller('LoginCtrl', LoginCtrl);
 
     LoginCtrl.$inject = ['$location', 'AuthenticationService', "$scope", "$state"];
@@ -23,7 +23,7 @@
                         AuthenticationService.Authorize(ctrl.username, response.data.id);
                         $scope.loggedIn();
                         $scope.createToast("User '" + ctrl.username + "' logged in successfully")
-                        $state.go("movies_review");
+                        $state.go("jobs");
                         // $location.path("/");
                     } else {
                         $scope.createToast(response.data.result + "! " + response.data.description)

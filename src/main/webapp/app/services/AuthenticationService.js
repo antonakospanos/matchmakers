@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('MovieRamaUi')
+        .module('Matchmakers')
         .factory('AuthenticationService', AuthenticationService);
 
     AuthenticationService.$inject = ['$http', '$cookies', '$rootScope', '$timeout', 'UserService'];

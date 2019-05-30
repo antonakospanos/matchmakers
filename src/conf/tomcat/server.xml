@@ -90,8 +90,8 @@
                          type="RSA"/>
         </SSLHostConfig>
     </Connector>-->
-    <Connector port="443" SSLEnabled="true" keystoreFile="conf/localhost-rsa.jks" keystorePass="matchmakers" keyAlias="matchmakers.com" scheme="https" secure="true" sslProtocol="TLS" ciphers="TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA"/>
-    <Connector port="8443" SSLEnabled="true" keystoreFile="conf/localhost-rsa.jks" keystorePass="matchmakers" keyAlias="selfsigned" scheme="https" secure="true" sslProtocol="TLS" ciphers="TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA"/>
+    <Connector port="443" SSLEnabled="true" keystoreFile="conf/keystores/rsa.keystore" keystorePass="panosant" keyAlias="antonakospanos.com" scheme="https" secure="true" sslProtocol="TLS"/>
+    <!--<Connector port="8443" SSLEnabled="true" keystoreFile="conf/localhost-rsa.jks" keystorePass="matchmakers" keyAlias="selfsigned" scheme="https" secure="true" sslProtocol="TLS" ciphers="TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA"/>-->
 
     <!-- Define a SSL/TLS HTTP/1.1 Connector on port 8443 with HTTP/2
          This connector uses the APR/native implementation which always uses
