@@ -3,7 +3,6 @@
     <div class="pageTitle">
       {{ model.data.length > 0 ? "Matching Jobs" : "No Jobs Found. :(" }}
     </div>
-    {{ model.data }}
     <div
       ng-repeat="item in model.data"
       class="job panel panel-default control-panel config-control-panel config-panel-margin md-whiteframe-6dp review-panel review-item-container"
