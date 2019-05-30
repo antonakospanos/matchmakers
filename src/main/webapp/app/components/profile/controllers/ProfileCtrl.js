@@ -30,7 +30,8 @@
       $scope.initialModel = angular.copy($scope.candidate);
       CandidateService.Read($scope.user.token).then(function setObjective(response) {
         console.log(response)
-        $scope.objective = response.data.objective || {};
+        var {roles, locationsSecondary, locationsPrimary} = response.data || {roles: [], locationsSecondary: [], locationsPrimary: []};
+        $scope.objective = {role: roles[0], locationsSecondary: locationsSecondary[0], locationsPrimary: locationsPrimary[0]};
       })
     };
 
