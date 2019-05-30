@@ -75,24 +75,46 @@
         );
     }
 
-    function UploadToS3({user, file}) {
+    function UploadToS3({ user, file }) {
       var headers = {
         "Content-Type": "multipart/form-data;",
         Expires: getUploadExpires()
       };
 
       var formData = new FormData();
-      var blob = new Blob([file], {type: 'multipart/form-data'});
-      formData.append(file.name, blob);
-      return fetch(service.GetResumeUrl(user), {
-        method: 'POST',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-        body: formData
-      });
+      formData.append("file", file);
+
+      return $http
+        .post(S3_URL, formData, {
+          transformRequest: angular.identity,
+          headers: {
+            "Content-Type": undefined,
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "*"
+          }
+        })
+        .then(
+          function successCallback(response) {
+            console.log(response);
+          },
+          function errorCallback(response) {
+            console.log("Failed");
+          }
+        );
+
+      // var blob = new Blob([file], { type: "multipart/form-data" });
+      // formData.append(file.name, blob);
+      // return fetch(S3_URL, {
+      //   method: "POST",
+      //   cache: "no-cache",
+      //   credentials: "same-origin",
+      //   headers: {
+      //     "Content-Type": "multipart/form-data"
+      //   },
+      //   body: formData
+      // });
     }
   }
 })();
