@@ -1,7 +1,7 @@
 <div ng-controller="JobsCtrl as ctrl" ng-init="ctrl.init()">
   <div class="config-control-panel config-panel-margin main-width ">
     <div class="pageTitle">
-      Job Suggestions
+      {{ model.data.length > 0 ? "Matching Jobs" : "No Jobs Found. :(" }}
     </div>
 
     <div

@@ -238,8 +238,6 @@
           }
         ]
       };
-
-      $rootScope.model.jobsCount = $scope.model.data.length;
     };
 
     /**

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html class="full" ng-app="Matchmakers">
-<head>
-    <meta charset="utf-8"/>
+  <head>
+    <meta charset="utf-8" />
     <title>Matchmakers</title>
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
-    <link href="css/bootstrap.css" rel="stylesheet"/>
-    <link href="css/jquery.dataTables.css" rel="stylesheet"/>
-    <link href="css/jquery-ui.css" rel="stylesheet"/>
-    <link href="css/angular-intro.css" rel="stylesheet"/>
-    <link href="css/angular-material.css" rel="stylesheet"/>
-    <link href="css/main.css" rel="stylesheet"/>
-    <link href="css/md-time-picker.css" rel="stylesheet"/>
-    <link href="js/ng-table/ng-table.min.css" rel="stylesheet"/>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="css/jquery-ui.css" rel="stylesheet" />
+    <link href="css/angular-intro.css" rel="stylesheet" />
+    <link href="css/angular-material.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="css/md-time-picker.css" rel="stylesheet" />
+    <link href="js/ng-table/ng-table.min.css" rel="stylesheet" />
 
     <!-- Library Scripts -->
     <script src="js/underscore-min.js"></script>
@@ -59,63 +59,68 @@
 
     <script src="app/services/UserService.js"></script>
     <script src="app/services/AuthenticationService.js"></script>
-</head>
+  </head>
 
-<body ng-controller="RootController" class="full">
-    <md-toolbar class="menu-toolbar navbar-center" layout="row" aria-hidden="false" md-scroll-shrink="true">
-        <div class="md-toolbar-tools main-width">
+  <body ng-controller="RootController" class="full">
+    <md-toolbar
+      class="menu-toolbar navbar-center"
+      layout="row"
+      aria-hidden="false"
+      md-scroll-shrink="true"
+    >
+      <div class="md-toolbar-tools main-width">
+        <!-- Home Page Logo -->
+        <md-button ui-sref="jobs" ng-click="reloadState()" title="Homepage">
+          <img src="images/logo.png" height="g" width="100" />
+        </md-button>
 
-            <!-- Home Page Logo -->
-            <md-button ui-sref="jobs" ng-click=reloadState() title="Homepage">
-                <img src="images/logo.png" height="g" width="100"/>
-            </md-button>
-
-            <!-- Menu Items -->
-            <div id="subscription-menus">
-                <md-button class="menu-width" ui-sref="profile">Profile</md-button>
-            </div>
-
-            <!-- Login and Logout Button -->
-            <span flex> </span>
-            <div id="login-button">
-                <md-button class="header-button header-login form-group usertag logout-width" ui-sref="login">
-                        Log in
-                </md-button>
-            </div>
-            <div id="register-button">
-                <md-button class="header-button header-register form-group usertag logout-width" ui-sref="register">
-                    Register
-                </md-button>
-            </div>
-            <div id="logout-button">
-                <md-button class="header-button header-logout form-group usertag logout-width" ui-sref="logout">
-                    Log out
-                </md-button>
-            </div>
+        <!-- Menu Items -->
+        <div id="subscription-menus">
+          <md-button
+            class="header-button menu-width header-login form-group usertag"
+            ui-sref="cv"
+            >Profile</md-button
+          >
         </div>
+
+        <!-- Login and Logout Button -->
+        <span flex> </span>
+        <div id="login-button">
+          <md-button
+            class="header-button header-login form-group usertag logout-width"
+            ui-sref="login"
+          >
+            Log in
+          </md-button>
+        </div>
+        <div id="register-button">
+          <md-button
+            class="header-button header-register form-group usertag logout-width"
+            ui-sref="register"
+          >
+            Register
+          </md-button>
+        </div>
+        <div id="logout-button">
+          <md-button
+            class="header-button header-logout form-group usertag logout-width"
+            ui-sref="logout"
+          >
+            Log out
+          </md-button>
+        </div>
+      </div>
     </md-toolbar>
 
     <md-toolbar class="menu-width" md-scroll-shrink="true">
-        <div class="container md-toolbar-tools main-width" layout="row">
-            <div id="pageTitleId"></div>
-        </div>
-        <!--<md-ink-bar class="md-primary" style="top: 100px; width: 100%; background-color: #e91e63;"></md-ink-bar>-->
+      <div class="container md-toolbar-tools main-width" layout="row">
+        <div id="pageTitleId"></div>
+      </div>
+      <!--<md-ink-bar class="md-primary" style="top: 100px; width: 100%; background-color: #e91e63;"></md-ink-bar>-->
     </md-toolbar>
 
-    <div class="main-panel" ui-view ></div>
+    <div class="main-panel" ui-view></div>
 
     <div id="toaster"></div>
-    <footer class="footer" aria-hidden="false">
-        <div class="container main-width" layout="row">
-            <div class="configuration-buttons title-style">
-                <div id="configCheck"><img class="configImage" src="images/checked.svg"/></div>
-                <div id="configAlert"><img class="configImage" src="images/alert.svg"/></div>
-                <div id="configPrompt"></div>
-                <div id="progressBar">
-                    <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-                </div>
-            </div>
-        </div>
-    </footer>
-</body>
+  </body>
 </html>
