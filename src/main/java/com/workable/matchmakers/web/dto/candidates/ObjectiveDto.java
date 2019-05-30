@@ -80,7 +80,9 @@ public class ObjectiveDto implements Dto<CandidateObjective> {
         entity.setRoles(this.getRoles());
         entity.setLocationsPrimary(this.getLocationsPrimary());
         entity.setLocationsSecondary(this.getLocationsSecondary());
-        entity.setStatus(this.getStatus().getDescription());
+        if (this.getStatus() != null) {
+            entity.setStatus(this.getStatus().getDescription());
+        }
         entity.setSalaryFrom(this.getSalaryFrom());
         entity.setSalaryTo(this.getSalaryTo());
         entity.setAvailabilityInterview(this.getAvailabilityInterview());
