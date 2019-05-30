@@ -23,7 +23,7 @@ public class JobsAdapter extends AtsAdapter {
 
     public void apply(Candidate candidate, String account, String jobId) {
         String baseUrl = atsUrl.replace("www", account);
-        rest.postForEntity(baseUrl + "/" + jobId + "/candidates", toJobApplyDto(candidate), Object.class);
+        rest.postForLocation(baseUrl + "/jobs/" + jobId + "/candidates", toJobApplyDto(candidate));
     }
 
     private JobApplyDto toJobApplyDto(Candidate candidate) {
