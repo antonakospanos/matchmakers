@@ -39,7 +39,7 @@
             // $location.path("/");
           } else {
             $rootScope.createToast(
-              response.data.result + "! " + response.data.description
+               response.data.description
             );
           }
         }

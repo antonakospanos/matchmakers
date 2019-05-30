@@ -305,13 +305,13 @@
             $http.put(applyUrl, body, { headers: headers }).then(
               function successCallback(response) {
                 $scope.createToast(
-                  response.data.result + "! " + response.data.description
+                   response.data.description
                 );
                 //ctrl.listJobs();
               },
               function errorCallback(response) {
                 $scope.createToast(
-                  response.data.result + "! " + response.data.description
+                   response.data.description
                 );
               }
             );
@@ -341,7 +341,7 @@
                 function successCallback(response) {
                   console.log("INFO:" + response.data);
                   $scope.createToast(
-                    response.data.result + "! " + response.data.description
+                     response.data.description
                   );
                   //ctrl.listJobs();
                   $scope.scrollTop();
@@ -349,7 +349,7 @@
                 function errorCallback(response) {
                   console.log("ERROR: " + response.data);
                   $scope.createToast(
-                    response.data.result + "! " + response.data.description
+                     response.data.description
                   );
                   $scope.scrollTop();
                 }

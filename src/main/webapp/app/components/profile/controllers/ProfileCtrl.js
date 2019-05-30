@@ -35,27 +35,6 @@
       })
     };
 
-    ctrl.reset = function() {
-      var message = "This will reset the form. Proceed anyway?";
-      $scope.modalWarning(message, "RESET").then(function(response) {
-        if (response === true) {
-          $scope.candidate = angular.copy($scope.initialModel);
-          // location.reload();
-          $scope.scrollTop();
-        }
-      });
-    };
-
-    ctrl.cancel = function() {
-      var message = "Your work will be lost. Proceed anyway?";
-      $scope.modalWarning(message, "PROCEED").then(function(response) {
-        if (response === true) {
-          $state.go("jobs");
-          $scope.scrollTop();
-        }
-      });
-    };
-
     ctrl.getFormCtrl = function() {
       var retval = $scope.$$childHead;
       if (retval) {
@@ -74,10 +53,6 @@
     };
 
     ctrl.add = function() {
-      var message =
-        "This will publish '" +
-        $scope.candidate.title +
-        "' to Matchmakers. Proceed?";
       var requestData = {
         ...$scope.user,
         objective: {
@@ -87,31 +62,25 @@
         }
       };
 
-      $scope.modalWarning(message, "SAVE").then(function(response) {
-        if (response === true) {
-          CandidateService.Update(requestData).then(
-            function successCallback(response) {
-              $state.go("jobs");
-              // Reload footer's img to switch from alert to check-mark!
-              $scope.createToast(
-                response.data.result + "! " + response.data.description
-              );
-              if ($rootScope.jobs === 0) {
-                location.reload();
-              } else {
-                $scope.scrollTop();
-              }
-            },
-            function errorCallback(response) {
-              $scope.createToast(
-                response.data.result + "! " + response.data.description
-              );
-              // var message = response.data.result + "<br/>" + response.data.description;
-              // $scope.modalError(message, "100");
-            }
+      CandidateService.Update(requestData).then(
+        function successCallback(response) {
+          $state.go("jobs");
+          // Reload footer's img to switch from alert to check-mark!
+          $scope.createToast(
+             response.data.description
+          );
+          if ($rootScope.jobs === 0) {
+            location.reload();
+          } else {
+            $scope.scrollTop();
+          }
+        },
+        function errorCallback(response) {
+          $scope.createToast(
+             response.data.description
           );
         }
-      });
+      );
     };
   }
 })();

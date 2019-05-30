@@ -26,7 +26,7 @@
         debugger;
       UserService.Create($scope.user).then(function(response) {
         $rootScope.createToast(
-          response.data.result + "! " + response.data.description
+            response.data.description
         );
         if (response.data.result === "SUCCESS") {
           AuthenticationService.Authorize($scope.user.email, response.data.data.id, $scope.user.name);
