@@ -80,10 +80,10 @@
       ctrl.sortedByHatesDesc = false;
       ctrl.sortedByDatesDesc = false;
       $scope.model.data.sort(function(a, b) {
-        var likesA = a && a.likes ? a.likes : 0;
-        var likesB = b && b.likes ? b.likes : 0;
-        if (likesA < likesB) return 1;
-        if (likesB < likesA) return -1;
+        var matchA = a && a.match ? a.match : 0;
+        var matchB = b && b.match ? b.match : 0;
+        if (matchA < matchB) return 1;
+        if (matchB < matchA) return -1;
         return 0;
       });
     };
@@ -171,6 +171,9 @@
         }
       }).then(
         function successCallback(response) {
+          response.data.forEach(e => {
+            e.match = e.match - Math.floor(Math.random() * 10 + 1);
+          });
           $scope.model = { data: response.data };
           $scope.loading = false;
           ctrl.sortLikesDesc();
@@ -183,7 +186,7 @@
       );
     };
 
-    ctrl.removeCode = function(text) {
+    ctrl.enrichCode = function(code) {
       return text
         .replace("<p>", "")
         .replace("</p>", "")
