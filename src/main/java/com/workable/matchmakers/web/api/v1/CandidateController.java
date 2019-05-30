@@ -67,7 +67,7 @@ public class CandidateController extends MatchmakersBaseController {
 
 		Candidate candidate = service.create(candidateBaseDto);
 
-		mailService.sendCandidateRegistrationIsPending(candidate);
+//		mailService.sendCandidateRegistrationIsPending(candidate);
 
 		CreateResponseData data = new CreateResponseData(candidate.getExternalId().toString());
 		UriComponents uriComponents =	uriBuilder.path(API_BASE + "/candidates/{id}").buildAndExpand(data.getId());
