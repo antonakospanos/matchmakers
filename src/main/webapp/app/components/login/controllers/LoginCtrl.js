@@ -6,10 +6,17 @@
   LoginCtrl.$inject = [
     "$location",
     "AuthenticationService",
+    "$rootScope",
     "$scope",
     "$state"
   ];
-  function LoginCtrl($location, AuthenticationService, $scope, $state) {
+  function LoginCtrl(
+    $location,
+    AuthenticationService,
+    $rootScope,
+    $scope,
+    $state
+  ) {
     var ctrl = this;
     ctrl.login = login;
 

@@ -42,7 +42,7 @@
 
     // Initialization
     ctrl.init = function() {
-      ctrl.listJobsMock();
+      ctrl.listJobs();
     };
 
     // Sorting states
@@ -155,9 +155,20 @@
     /**
      *  List Matchmakers jobs!
      */
+
+    // $rootScope.globals = $cookies.getObject("globals") || {};
+    // if ($rootScope.globals.currentUser) {
+    //   $http.defaults.headers.common["Authorization"] =
+    //     "Bearer " + $rootScope.globals.currentUser.token;
+    // }
+
     ctrl.listJobs = function() {
+      console.log($http.defaults.headers.common["Authorization"]);
       $http({
-        url: matchingUrl
+        url: matchingUrl,
+        headers: {
+          Authorization: $http.defaults.headers.common["Authorization"]
+        }
       }).then(
         function successCallback(response) {
           $scope.model = { data: response.data };
@@ -288,7 +299,7 @@
                 $scope.createToast(
                   response.data.result + "! " + response.data.description
                 );
-                ctrl.listJobs();
+                //ctrl.listJobs();
               },
               function errorCallback(response) {
                 $scope.createToast(
@@ -324,7 +335,7 @@
                   $scope.createToast(
                     response.data.result + "! " + response.data.description
                   );
-                  ctrl.listJobs();
+                  //ctrl.listJobs();
                   $scope.scrollTop();
                 },
                 function errorCallback(response) {
