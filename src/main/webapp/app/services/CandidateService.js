@@ -41,7 +41,12 @@
     }
 
     function Read(user) {
-      return $http.get(service.GetUrl(user), { headers: headers });
+      var config = {
+        headers: {
+          "Content-Type": "application/json;charset=utf-8;"
+        }
+      };
+      return $http.get(service.GetUrl(user), config);
     }
   }
 })();
