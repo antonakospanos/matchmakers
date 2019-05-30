@@ -18,7 +18,7 @@
                     if (response.data.result === 'SUCCESS') {
                         AuthenticationService.Authorize(ctrl.email, response.data.data.id);
                         $scope.loggedIn();
-                        $state.go("jobs");
+                        $state.go("profile");
                         // $location.path("/");
                     }
                 });
