@@ -9,6 +9,7 @@ public class JobDto {
 
     String logo;
     String company;
+    String company_subdomain;
     String title;
     String jobId;
     String jobUrl;
