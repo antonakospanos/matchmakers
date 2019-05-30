@@ -26,6 +26,22 @@
       );
     }
 
+    function GetResumeUrl(candidateToken) {
+      return (
+        $rootScope.backend_protocol +
+        "://" +
+        $rootScope.backend_ip +
+        ":" +
+        $rootScope.backend_port +
+        "/" +
+        $rootScope.backend_context_path +
+        "/candidates" +
+        "/" +
+        candidateToken +
+        "/cv"
+      );
+    }
+
     function Update({ token, ...candidateData }) {
       debugger;
       var config = {
