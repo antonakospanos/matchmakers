@@ -7,6 +7,9 @@
     <div
       ng-repeat="item in model.data"
       class="job panel panel-default control-panel config-control-panel config-panel-margin md-whiteframe-6dp review-panel review-item-container"
+      ng-mouseover="hoverActive = true"
+      ng-mouseleave="hoverActive = false"
+      ng-style="hoverActive? {'border-width':'2px','border-color': ctrl.decideColor(item)} : {}"
     >
       <button
         class="md-button-toggle md-button md-ink-ripple review-item-button"
