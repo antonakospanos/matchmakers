@@ -64,7 +64,7 @@ public class SwaggerConfiguration {
 	}
 
 	private Predicate<String> apiV1Paths() {
-		return or(regex( API_BASE + "/(candidates|matching).*"));
+		return or(regex( API_BASE + "/(candidates|jobs).*"));
 	}
 
 	private Predicate<String> apiV2Paths() {
