@@ -66,7 +66,7 @@ public class JobController extends MatchmakersBaseController {
 			dataType = "string",
 			paramType = "header"
 	)
-	public ResponseEntity<Iterable> lisJobs(@RequestHeader(value = "Authorization") String authorization) {
+	public ResponseEntity<Iterable> list(@RequestHeader(value = "Authorization") String authorization) {
 		UUID accessToken = SecurityHelper.getUuidToken(authorization);
 		candidateService.validateCandidate(accessToken);
 
@@ -79,5 +79,30 @@ public class JobController extends MatchmakersBaseController {
 		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(jobs);
+	}
+
+	@ApiOperation(value = "Applies to the requested job", response = ResponseBase.class)
+	@RequestMapping(value = "/{id}", produces = {"application/json"},	method = RequestMethod.POST)
+	@ApiImplicitParam(
+			name = "Authorization",
+			value = "Bearer <The candidate's access token obtained upon registration or authentication>",
+			example = "Bearer 6b6f2985-ae5b-46bc-bad1-f9176ab90171",
+			defaultValue = "Bearer admin",
+			required = true,
+			dataType = "string",
+			paramType = "header"
+	)
+	public ResponseEntity<ResponseBase> apply(@RequestHeader(value = "Authorization") String authorization, @PathVariable String id, @RequestParam String account) {
+		UUID accessToken = SecurityHelper.getUuidToken(authorization);
+		candidateService.validateCandidate(accessToken);
+
+		try {
+			Candidate candidate = candidateService.find(accessToken);
+			jobService.apply(candidate, account, id);
+		} catch (Exception e) {
+			log.error("ERROR: ", e);
+		}
+
+		return ResponseEntity.ok().body(ResponseBase.Builder().build(Result.SUCCESS));
 	}
 }

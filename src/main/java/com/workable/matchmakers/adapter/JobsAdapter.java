@@ -1,30 +1,36 @@
 package com.workable.matchmakers.adapter;
 
 import com.google.common.collect.Lists;
+import com.workable.matchmakers.adapter.dto.JobApplyDto;
 import com.workable.matchmakers.adapter.dto.JobQueryDto;
 import com.workable.matchmakers.dao.model.Candidate;
-import com.workable.matchmakers.dao.model.CandidateEducation;
-import com.workable.matchmakers.dao.model.CandidateExperienceWork;
 import com.workable.matchmakers.web.dto.jobs.JobDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @Slf4j
 public class JobsAdapter extends AtsAdapter {
 
     public List<JobDto> list(Candidate candidate) {
-        ResponseEntity<Object> jobs =  rest.postForEntity( atsUrl + "/matchmakers/matching_jobs", toDto(candidate), Object.class);
+        ResponseEntity<Object> jobs =  rest.postForEntity( atsUrl + "/matchmakers/matching_jobs", toJobQueryDto(candidate), Object.class);
 
         return (List<JobDto>) jobs.getBody();
     }
 
-    private JobQueryDto toDto(Candidate candidate) {
+    public void apply(Candidate candidate, String account, String jobId) {
+        String baseUrl = atsUrl.replace("www", account);
+        rest.postForEntity(baseUrl + "/" + jobId + "/candidates", toJobApplyDto(candidate), Object.class);
+    }
+
+    private JobApplyDto toJobApplyDto(Candidate candidate) {
+        return JobApplyDto.builder().firstname(candidate.getName()).lastname(candidate.getName()).email(candidate.getEmail()).build();
+    }
+
+    private JobQueryDto toJobQueryDto(Candidate candidate) {
         String title = "";//candidate.getCandidateObjective().getRoles().stream().findFirst().orElse(null);
         String city = "";//candidate.getCandidateObjective().getCity();
         String country = ""; //candidate.getCandidateObjective().getCountry();

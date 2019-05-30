@@ -10,8 +10,9 @@ public class JobDto {
     String logo;
     String company;
     String title;
-    String description;
+    String jobId;
     String jobUrl;
+    String description;
     Integer match;
     Publisher publisher;
 

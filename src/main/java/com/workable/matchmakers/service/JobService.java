@@ -17,4 +17,8 @@ public class JobService {
     public List<JobDto> list(Candidate candidate) {
         return adapter.list(candidate);
     }
+
+    public void apply(Candidate candidate, String account, String jobId) {
+        adapter.apply(candidate, account, jobId);
+    }
 }
