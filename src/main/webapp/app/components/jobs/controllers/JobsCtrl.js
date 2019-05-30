@@ -238,6 +238,8 @@
           }
         ]
       };
+
+      $rootScope.model.jobsCount = $scope.model.data.length;
     };
 
     /**
@@ -388,9 +390,9 @@
     ctrl.decideColor = function(item) {
       let color = "#95a5a6"; //Concrete;
       if (item.match >= 85) {
-        color = "#27ae60"; //Turqoise;
+        color = "#00756a"; //Pine-green;
       } else if (item.match >= 70) {
-        color = "#f39c12"; //Orange
+        color = "#ff5e16"; //Lava
       }
       return color;
     };

@@ -624,7 +624,6 @@ btn-file {
 
 .footer {
   background-color: #373656; /* #202533;*/
-  border-top: 2px solid #00756a;
   color: #ffffff;
   font-size: 12px;
   position: fixed !important;
@@ -724,15 +723,17 @@ section {
 */
 
 .btn-primary {
-  background-color: rgb(77, 77, 79);
-  border-color: rgb(97, 97, 99);
+  color: #00756a !important;
+  background-color: white;
+  border-color: #00756a !important;
 }
 
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus {
-  background-color: rgb(97, 97, 99);
-  border-color: rgb(243, 112, 33);
+  background-color: #eee;
+  color: #00756a;
+  border-color: #27ae60;
 }
 
 .nav-tabs > li.active > a,
@@ -1005,10 +1006,10 @@ wizard step bar end
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.btn-blue {
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #204d74;
+.btn-green {
+  color: #00756a;
+  background-color: white;
+  border-color: #00756a;
 }
 
 .btn-orange {
@@ -1019,8 +1020,13 @@ wizard step bar end
   color: #ef4438;
 }
 
-.btn-green {
-  color: green;
+.header-button {
+  border-color: #00756a;
+  color: #00756a;
+}
+
+.header-button span {
+  color: #00756a;
 }
 
 .modal-body {
@@ -1127,7 +1133,8 @@ div.dataTables_filter {
   font-style: normal;
   font-family: "Open Sans", sans-serif;
   color: inherit;
-  margin: 24px 5px;
+  margin-left: 50px;
+  margin-bottom: 20px;
 }
 
 .config-control-panel {
@@ -1320,7 +1327,7 @@ ol.list-group {
 
 md-toolbar.menu-toolbar {
   min-height: 60px;
-  background-color: #373656;
+  background-color: white;
   position: fixed;
   top: 0;
   z-index: 50;
@@ -1374,12 +1381,16 @@ md-menu.menu-flows {
   text-transform: none;
 }
 
+/* Jobs CSS */
+
 .job {
+  font-family: "Open Sans", sans-serif;
 }
 
 .job .description {
   margin-bottom: 20px;
   text-align: justify;
+  font-family: "Open Sans", sans-serif;
 }
 
 .job-info h4 {
@@ -1387,6 +1398,7 @@ md-menu.menu-flows {
   font-weight: bold;
   font-size: 25px;
   padding-top: 5px;
+  font-family: "Open Sans", sans-serif;
 }
 
 .job-info .company {
@@ -1403,6 +1415,7 @@ md-menu.menu-flows {
   border-width: 1px;
   padding: 7px 10px 2px 10px;
   color: white;
+  font-family: "Open Sans", sans-serif;
 }
 
 .publish-info {
@@ -1413,6 +1426,19 @@ md-menu.menu-flows {
 img.job-image {
   margin-right: 25px;
 }
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:active:focus:not(:disabled):not(.disabled),
+.btn:focus,
+.btn:active,
+.btn:hover {
+  box-shadow: none !important;
+  outline: 0;
+}
+
+/*End of jobs CSS*/
 
 md-ink-bar.progress-ink-bar {
   width: 60px;
