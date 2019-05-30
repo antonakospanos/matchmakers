@@ -28,6 +28,10 @@
       $scope.user = $rootScope.globals.currentUser || {};
       $scope.objective = {};
       $scope.initialModel = angular.copy($scope.candidate);
+      CandidateService.Read($scope.user.token).then(function setObjective(response) {
+        console.log(response)
+        $scope.objective = response.data.objective || {};
+      })
     };
 
     ctrl.reset = function() {
