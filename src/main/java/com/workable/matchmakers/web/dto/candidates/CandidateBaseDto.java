@@ -47,6 +47,10 @@ public class CandidateBaseDto {
 	@Pattern(regexp=RegexValidator.FACEBOOK_URL_VALIDATOR, flags = Pattern.Flag.CASE_INSENSITIVE, message="Invalid Facebook URL!")
 	private String facebookUrl;
 
+	@ApiModelProperty(example = "https://s3.amazonaws.com/workable-tmp/antonakospanos")
+	@Pattern(regexp=RegexValidator.CV_URL_VALIDATOR, flags = Pattern.Flag.CASE_INSENSITIVE, message="Invalid CV URL!")
+	private String cvUrl;
+
 	private List<EducationDto> education;
 
 	private ExperienceDto experience;
@@ -58,7 +62,7 @@ public class CandidateBaseDto {
 	}
 
 	public CandidateBaseDto(String username, String password, String name, String email,
-							String cellphone, String linkedInUrl, String facebookUrl,
+							String cellphone, String linkedInUrl, String facebookUrl, String cvUrl,
 							List<EducationDto> education, ExperienceDto experience, ObjectiveDto objective) {
 		this.username = username;
 		this.password = password;
@@ -67,6 +71,7 @@ public class CandidateBaseDto {
 		this.cellphone = cellphone;
 		this.linkedInUrl = linkedInUrl;
 		this.facebookUrl = facebookUrl;
+		this.cvUrl= cvUrl;
 		this.education = education;
 		this.experience = experience;
 		this.objective = objective;

@@ -27,6 +27,8 @@ public class Candidate extends User {
 
 	private String facebookUrl;
 
+	private String cvUrl;
+
 	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL , fetch = FetchType.LAZY, orphanRemoval = true)
 	private Set<CandidateEducation> education;
 

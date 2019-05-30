@@ -303,6 +303,35 @@ public class CandidateController extends MatchmakersBaseController {
 		return ResponseEntity.created(uriComponents.toUri()).body(responseBase);
 	}
 
+	@RequestMapping(value = "/{id}/cv-url", produces = {"application/json"}, method = RequestMethod.POST)
+	@ApiOperation(value = "Uploads the candidate's Curriculum Vitae", response = CreateResponse.class)
+	@ApiImplicitParam(
+			name = "Authorization",
+			value = "Bearer <The user's access token obtained upon registration or authentication>",
+			defaultValue = "Bearer admin",
+			example = "Bearer 6b6f2985-ae5b-46bc-bad1-f9176ab90171",
+			required = true,
+			dataType = "string",
+			paramType = "header"
+	)
+	@ResponseStatus(HttpStatus.CREATED)
+	@ApiResponses(value = {
+			@ApiResponse(code = 201, message = "The CV is uploaded!", response = ResponseBase.class),
+			@ApiResponse(code = 400, message = "The request is invalid!"),
+			@ApiResponse(code = 500, message = "server error")})
+	public ResponseEntity<ResponseBase> uploadCV(UriComponentsBuilder uriBuilder, @PathVariable UUID id, String cvUrl) {
+		service.validateCandidate(id);
+
+		Candidate candidate = service.find(id);
+		candidate.setCvUrl(cvUrl);
+		candidateRepository.save(candidate);
+
+		UriComponents uriComponents =	uriBuilder.path("/{id}/cv-url").buildAndExpand(id);
+		ResponseBase responseBase = ResponseBase.Builder().build(Result.SUCCESS);
+
+		return ResponseEntity.created(uriComponents.toUri()).body(responseBase);
+	}
+
 	@ApiOperation(value = "Deletes the candidate's image", response = ResponseBase.class)
 	@RequestMapping(value = "/{id}/cv", produces = {"application/json"},	method = RequestMethod.DELETE)
 	@ApiImplicitParam(

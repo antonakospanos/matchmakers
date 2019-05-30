@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 /**
  * AccountDto
  */
-@JsonPropertyOrder({ "id", "username", "password", "name", "email", "cellphone", "linkedInUrl", "facebookUrl", "education", "experience", "objective" })
+@JsonPropertyOrder({ "id", "username", "password", "name", "email", "cellphone", "linkedInUrl", "facebookUrl", "cvUrl", "education", "experience", "objective" })
 @ToString
 @Getter
 @Setter
@@ -42,7 +42,7 @@ public class CandidateDto extends CandidateBaseDto implements Dto<Candidate> {
 	}
 
 	public CandidateDto(UUID id, String username, String password, String name, String email,
-						String cellphone, String linkedInUrl, String facebookUrl,
+						String cellphone, String linkedInUrl, String facebookUrl, String cvUrl,
 						List<EducationDto> education, ExperienceDto experience, ObjectiveDto objective) {
 		this.id = id;
 		setUsername(username);
@@ -52,6 +52,7 @@ public class CandidateDto extends CandidateBaseDto implements Dto<Candidate> {
 		setCellphone(cellphone);
 		setLinkedInUrl(linkedInUrl);
 		setFacebookUrl(facebookUrl);
+		setCvUrl(cvUrl);
 		setEducation(education);
 		setExperience(experience);
 		setObjective(objective);
@@ -65,7 +66,7 @@ public class CandidateDto extends CandidateBaseDto implements Dto<Candidate> {
 	public CandidateDto(CandidateBaseDto candidateBaseDto) {
 		super(candidateBaseDto.getUsername(), candidateBaseDto.getPassword(), candidateBaseDto.getName(),
 				candidateBaseDto.getEmail(), candidateBaseDto.getCellphone(),
-				candidateBaseDto.getLinkedInUrl(), candidateBaseDto.getFacebookUrl(),
+				candidateBaseDto.getLinkedInUrl(), candidateBaseDto.getFacebookUrl(), candidateBaseDto.getCvUrl(),
 				candidateBaseDto.getEducation(), candidateBaseDto.getExperience(), candidateBaseDto.getObjective());
 	}
 
@@ -94,6 +95,7 @@ public class CandidateDto extends CandidateBaseDto implements Dto<Candidate> {
 		setCellphone(candidate.getCellphone());
 		setLinkedInUrl(candidate.getLinkedInUrl());
 		setFacebookUrl(candidate.getFacebookUrl());
+		setCvUrl(candidate.getCvUrl());
 
 		if (candidate.getEducation() != null) {
 			List<EducationDto> educations =
@@ -131,6 +133,7 @@ public class CandidateDto extends CandidateBaseDto implements Dto<Candidate> {
 		candidate.setCellphone(this.getCellphone());
 		candidate.setLinkedInUrl(this.getLinkedInUrl());
 		candidate.setFacebookUrl(this.getFacebookUrl());
+		candidate.setCvUrl(this.getCvUrl());
 
 		if (this.getEducation() != null) {
 			Set<CandidateEducation> educations =

@@ -11,4 +11,5 @@ public class RegexValidator {
 
     public static final String FACEBOOK_URL_VALIDATOR = "((http|https)://)?(www[.])?facebook.com/.+";
     public static final String LINKEDIN_URL_VALIDATOR = "((http|https)://)?(www[.])?linkedin.com/.+";
+    public static final String CV_URL_VALIDATOR = "((http|https)://).+";
 }
