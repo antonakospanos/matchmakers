@@ -11,15 +11,63 @@
 			<md-content layout="column" class="md-padding">
 				<md-input-container>
 					<label>Name</label>
-					<input required="" name="title" ng-model="user.name">
-					<div ng-messages="profileForm.title.$error">
+					<input required="" name="name" ng-model="user.name">
+					<div ng-messages="profileForm.name.$error">
 						<div ng-message="required">This is required</div>
 					</div>
 				</md-input-container>
 
 				<md-input-container>
 					<label>Email</label>
-					<input name="description" ng-model="user.email">
+					<input name="email" type="email" ng-model="user.email">
+					<div ng-messages="profileForm.email.$error">
+						<div ng-message="required">This is required</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container>
+					<label for="role">Looking for</label>
+					<input
+						type="text"
+						name="role"
+						id="role"
+						class="form-control"
+						ng-model="objective.role"
+						required
+					/>
+					<div ng-messages="profileForm.role.$error">
+						<div ng-message="required">This is required</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container>
+					<label for="country">Country</label>
+					<input
+						type="text"
+						name="country"
+						id="country"
+						class="form-control"
+						ng-model="objective.locationsPrimary"
+						required
+					/>
+					<div ng-messages="profileForm.country.$error">
+						<div ng-message="required">This is required</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container>
+					<label for="city">City</label>
+					<input
+						type="text"
+						name="city"
+						id="city"
+						class="form-control"
+						ng-model="objective.locationsSecondary"
+						required
+					/>
+					<div ng-messages="profileForm.city.$error">
+						<div ng-message="required">This is required</div>
+					</div>
 				</md-input-container>
 			</md-content>
 		</form>
