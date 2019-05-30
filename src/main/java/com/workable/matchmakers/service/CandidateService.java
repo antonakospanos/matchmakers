@@ -1,5 +1,7 @@
 package com.workable.matchmakers.service;
 
+import com.workable.matchmakers.adapter.CandidateAdapter;
+import com.workable.matchmakers.adapter.ProfileDbAdapter;
 import com.workable.matchmakers.util.Utils;
 import javassist.NotFoundException;
 import com.workable.matchmakers.dao.converter.CandidateConverter;
@@ -40,6 +42,11 @@ public class CandidateService {
 	@Autowired
 	MailService mailService;
 
+	@Autowired
+	CandidateAdapter candidateAdapter;
+
+	@Autowired
+	ProfileDbAdapter profileDbAdapter;
 
 	@Transactional
 	public Candidate create(CandidateBaseDto candidateBaseDto) {
@@ -88,6 +95,11 @@ public class CandidateService {
  		Candidate updatedCandidate = candidateDto.toEntity(cleanedCandidate);
 
 		candidateRepository.save(updatedCandidate);
+
+		if (updatedCandidate.getCv() != null || StringUtils.isNotBlank(updatedCandidate.getCvUrl())) {
+			candidateAdapter.upload(candidate);
+			profileDbAdapter.wait(candidate);
+		}
 	}
 
 	@Transactional

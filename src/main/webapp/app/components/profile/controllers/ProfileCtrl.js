@@ -63,7 +63,7 @@
             $scope.modalWarning(message, "ADD")
                 .then(function (response) {
                     if (response === true) {
-                        $http.post(ctrl.profileUrl, $scope.candidate, config)
+                        $http.put(ctrl.profileUrl, $scope.candidate, config)
                             .then(function successCallback(response) {
                                 $scope.refreshJobs();
                                 $state.go("jobs");

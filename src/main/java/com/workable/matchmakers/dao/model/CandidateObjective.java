@@ -24,13 +24,17 @@ public class CandidateObjective extends ResourceBase {
     @ElementCollection(targetClass=String.class)
     private Set<String> roles;
 
+    private String city;
+
+    private String country;
+
+    private String status;
+
     @ElementCollection
     private Set<String> locationsPrimary;
 
     @ElementCollection
     private Set<String> locationsSecondary;
-
-    private String status;
 
     private Long salaryFrom;
 
