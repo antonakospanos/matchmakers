@@ -23,13 +23,13 @@
     ctrl.register = register;
 
     function register() {
-      UserService.Create(ctrl.user).then(function(response) {
-        console.log(response);
+        debugger;
+      UserService.Create($scope.user).then(function(response) {
         $rootScope.createToast(
           response.data.result + "! " + response.data.description
         );
         if (response.data.result === "SUCCESS") {
-          AuthenticationService.Authorize(ctrl.email, response.data.data.id);
+          AuthenticationService.Authorize($scope.user.email, response.data.data.id, $scope.user.name);
           $scope.loggedIn();
           $state.go("cv");
           // $location.path("/");

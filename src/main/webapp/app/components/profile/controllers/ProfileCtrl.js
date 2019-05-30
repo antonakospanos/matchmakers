@@ -10,6 +10,7 @@
 
         ctrl.init = function() {
             $scope.candidate = {};
+            $scope.user = $rootScope.globals.currentUser || {};
             $scope.initialModel = angular.copy($scope.candidate);
         }
 
