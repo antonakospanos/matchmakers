@@ -6,7 +6,7 @@
 
     <div
       ng-repeat="item in model.data"
-      class="job panel panel-default control-panel config-control-panel config-panel-margin main-width md-whiteframe-6dp review-panel review-item-container"
+      class="job panel panel-default control-panel config-control-panel config-panel-margin md-whiteframe-6dp review-panel review-item-container"
     >
       <button
         class="md-button-toggle md-button md-ink-ripple review-item-button"
@@ -71,7 +71,9 @@
                   ng-hide="ctrl.hideApplyButton(item)"
                   type="button"
                   class="pull-right btn btn-default review-control-button"
-                  ng-click="ctrl.apply(item)"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                  ng-click="ctrl.apply(item);"
                 >
                   View Job
                 </button>
@@ -91,4 +93,43 @@
       </div>
     </div>
   </div>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="myModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >
+            &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel">
+            {{ lastItem.title }}
+          </h4>
+        </div>
+        <div class="modal-body">
+          <iframe
+            src="{{ ctrl.trustSrcurl(lastItem.jobUrl) }}"
+            width="100%"
+            height="960"
+            frameborder="0"
+            allowtransparency="true"
+          ></iframe>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 </div>

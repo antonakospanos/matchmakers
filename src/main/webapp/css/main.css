@@ -1385,6 +1385,14 @@ md-menu.menu-flows {
 
 .job {
   font-family: "Open Sans", sans-serif;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+.modal.in .modal-dialog {
+  width: 90% !important;
+  height: 90% !important;
 }
 
 .job .description {

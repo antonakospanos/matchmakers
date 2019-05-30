@@ -7,10 +7,11 @@
       "$scope",
       "$http",
       "$state",
+      "$sce",
       JobsCtrl
     ]);
 
-  function JobsCtrl($rootScope, $scope, $http, $state) {
+  function JobsCtrl($rootScope, $scope, $http, $state, $sce) {
     var ctrl = this;
     var matchingUrl =
       $rootScope.backend_protocol +
@@ -183,7 +184,7 @@
             Software Engineer responsibilities include gathering user requirements, defining system functionality and writing code in various languages, like Java, Ruby on Rails or .NET programming languages (e.g. C++ or JScript.NET.) Our ideal candidates are familiar with the software development life cycle (SDLC) from preliminary system analysis to tests and deployment.
             
             Ultimately, the role of the Software Engineer is to build high-quality, innovative and fully performing software that complies with coding standards and technical design.`,
-            jobUrl: "",
+            jobUrl: "https://careers.workable.com/j/9525118267?viewed=true",
             match: 90,
             publisher: {
               name: "Workable",
@@ -195,12 +196,12 @@
             company: "Workable",
             title: "Test title",
             description: "Test description",
-            jobUrl: "",
+            jobUrl: "https://careers.workable.com/j/9525118267?viewed=true",
             match: 90,
 
             publisher: {
               name: "Workable",
-              date: ""
+              date: "21/5/2019"
             }
           },
           {
@@ -209,7 +210,7 @@
             title: "Test title",
             description: "Test description",
             match: 80,
-            jobUrl: "",
+            jobUrl: "https://workable.com",
             publisher: {
               name: "Workable"
             }
@@ -343,6 +344,7 @@
      */
     ctrl.apply = function(item) {
       // TODO
+      $scope.lastItem = item;
     };
 
     /**
@@ -393,6 +395,10 @@
         color = "#ff5e16"; //Lava
       }
       return color;
+    };
+
+    ctrl.trustSrcurl = function(data) {
+      return $sce.trustAsResourceUrl(data);
     };
   }
 })();
