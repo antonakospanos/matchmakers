@@ -35,27 +35,6 @@
       })
     };
 
-    ctrl.reset = function() {
-      var message = "This will reset the form. Proceed anyway?";
-      $scope.modalWarning(message, "RESET").then(function(response) {
-        if (response === true) {
-          $scope.candidate = angular.copy($scope.initialModel);
-          // location.reload();
-          $scope.scrollTop();
-        }
-      });
-    };
-
-    ctrl.cancel = function() {
-      var message = "Your work will be lost. Proceed anyway?";
-      $scope.modalWarning(message, "PROCEED").then(function(response) {
-        if (response === true) {
-          $state.go("jobs");
-          $scope.scrollTop();
-        }
-      });
-    };
-
     ctrl.getFormCtrl = function() {
       var retval = $scope.$$childHead;
       if (retval) {
