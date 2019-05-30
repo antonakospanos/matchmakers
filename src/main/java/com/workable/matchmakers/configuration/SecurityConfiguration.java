@@ -29,9 +29,9 @@ import static com.workable.matchmakers.web.api.MatchmakersBaseController.API_BAS
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private static final String[] SWAGGER_WHITELIST_REGEX = {"/swagger-resources.*", "/swagger-ui.html", "docs/api.html",
-			"/v2/api-docs.*", "/docs.*", "/webjars.*", "/configuration/ui", "/configuration/security"};
+			"/v2/api-docs.*", "/docs.*", "/webjars.*", "/configuration/ui", "/configuration/security", "/app/.*"};
 
-	private static final String[] VENUS_WHITELIST_REGEX = new String[]{"/", "/version", "/health", "/ehcache.*", "/metrics.*"};
+	private static final String[] MATCHMAKERS_WHITELIST_REGEX = new String[]{"/", "/version", "/health", "/ehcache.*", "/metrics.*"};
 
 	private static final String CANDIDATES_API = API_BASE + "/candidates/**";
 	private static final String[] CANDIDATE_API = { CANDIDATES_API };
@@ -60,20 +60,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// Logging
-		http.addFilterBefore(new LoggingFilter(), BasicAuthenticationFilter.class);
+//		http.addFilterBefore(new LoggingFilter(), BasicAuthenticationFilter.class);
 
 		// Exception handling
-		http.addFilterAfter(new ExceptionHandlerFilter(), BasicAuthenticationFilter.class);
+//		http.addFilterAfter(new ExceptionHandlerFilter(), BasicAuthenticationFilter.class);
 
 		// Authentication
-		http.addFilterAfter(new AuthenticationFilter(authenticationManager()), ExceptionHandlerFilter.class);
+//		http.addFilterAfter(new AuthenticationFilter(authenticationManager()), ExceptionHandlerFilter.class);
 
 		http.cors().and().csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 				.authorizeRequests()
 				// Permit Swagger and Metrics APIs
-				.regexMatchers(VENUS_WHITELIST_REGEX).permitAll()
+				.regexMatchers(MATCHMAKERS_WHITELIST_REGEX).permitAll()
 				.regexMatchers(SWAGGER_WHITELIST_REGEX).permitAll()
 
 				// Permit User Authentication API
@@ -86,7 +86,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(CANDIDATE_API).hasAnyRole("ADMIN", "CANDIDATE")
 
 				// Authenticate rest APIs
-				.anyRequest().authenticated() // implicitly permit with .permitAll()
+//				.anyRequest().authenticated() // implicitly permit with .permitAll()
+				.anyRequest().permitAll() // implicitly permit with .permitAll()
 				.and()
 				.httpBasic();
 	}

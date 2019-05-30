@@ -26,9 +26,10 @@
         });
 
         // Create Profile after login
-        $stateProvider.state("profile", {
+        $stateProvider.state("cv", {
             url: "/profile",
             templateUrl: "app/components/profile/views/profile.html",
+            controller: "ProfileCtrl"
         });
 
         // User Login form
@@ -89,7 +90,7 @@
          *  Uses stored 'globals.currentUser' information from his cookie
          */
         $rootScope.$on('$locationChangeStart', function () {
-            var restrictedPage = $.inArray($location.path(), ['/', 'publisher', '/login', '/register']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/', '/login', '/register']) === -1;
 
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {

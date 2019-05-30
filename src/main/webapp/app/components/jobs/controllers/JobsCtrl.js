@@ -29,7 +29,7 @@
       $rootScope.backend_port +
       "/" +
       $rootScope.backend_context_path +
-      "/applications";
+      "/jobs";
 
     if (
       $state.params.publisher !== undefined &&
