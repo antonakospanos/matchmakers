@@ -1,0 +1,18 @@
+<div class="modal-body">
+    <div class="row"><div class="col-md-11 col-md-offset-1 alertmsg" ng-bind-html="message"></div></div>   
+</div>
+<div class="modal-footer">
+    
+    <div class="row">
+        <div class="btn-group pull-left pad10" ng-repeat="choice in choices">
+            <button type="button" class="btn btn-default" ng-click="choose(choice)">
+                {{choice}}
+            </button>
+        </div>
+        <div class="btn-group pull-right pad10">
+            <button type="button" class="btn btn-default" ng-click="cancel()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

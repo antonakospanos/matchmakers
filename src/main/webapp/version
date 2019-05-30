@@ -1,0 +1,6 @@
+Version: ${pom.version}-${git.buildnumber}
+Revision: ${git.revision}
+Branch: ${git.branch}
+Tag: ${git.tag}
+Commits Count: ${git.commitsCount}
+Deployment Type: ${deployment.type}

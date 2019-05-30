@@ -1,0 +1,14 @@
+<div layout="row" class="modal-body btn-orange">
+	<img src="images/warning-oragne.png" alt="warning" height="32" width="32">
+	<div class="alertmsg" style="margin: 6px 0px 0px 12px" ng-bind-html="message"></div>
+</div>
+<div class="modal-footer modal-footer">
+	<div class="btn-group pull-right">
+		<md-button class="btn" type="button" ng-click="cancel()" id="modalConfirmNo">
+			CANCEL 
+		</md-button>
+		<md-button class="btn btn-orange alertmsg" type="button" ng-click="ok(choice)" id="modalConfirmYes">
+			{{choice}}
+		</md-button>
+	</div>
+</div>

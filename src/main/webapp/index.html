@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html class="full" ng-app="MovieRamaUi">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/jquery.dataTables.css" rel="stylesheet"/>
+    <link href="css/jquery-ui.css" rel="stylesheet"/>
+    <link href="css/angular-intro.css" rel="stylesheet"/>
+    <link href="css/angular-material.css" rel="stylesheet"/>
+    <link href="css/main.css" rel="stylesheet"/>
+    <link href="css/md-time-picker.css" rel="stylesheet"/>
+    <link href="js/ng-table/ng-table.min.css" rel="stylesheet"/>
+
+    <!-- Library Scripts -->
+    <script src="js/underscore-min.js"></script>
+    <script src="js/jquery-1.11.2.js"></script>
+    <script src="js/jqueryui/jquery-ui.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-waitingfor.js"></script>
+    <script src="js/introJs.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/angular-animate.js"></script>
+    <script src="js/angular-translate.min.js"></script>
+    <script src="js/angular-aria.js"></script>
+    <script src="js/angular-material.js"></script>
+    <script src="js/sortable.js"></script>
+    <script src="js/angular-resource.min.js"></script>
+    <script src="js/angular-cookies.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="js/angular-sanitize.js"></script>
+    <script src="js/angular-filereader.js"></script>
+    <script src="js/linq.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/moment-timezone.js"></script>
+    <script src="js/angular-moment.js"></script>
+    <script src="js/angular-file-upload.min.js"></script>
+    <script src="js/angular-intro.js"></script>
+    <script src="js/angular-ui-router.js"></script>
+    <script src="js/angular-messages.js"></script>
+    <script src="js/ng-table/ng-table.js"></script>
+    <script src="js/validate.js"></script>
+    <script src="js/md-time-picker.js"></script>
+    <script src="js/yaml.min.js"></script>
+
+    <!-- Application Scripts -->
+    <script src="app/app.js"></script>
+    <script src="app/common/controllers/ConfirmInstanceCtrl.js"></script>
+    <script src="app/common/controllers/MessageInstanceCtrl.js"></script>
+
+    <script src="app/components/header/controllers/Header.js"></script>
+    <script src="app/components/footer/controllers/Footer.js"></script>
+    <script src="app/components/movies-review/controllers/MoviesReviewCtrl.js"></script>
+    <script src="app/components/movies-add/controllers/MoviesAddCtrl.js"></script>
+    <script src="app/components/login/controllers/LoginCtrl.js"></script>
+    <script src="app/components/logout/controllers/LogoutCtrl.js"></script>
+    <script src="app/components/register/controllers/RegisterCtrl.js"></script>
+
+    <script src="app/services/UserService.js"></script>
+    <script src="app/services/AuthenticationService.js"></script>
+</head>
+
+<body ng-controller="RootController" class="full">
+    <md-toolbar class="menu-toolbar navbar-center" layout="row" aria-hidden="false" md-scroll-shrink="true">
+        <div class="md-toolbar-tools main-width">
+
+            <!-- Home Page Logo -->
+            <md-button ui-sref="movies_review" ng-click=reloadState() "title="Homepage">
+                <img src="images/logo.png" height="g" width="100"/>
+            </md-button>
+
+            <!-- Menu Items -->
+            <div id="subscription-menus">
+                <md-button class="menu-width" ui-sref="movies_add">Add Movie</md-button>
+            </div>
+
+            <!-- Login and Logout Button -->
+            <span flex> </span>
+            <div id="login-button">
+                <md-button class="form-group usertag logout-width">
+                    Log in<a id="menuLogIn" class="btn pull-right btn-success logout-button glyphicon glyphicon-off"
+                             ui-sref="login" tooltip="Sign in" tooltip-placement="bottom"></a>
+                </md-button>
+            </div>
+            <div id="register-button">
+                <md-button class="form-group usertag logout-width">
+                    Register<a id="menuRegister"
+                               class="btn pull-right btn-success logout-button glyphicon glyphicon-off"
+                               ui-sref="register" tooltip="Sign up" tooltip-placement="bottom"></a>
+                </md-button>
+            </div>
+            <div id="logout-button">
+                <md-button class="form-group usertag logout-width">
+                    Log out <a id="menuLogout" class="btn pull-right btn-success logout-button glyphicon glyphicon-off"
+                               ui-sref="logout" tooltip="Log out" tooltip-placement="bottom"></a>
+                </md-button>
+            </div>
+        </div>
+    </md-toolbar>
+
+    <md-toolbar class="menu-width" md-scroll-shrink="true">
+        <div class="container md-toolbar-tools main-width" layout="row">
+            <div id="pageTitleId"></div>
+        </div>
+        <!--<md-ink-bar class="md-primary" style="top: 100px; width: 100%; background-color: #e91e63;"></md-ink-bar>-->
+    </md-toolbar>
+
+    <div class="main-panel" ui-view ></div>
+
+    <div id="toaster"></div>
+    <footer class="footer" aria-hidden="false">
+        <div class="container main-width" layout="row">
+            <div class="configuration-buttons title-style">
+                <div id="configCheck"><img class="configImage" src="images/checked.svg"/></div>
+                <div id="configAlert"><img class="configImage" src="images/alert.svg"/></div>
+                <div id="configPrompt"></div>
+                <div id="progressBar">
+                    <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

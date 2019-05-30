@@ -1,0 +1,50 @@
+server:
+  # Configuration of Spring Boot embedded Tomcat server (java -jar matchmakers.war)
+  servlet:
+    contextPath: '/'
+  port: 8443
+  http:
+    port: 8080
+endpoints:
+  jmx:
+    domain: matchmakers
+logging:
+  config: 'classpath:matchmakers-logback.xml'
+spring:
+  jmx:
+    default-domain: matchmakers
+  data:
+    rest:
+      defaultMediaType: application/json
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    #hibernate:
+      #ddl-auto: create-drop # create | update | validate | create-drop
+    properties:
+      net.sf.ehcache.configurationResourceName: matchmakers-ehcache.xml
+      hibernate:
+        default_schema: matchmakers
+        show_sql: false
+        generate_statistics: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+        cache:
+          use_query_cache: true
+          use_second_level_cache: true
+          region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+  datasource:
+    url: 'jdbc:postgresql://db:5432/matchmakers?currentSchema=matchmakers'
+    username: matchmakers
+    password: matchmakers
+    driver-class-name: org.postgresql.Driver
+flyway:
+  enabled: true
+  table: DB_MIGRATION_HISTORY
+  sqlMigrationSuffix: .sql
+  schemas: matchmakers
+application:
+  roles:
+    admin:
+      access-token: admin # Change in PRD with a UUID

@@ -1,0 +1,21 @@
+<div layout="row" class="modal-body modal-body btn-red">
+    <img src="images/warning-red.png" alt="warning" height="32" width="32">
+    <div class="alertmsg" style="margin: 6px 0px 0px 12px" ng-bind-html="message"></div>
+</div>
+
+<div class="modal-width">
+    <md-input-container class="md-block text-container">
+        <input type="text" ng-model="modalInput" id="modalInput" class="col-md-12 center-block" ng-keyup="validate($event)"/>
+    </md-input-container>
+</div>
+
+<div class="modal-footer modal-footer">
+    <div class="btn-group pull-right">
+        <md-button class="btn" type="button" ng-click="cancel()" id="modalConfirmNo">
+            CANCEL
+        </md-button>
+        <md-button class="btn btn-red alertmsg" type="button"  id="modalConfirmYes" ng-click="ok(choice)">
+            {{choice}}
+        </md-button>
+    </div>
+</div>
