@@ -5,9 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CandidateDto {
+public class CvUploadResponseDto {
 
-    String fullname;
-    String email;
-    String resume_url;
+    String correlation_id;
 }
