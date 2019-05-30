@@ -1651,6 +1651,10 @@ div.form-nested-content > sf-decorator.ng-scope > md-content.ng-scope > span {
   color: #e91e63;
 }
 
+md-toolbar.menu-width:not(.md-menu-toolbar) {
+   background-color: transparent !important;
+ }
+
 /************
  * Defaults
  ************/

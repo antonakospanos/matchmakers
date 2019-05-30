@@ -91,7 +91,6 @@
         if (response === true) {
           CandidateService.Update(requestData).then(
             function successCallback(response) {
-              $scope.refreshJobs();
               $state.go("jobs");
               // Reload footer's img to switch from alert to check-mark!
               $scope.createToast(
