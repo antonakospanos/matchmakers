@@ -175,7 +175,7 @@
             e.match = e.match - Math.floor(Math.random() * 10 + 1);
             e.skills = ["Java", "C#", "Senior", "Programming", "Development"];
           });
-          $scope.model = { data: response.data };
+          $scope.model = { data: response.data.map(d => ctrl.mapProgressModel(d)) };
           $scope.loading = false;
           ctrl.sortLikesDesc();
         },
@@ -445,5 +445,15 @@
     ctrl.trustSrcurl = function(data) {
       return $sce.trustAsResourceUrl(data);
     };
+
+    ctrl.mapProgressModel = function(job) {
+      return {
+        ...job,
+        current: job.match,
+        total: 100,
+        color: ctrl.decideColor(job),
+        duration: Number(job.match) * 8
+      }
+    }
   }
 })();

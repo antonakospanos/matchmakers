@@ -1,5 +1,530 @@
 /* angular-svg-round-progressbar@0.4.8 2016-09-18 */
 (function(){
   "use strict";
-!function(){for(var a=0,b=["webkit","moz"],c=0;c<b.length&&!window.requestAnimationFrame;++c)window.requestAnimationFrame=window[b[c]+"RequestAnimationFrame"],window.cancelAnimationFrame=window[b[c]+"CancelAnimationFrame"]||window[b[c]+"CancelRequestAnimationFrame"];window.requestAnimationFrame||(window.requestAnimationFrame=function(b){var c=(new Date).getTime(),d=Math.max(0,16-(c-a)),e=window.setTimeout(function(){b(c+d)},d);return a=c+d,e}),window.cancelAnimationFrame||(window.cancelAnimationFrame=function(a){window.clearTimeout(a)})}(),angular.module("angular-svg-round-progressbar",[]),angular.module("angular-svg-round-progressbar").constant("roundProgressConfig",{max:50,semi:!1,rounded:!1,responsive:!1,clockwise:!0,radius:100,color:"#45ccce",bgcolor:"#eaeaea",stroke:15,duration:800,animation:"easeOutCubic",animationDelay:0,offset:0}),angular.module("angular-svg-round-progressbar").service("roundProgressService",["$window",function(a){function b(a,b,c,d){var e=(d-90)*Math.PI/180,f=a+c*Math.cos(e),g=b+c*Math.sin(e);return f+" "+g}var c={},d=angular.isNumber,e=document.head.querySelector("base");return c.isSupported=!(!document.createElementNS||!document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect),c.resolveColor=e&&e.href?function(a){var b=a.indexOf("#");return b>-1&&a.indexOf("url")>-1?a.slice(0,b)+window.location.href+a.slice(b):a}:function(a){return a},c.toNumber=function(a){return d(a)?a:parseFloat((a+"").replace(",","."))},c.getOffset=function(a,b){var c=+b.offset||0;if("inherit"===b.offset)for(var d=a.$parent;d;){if(d.hasOwnProperty("$$getRoundProgressOptions")){var e=d.$$getRoundProgressOptions();c+=(+e.offset||0)+(+e.stroke||0)}d=d.$parent}return c},c.getTimestamp=a.performance&&a.performance.now&&angular.isNumber(a.performance.now())?function(){return a.performance.now()}:function(){return(new a.Date).getTime()},c.updateState=function(a,c,d,e,f,g){if(!f)return e;var h=a>0?Math.min(a,c):0,i=g?180:359.9999,j=0===c?0:h/c*i,k=b(f,f,d,j),l=b(f,f,d,0),m=j<=180?0:1,n="M "+k+" A "+d+" "+d+" 0 "+m+" 0 "+l;return e.attr("d",n)},c.animations={linearEase:function(a,b,c,d){return c*a/d+b},easeInQuad:function(a,b,c,d){return c*(a/=d)*a+b},easeOutQuad:function(a,b,c,d){return-c*(a/=d)*(a-2)+b},easeInOutQuad:function(a,b,c,d){return(a/=d/2)<1?c/2*a*a+b:-c/2*(--a*(a-2)-1)+b},easeInCubic:function(a,b,c,d){return c*(a/=d)*a*a+b},easeOutCubic:function(a,b,c,d){return c*((a=a/d-1)*a*a+1)+b},easeInOutCubic:function(a,b,c,d){return(a/=d/2)<1?c/2*a*a*a+b:c/2*((a-=2)*a*a+2)+b},easeInQuart:function(a,b,c,d){return c*(a/=d)*a*a*a+b},easeOutQuart:function(a,b,c,d){return-c*((a=a/d-1)*a*a*a-1)+b},easeInOutQuart:function(a,b,c,d){return(a/=d/2)<1?c/2*a*a*a*a+b:-c/2*((a-=2)*a*a*a-2)+b},easeInQuint:function(a,b,c,d){return c*(a/=d)*a*a*a*a+b},easeOutQuint:function(a,b,c,d){return c*((a=a/d-1)*a*a*a*a+1)+b},easeInOutQuint:function(a,b,c,d){return(a/=d/2)<1?c/2*a*a*a*a*a+b:c/2*((a-=2)*a*a*a*a+2)+b},easeInSine:function(a,b,c,d){return-c*Math.cos(a/d*(Math.PI/2))+c+b},easeOutSine:function(a,b,c,d){return c*Math.sin(a/d*(Math.PI/2))+b},easeInOutSine:function(a,b,c,d){return-c/2*(Math.cos(Math.PI*a/d)-1)+b},easeInExpo:function(a,b,c,d){return 0==a?b:c*Math.pow(2,10*(a/d-1))+b},easeOutExpo:function(a,b,c,d){return a==d?b+c:c*(-Math.pow(2,-10*a/d)+1)+b},easeInOutExpo:function(a,b,c,d){return 0==a?b:a==d?b+c:(a/=d/2)<1?c/2*Math.pow(2,10*(a-1))+b:c/2*(-Math.pow(2,-10*--a)+2)+b},easeInCirc:function(a,b,c,d){return-c*(Math.sqrt(1-(a/=d)*a)-1)+b},easeOutCirc:function(a,b,c,d){return c*Math.sqrt(1-(a=a/d-1)*a)+b},easeInOutCirc:function(a,b,c,d){return(a/=d/2)<1?-c/2*(Math.sqrt(1-a*a)-1)+b:c/2*(Math.sqrt(1-(a-=2)*a)+1)+b},easeInElastic:function(a,b,c,d){var e=1.70158,f=0,g=c;return 0==a?b:1==(a/=d)?b+c:(f||(f=.3*d),g<Math.abs(c)?(g=c,e=f/4):e=f/(2*Math.PI)*Math.asin(c/g),-(g*Math.pow(2,10*(a-=1))*Math.sin((a*d-e)*(2*Math.PI)/f))+b)},easeOutElastic:function(a,b,c,d){var e=1.70158,f=0,g=c;return 0==a?b:1==(a/=d)?b+c:(f||(f=.3*d),g<Math.abs(c)?(g=c,e=f/4):e=f/(2*Math.PI)*Math.asin(c/g),g*Math.pow(2,-10*a)*Math.sin((a*d-e)*(2*Math.PI)/f)+c+b)},easeInOutElastic:function(a,b,c,d){var e=1.70158,f=0,g=c;return 0==a?b:2==(a/=d/2)?b+c:(f||(f=d*(.3*1.5)),g<Math.abs(c)?(g=c,e=f/4):e=f/(2*Math.PI)*Math.asin(c/g),a<1?-.5*(g*Math.pow(2,10*(a-=1))*Math.sin((a*d-e)*(2*Math.PI)/f))+b:g*Math.pow(2,-10*(a-=1))*Math.sin((a*d-e)*(2*Math.PI)/f)*.5+c+b)},easeInBack:function(a,b,c,d,e){return void 0==e&&(e=1.70158),c*(a/=d)*a*((e+1)*a-e)+b},easeOutBack:function(a,b,c,d,e){return void 0==e&&(e=1.70158),c*((a=a/d-1)*a*((e+1)*a+e)+1)+b},easeInOutBack:function(a,b,c,d,e){return void 0==e&&(e=1.70158),(a/=d/2)<1?c/2*(a*a*(((e*=1.525)+1)*a-e))+b:c/2*((a-=2)*a*(((e*=1.525)+1)*a+e)+2)+b},easeInBounce:function(a,b,d,e){return d-c.animations.easeOutBounce(e-a,0,d,e)+b},easeOutBounce:function(a,b,c,d){return(a/=d)<1/2.75?c*(7.5625*a*a)+b:a<2/2.75?c*(7.5625*(a-=1.5/2.75)*a+.75)+b:a<2.5/2.75?c*(7.5625*(a-=2.25/2.75)*a+.9375)+b:c*(7.5625*(a-=2.625/2.75)*a+.984375)+b},easeInOutBounce:function(a,b,d,e){return a<e/2?.5*c.animations.easeInBounce(2*a,0,d,e)+b:.5*c.animations.easeOutBounce(2*a-e,0,d,e)+.5*d+b}},c}]),angular.module("angular-svg-round-progressbar").directive("roundProgress",["$window","roundProgressService","roundProgressConfig",function(a,b,c){var d={restrict:"EA",replace:!0,transclude:!0,scope:{current:"=",max:"=",semi:"=",rounded:"=",clockwise:"=",responsive:"=",onRender:"=",radius:"@",color:"@",bgcolor:"@",stroke:"@",duration:"@",animation:"@",offset:"@",animationDelay:"@"}};return b.isSupported?angular.extend(d,{link:function(e,f,g){function h(a){return g.hasOwnProperty(a)}var i,j,k=!f.hasClass("round-progress-wrapper"),l=k?f:f.find("svg").eq(0),m=l.find("path").eq(0),n=l.find("circle").eq(0),o=angular.copy(c),p=0;e.$$getRoundProgressOptions=function(){return o};var q=function(){var a=o.semi,c=o.responsive,d=+o.radius||0,g=+o.stroke,h=2*d,i=d-g/2-b.getOffset(e,o);l.css({top:0,left:0,position:c?"absolute":"static",width:c?"100%":h+"px",height:c?"100%":(a?d:h)+"px",overflow:"hidden"}),k||l[0].setAttribute("viewBox","0 0 "+h+" "+(a?d:h)),f.css({width:c?"100%":"auto",position:"relative",paddingBottom:c?a?"50%":"100%":0}),m.css({stroke:b.resolveColor(o.color),strokeWidth:g,strokeLinecap:o.rounded?"round":"butt"}),a?m.attr("transform",o.clockwise?"translate(0, "+h+") rotate(-90)":"translate("+h+", "+h+") rotate(90) scale(-1, 1)"):m.attr("transform",o.clockwise?"":"scale(-1, 1) translate("+-h+" 0)"),n.attr({cx:d,cy:d,r:i>=0?i:0}).css({stroke:b.resolveColor(o.bgcolor),strokeWidth:g})},r=function(c,d,g){var h=b.toNumber(o.max||0),j=c>0?a.Math.min(c,h):0,k=d===j||d<0?0:d||0,n=j-k,q=b.animations[o.animation],r=+o.duration||0,s=g||c>h&&d>h||c<0&&d<0||r<25,t=b.toNumber(o.radius),u=t-o.stroke/2-b.getOffset(e,o),v=o.semi;l.attr({"aria-valuemax":h,"aria-valuenow":j});var w=function(){if(s)b.updateState(j,h,u,m,t,v),o.onRender&&o.onRender(j,o,f);else{var c=b.getTimestamp(),d=++p;a.requestAnimationFrame(function e(){var g=a.Math.min(b.getTimestamp()-c,r),i=q(g,k,n,r);b.updateState(i,h,u,m,t,v),o.onRender&&o.onRender(i,o,f),d===p&&g<r&&a.requestAnimationFrame(e)})}};o.animationDelay>0?(a.clearTimeout(i),a.setTimeout(w,o.animationDelay)):w()},s=Object.keys(d.scope).filter(function(a){return h(a)&&"current"!==a});e.$watchGroup(s,function(a){for(var b=0;b<a.length;b++)"undefined"!=typeof a[b]&&(o[s[b]]=a[b]);q(),e.$broadcast("$parentOffsetChanged"),"inherit"!==o.offset||j?"inherit"!==o.offset&&j&&j():j=e.$on("$parentOffsetChanged",function(){r(e.current,e.current,!0),q()})}),e.$watchGroup(["current","max","radius","stroke","semi","offset"].filter(h),function(a,c){r(b.toNumber(a[0]),b.toNumber(c[0]))})},template:function(a){for(var b=a.parent(),c="round-progress",d=['<svg class="'+c+'" xmlns="http://www.w3.org/2000/svg" role="progressbar" aria-valuemin="0">','<circle fill="none"/>','<path fill="none"/>',"<g ng-transclude></g>","</svg>"];b.length&&b[0].nodeName.toLowerCase()!==c&&"undefined"==typeof b.attr(c);)b=b.parent();return b&&b.length||(d.unshift('<div class="round-progress-wrapper">'),d.push("</div>")),d.join("\n")}}):angular.extend(d,{template:'<div class="round-progress" ng-transclude></div>'})}]);
+// shim layer with setTimeout fallback
+// credit Erik Möller and http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+(function() {
+    var lastTime = 0;
+    var vendors = ['webkit', 'moz'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame =
+          window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+
+    if (!window.requestAnimationFrame){
+        window.requestAnimationFrame = function(callback) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+              timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+    }
+
+    if (!window.cancelAnimationFrame){
+        window.cancelAnimationFrame = function(id) {
+            window.clearTimeout(id);
+        };
+    }
+}());
+
+angular.module('angular-svg-round-progressbar', []);
+
+angular.module('angular-svg-round-progressbar').constant('roundProgressConfig', {
+    max:            50,
+    semi:           false,
+    rounded:        false,
+    responsive:     false,
+    clockwise:      true,
+    radius:         100,
+    color:          '#45ccce',
+    bgcolor:        '#eaeaea',
+    stroke:         15,
+    duration:       800,
+    animation:      'easeOutCubic',
+    animationDelay: 0,
+    offset:         0
+});
+
+angular.module('angular-svg-round-progressbar').service('roundProgressService', ['$window', function($window){
+    var service = {};
+    var isNumber = angular.isNumber;
+    var base = document.head.querySelector('base');
+
+    // credits to http://modernizr.com/ for the feature test
+    service.isSupported = !!(document.createElementNS && document.createElementNS('http://www.w3.org/2000/svg', "svg").createSVGRect);
+
+    // fixes issues if the document has a <base> element
+    service.resolveColor = base && base.href ? function(value){
+        var hashIndex = value.indexOf('#');
+
+        if(hashIndex > -1 && value.indexOf('url') > -1){
+            return value.slice(0, hashIndex) + window.location.href + value.slice(hashIndex);
+        }
+
+        return value;
+    } : function(value){
+        return value;
+    };
+
+    // deals with floats passed as strings
+    service.toNumber = function(value){
+        return isNumber(value) ? value : parseFloat((value + '').replace(',', '.'));
+    };
+
+    service.getOffset = function(scope, options){
+        var value = +options.offset || 0;
+
+        if(options.offset === 'inherit'){
+            var parent = scope.$parent;
+
+            while(parent){
+                if(parent.hasOwnProperty('$$getRoundProgressOptions')){
+                    var opts = parent.$$getRoundProgressOptions();
+                    value += ((+opts.offset || 0) + (+opts.stroke || 0));
+                }
+
+                parent = parent.$parent;
+            }
+        }
+
+        return value;
+    };
+
+    service.getTimestamp = ($window.performance && $window.performance.now && angular.isNumber($window.performance.now())) ? function(){
+        return $window.performance.now();
+    } : function(){
+        return new $window.Date().getTime();
+    };
+
+    // credit to http://stackoverflow.com/questions/5736398/how-to-calculate-the-svg-path-for-an-arc-of-a-circle
+    service.updateState = function(current, total, pathRadius, element, elementRadius, isSemicircle) {
+        if(!elementRadius) return element;
+
+        var value       = current > 0 ? Math.min(current, total) : 0;
+        var type        = isSemicircle ? 180 : 359.9999;
+        var perc        = total === 0 ? 0 : (value / total) * type;
+        var start       = polarToCartesian(elementRadius, elementRadius, pathRadius, perc);
+        var end         = polarToCartesian(elementRadius, elementRadius, pathRadius, 0);
+        var arcSweep    = (perc <= 180 ? 0 : 1);
+        var d           = 'M ' + start + ' A ' + pathRadius + ' ' + pathRadius + ' 0 ' + arcSweep + ' 0 ' + end;
+
+        return element.attr('d', d);
+    };
+
+    // Easing functions by Robert Penner
+    // Source: http://www.robertpenner.com/easing/
+    // License: http://www.robertpenner.com/easing_terms_of_use.html
+
+    service.animations = {
+
+        // t: is the current time (or position) of the tween. This can be seconds or frames, steps, seconds, ms, whatever – as long as the unit is the same as is used for the total time.
+        // b: is the beginning value of the property.
+        // c: is the change between the beginning and destination value of the property.
+        // d: is the total time of the tween.
+        // jshint eqeqeq: false, -W041: true
+
+        linearEase: function(t, b, c, d) {
+            return c * t / d + b;
+        },
+
+        easeInQuad: function (t, b, c, d) {
+            return c*(t/=d)*t + b;
+        },
+
+        easeOutQuad: function (t, b, c, d) {
+            return -c *(t/=d)*(t-2) + b;
+        },
+
+        easeInOutQuad: function (t, b, c, d) {
+            if ((t/=d/2) < 1) return c/2*t*t + b;
+            return -c/2 * ((--t)*(t-2) - 1) + b;
+        },
+
+        easeInCubic: function (t, b, c, d) {
+            return c*(t/=d)*t*t + b;
+        },
+
+        easeOutCubic: function (t, b, c, d) {
+            return c*((t=t/d-1)*t*t + 1) + b;
+        },
+
+        easeInOutCubic: function (t, b, c, d) {
+            if ((t/=d/2) < 1) return c/2*t*t*t + b;
+            return c/2*((t-=2)*t*t + 2) + b;
+        },
+
+        easeInQuart: function (t, b, c, d) {
+            return c*(t/=d)*t*t*t + b;
+        },
+
+        easeOutQuart: function (t, b, c, d) {
+            return -c * ((t=t/d-1)*t*t*t - 1) + b;
+        },
+
+        easeInOutQuart: function (t, b, c, d) {
+            if ((t/=d/2) < 1) return c/2*t*t*t*t + b;
+            return -c/2 * ((t-=2)*t*t*t - 2) + b;
+        },
+
+        easeInQuint: function (t, b, c, d) {
+            return c*(t/=d)*t*t*t*t + b;
+        },
+
+        easeOutQuint: function (t, b, c, d) {
+            return c*((t=t/d-1)*t*t*t*t + 1) + b;
+        },
+
+        easeInOutQuint: function (t, b, c, d) {
+            if ((t/=d/2) < 1) return c/2*t*t*t*t*t + b;
+            return c/2*((t-=2)*t*t*t*t + 2) + b;
+        },
+
+        easeInSine: function (t, b, c, d) {
+            return -c * Math.cos(t/d * (Math.PI/2)) + c + b;
+        },
+
+        easeOutSine: function (t, b, c, d) {
+            return c * Math.sin(t/d * (Math.PI/2)) + b;
+        },
+
+        easeInOutSine: function (t, b, c, d) {
+            return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
+        },
+
+        easeInExpo: function (t, b, c, d) {
+            return (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
+        },
+
+        easeOutExpo: function (t, b, c, d) {
+            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+        },
+
+        easeInOutExpo: function (t, b, c, d) {
+            if (t==0) return b;
+            if (t==d) return b+c;
+            if ((t/=d/2) < 1) return c/2 * Math.pow(2, 10 * (t - 1)) + b;
+            return c/2 * (-Math.pow(2, -10 * --t) + 2) + b;
+        },
+
+        easeInCirc: function (t, b, c, d) {
+            return -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;
+        },
+
+        easeOutCirc: function (t, b, c, d) {
+            return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
+        },
+
+        easeInOutCirc: function (t, b, c, d) {
+            if ((t/=d/2) < 1) return -c/2 * (Math.sqrt(1 - t*t) - 1) + b;
+            return c/2 * (Math.sqrt(1 - (t-=2)*t) + 1) + b;
+        },
+
+        easeInElastic: function (t, b, c, d) {
+            var s=1.70158;var p=0;var a=c;
+            if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*0.3;
+            if (a < Math.abs(c)) { a=c; s=p/4; }
+            else s = p/(2*Math.PI) * Math.asin (c/a);
+            return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+        },
+
+        easeOutElastic: function (t, b, c, d) {
+            var s=1.70158;var p=0;var a=c;
+            if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*0.3;
+            if (a < Math.abs(c)) { a=c; s=p/4; }
+            else s = p/(2*Math.PI) * Math.asin (c/a);
+            return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
+        },
+
+        easeInOutElastic: function (t, b, c, d) {
+            // jshint eqeqeq: false, -W041: true
+            var s=1.70158;var p=0;var a=c;
+            if (t==0) return b;  if ((t/=d/2)==2) return b+c;  if (!p) p=d*(0.3*1.5);
+            if (a < Math.abs(c)) { a=c; s=p/4; }
+            else s = p/(2*Math.PI) * Math.asin (c/a);
+            if (t < 1) return -0.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+            return a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )*0.5 + c + b;
+        },
+
+        easeInBack: function (t, b, c, d, s) {
+            // jshint eqeqeq: false, -W041: true
+            if (s == undefined) s = 1.70158;
+            return c*(t/=d)*t*((s+1)*t - s) + b;
+        },
+
+        easeOutBack: function (t, b, c, d, s) {
+            // jshint eqeqeq: false, -W041: true
+            if (s == undefined) s = 1.70158;
+            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+        },
+
+        easeInOutBack: function (t, b, c, d, s) {
+            // jshint eqeqeq: false, -W041: true
+            if (s == undefined) s = 1.70158;
+            if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+            return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+        },
+
+        easeInBounce: function (t, b, c, d) {
+            return c - service.animations.easeOutBounce (d-t, 0, c, d) + b;
+        },
+
+        easeOutBounce: function (t, b, c, d) {
+            if ((t/=d) < (1/2.75)) {
+                return c*(7.5625*t*t) + b;
+            } else if (t < (2/2.75)) {
+                return c*(7.5625*(t-=(1.5/2.75))*t + 0.75) + b;
+            } else if (t < (2.5/2.75)) {
+                return c*(7.5625*(t-=(2.25/2.75))*t + 0.9375) + b;
+            } else {
+                return c*(7.5625*(t-=(2.625/2.75))*t + 0.984375) + b;
+            }
+        },
+
+        easeInOutBounce: function (t, b, c, d) {
+            if (t < d/2) return service.animations.easeInBounce (t*2, 0, c, d) * 0.5 + b;
+            return service.animations.easeOutBounce (t*2-d, 0, c, d) * 0.5 + c*0.5 + b;
+        }
+    };
+
+    // utility function
+    function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+        var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+        var x = centerX + (radius * Math.cos(angleInRadians));
+        var y = centerY + (radius * Math.sin(angleInRadians));
+
+        return x + ' ' + y;
+    }
+
+    return service;
+}]);
+
+angular.module('angular-svg-round-progressbar').directive('roundProgress', ['$window', 'roundProgressService', 'roundProgressConfig', function($window, service, roundProgressConfig){
+    var base = {
+        restrict: 'EA',
+        replace: true,
+        transclude: true,
+        scope: {
+            current:        '=',
+            max:            '=',
+            semi:           '=',
+            rounded:        '=',
+            clockwise:      '=',
+            responsive:     '=',
+            onRender:       '=',
+            radius:         '@',
+            color:          '@',
+            bgcolor:        '@',
+            stroke:         '@',
+            duration:       '@',
+            animation:      '@',
+            offset:         '@',
+            animationDelay: '@'
+        }
+    };
+
+    if(!service.isSupported){
+        return angular.extend(base, {
+            // placeholder element to keep the structure
+            template: '<div class="round-progress" ng-transclude></div>'
+        });
+    }
+
+    return angular.extend(base, {
+        link: function(scope, element, attrs){
+            var isNested    = !element.hasClass('round-progress-wrapper');
+            var svg         = isNested ? element : element.find('svg').eq(0);
+            var ring        = svg.find('path').eq(0);
+            var background  = svg.find('circle').eq(0);
+            var options     = {...angular.copy(roundProgressConfig), ...scope.$parent.item};
+            var lastAnimationId = 0;
+            var lastTimeoutId;
+            var parentChangedListener;
+
+            scope.$$getRoundProgressOptions = function(){
+                return {...options, ...scope.$parent.item};
+            };
+
+            var renderCircle = function(){
+                var isSemicircle     = options.semi;
+                var responsive       = options.responsive;
+                var radius           = +options.radius || 0;
+                var stroke           = +options.stroke;
+                var diameter         = radius*2;
+                var backgroundSize   = radius - (stroke/2) - service.getOffset(scope, options);
+
+                svg.css({
+                    top:          0,
+                    left:         0,
+                    position:     responsive ? 'absolute' : 'static',
+                    width:        responsive ? '100%' : (diameter + 'px'),
+                    height:       responsive ? '100%' : (isSemicircle ? radius : diameter) + 'px',
+                    overflow:     'hidden' // on some browsers the background overflows, if in semicircle mode
+                });
+
+                // when nested, the element shouldn't define its own viewBox
+                if(!isNested){
+                    // note that we can't use .attr, because if jQuery is loaded,
+                    // it lowercases all attributes and viewBox is case-sensitive
+                    svg[0].setAttribute('viewBox', '0 0 ' + diameter + ' ' + (isSemicircle ? radius : diameter));
+                }
+
+                element.css({
+                    width:           responsive ? '100%' : 'auto',
+                    position:        'relative',
+                    paddingBottom:   responsive ? (isSemicircle ? '50%' : '100%') : 0
+                });
+
+                ring.css({
+                    stroke:          service.resolveColor(options.color),
+                    strokeWidth:     stroke,
+                    strokeLinecap:   options.rounded ? 'round': 'butt'
+                });
+
+                if(isSemicircle){
+                    ring.attr('transform', options.clockwise ? 'translate(0, ' + diameter + ') rotate(-90)' : 'translate(' + diameter + ', '+ diameter +') rotate(90) scale(-1, 1)');
+                }else{
+                    ring.attr('transform', options.clockwise ? '' : 'scale(-1, 1) translate(' + (-diameter) + ' 0)');
+                }
+
+                background.attr({
+                    cx:           radius,
+                    cy:           radius,
+                    r:            backgroundSize >= 0 ? backgroundSize : 0
+                }).css({
+                    stroke:       service.resolveColor(options.bgcolor),
+                    strokeWidth:  stroke
+                });
+            };
+
+            var renderState = function(newValue, oldValue, preventAnimationOverride){
+                var max                 = service.toNumber(options.max || 0);
+                var end                 = newValue > 0 ? $window.Math.min(newValue, max) : 0;
+                var start               = (oldValue === end || oldValue < 0) ? 0 : (oldValue || 0); // fixes the initial animation
+                var changeInValue       = end - start;
+
+                var easingAnimation     = service.animations[options.animation];
+                var duration            = +options.duration || 0;
+                var preventAnimation    = preventAnimationOverride || (newValue > max && oldValue > max) || (newValue < 0 && oldValue < 0) || duration < 25;
+
+                var radius              = service.toNumber(options.radius);
+                var circleSize          = radius - (options.stroke/2) - service.getOffset(scope, options);
+                var isSemicircle        = options.semi;
+
+                svg.attr({
+                    'aria-valuemax': max,
+                    'aria-valuenow': end
+                });
+
+                var doAnimation = function(){
+                    // stops some expensive animating if the value is above the max or under 0
+                    if(preventAnimation){
+                        service.updateState(end, max, circleSize, ring, radius, isSemicircle);
+
+                        if(options.onRender){
+                            options.onRender(end, options, element);
+                        }
+                    }else{
+                        var startTime = service.getTimestamp();
+                        var id = ++lastAnimationId;
+
+                        $window.requestAnimationFrame(function animation(){
+                            var currentTime = $window.Math.min(service.getTimestamp() - startTime, duration);
+                            var animateTo = easingAnimation(currentTime, start, changeInValue, duration);
+
+                            service.updateState(animateTo, max, circleSize, ring, radius, isSemicircle);
+
+                            if(options.onRender){
+                                options.onRender(animateTo, options, element);
+                            }
+
+                            if(id === lastAnimationId && currentTime < duration){
+                                $window.requestAnimationFrame(animation);
+                            }
+                        });
+                    }
+                };
+
+                if(options.animationDelay > 0){
+                    $window.clearTimeout(lastTimeoutId);
+                    $window.setTimeout(doAnimation, options.animationDelay);
+                }else{
+                    doAnimation();
+                }
+            };
+
+            var keys = Object.keys(base.scope).filter(function(key){
+                return optionIsSpecified(key) && key !== 'current';
+            });
+
+            // properties that are used only for presentation
+            scope.$watchGroup(keys, function(newValue){
+                for(var i = 0; i < newValue.length; i++){
+                    if(typeof newValue[i] !== 'undefined'){
+                        options[keys[i]] = newValue[i];
+                    }
+                }
+
+                renderCircle();
+                scope.$broadcast('$parentOffsetChanged');
+
+                // it doesn't have to listen for changes on the parent unless it inherits
+                if(options.offset === 'inherit' && !parentChangedListener){
+                    parentChangedListener = scope.$on('$parentOffsetChanged', function(){
+                        renderState(options.current, options.current, true);
+                        renderCircle();
+                    });
+                }else if(options.offset !== 'inherit' && parentChangedListener){
+                    parentChangedListener();
+                }
+            });
+
+            // properties that are used during animation. some of these overlap with
+            // the ones that are used for presentation
+            scope.$watchGroup([
+                'current',
+                'max',
+                'radius',
+                'stroke',
+                'semi',
+                'offset'
+            ].filter(optionIsSpecified), function(newValue, oldValue){
+                renderState(service.toNumber(newValue[0] || options.current), service.toNumber(oldValue[0]  || options.current));
+            });
+
+            function optionIsSpecified(name) {
+                return attrs.hasOwnProperty(name);
+            }
+        },
+        template: function(element){
+            var parent = element.parent();
+            var directiveName = 'round-progress';
+            var template = [
+                '<svg class="'+ directiveName +'" xmlns="http://www.w3.org/2000/svg" role="progressbar" aria-valuemin="0">',
+                    '<circle fill="none"/>',
+                    '<path fill="none"/>',
+                    '<g ng-transclude></g>',
+                '</svg>'
+            ];
+
+            while(
+                parent.length &&
+                parent[0].nodeName.toLowerCase() !== directiveName &&
+                typeof parent.attr(directiveName) === 'undefined'
+            ){
+                parent = parent.parent();
+            }
+
+            if(!parent || !parent.length){
+                template.unshift('<div class="round-progress-wrapper">');
+                template.push('</div>');
+            }
+
+            return template.join('\n');
+        }
+    });
+}]);
+
  })();
