@@ -1789,7 +1789,8 @@ md-toolbar.menu-width:not(.md-menu-toolbar) {
   width: 80%;
   max-width: 900px;
   margin: 0 auto;
-  top: 500px;
+  top: 300px;
+  transform: translateY(100%);
   position: relative;
   left: 0;
 }

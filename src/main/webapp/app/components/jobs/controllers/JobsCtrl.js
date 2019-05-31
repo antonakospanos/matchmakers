@@ -172,12 +172,13 @@
       }).then(
         function successCallback(response) {
           response.data.forEach(e => {
-            e.match = e.match - Math.floor(Math.random() * 10 + 1);
-            if (e.skills && e.skills.length > 5) {
-              //e.skills.slice(5);
-            }
+            //e.match = e.match - Math.floor(Math.random() * 10 + 1);
+            e.skills = ["Java", "C#"];
+            //e.match = 100;
           });
-          $scope.model = { data: response.data.map(d => ctrl.mapProgressModel(d)) };
+          $scope.model = {
+            data: response.data.map(d => ctrl.mapProgressModel(d))
+          };
           $scope.loading = false;
           ctrl.sortLikesDesc();
         },
@@ -451,7 +452,7 @@
         total: 100,
         color: ctrl.decideColor(job),
         duration: Number(job.match) * 8
-      }
-    }
+      };
+    };
   }
 })();
