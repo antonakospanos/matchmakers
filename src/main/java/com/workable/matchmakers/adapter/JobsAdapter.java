@@ -31,9 +31,16 @@ public class JobsAdapter extends Adapter {
     }
 
     private JobQueryDto toJobQueryDto(Candidate candidate) {
-        String title = "";//candidate.getCandidateObjective().getRoles().stream().findFirst().orElse(null);
-        String city = "";//candidate.getCandidateObjective().getCity();
-        String country = ""; //candidate.getCandidateObjective().getCountry();
+        String title = "";
+        if (candidate.getCandidateObjective() != null && candidate.getCandidateObjective().getRoles() != null) {
+            title = candidate.getCandidateObjective().getRoles().stream().findFirst().orElse(null);
+        }
+
+        String city = "";
+        if (candidate.getCandidateObjective() != null) {
+            city= candidate.getCandidateObjective().getCity();
+        }
+
         List<String> education = Lists.newArrayList(); // candidate.getEducation().stream().map(CandidateEducation::getUniversity).collect(Collectors.toList())
         List<String> experience = Lists.newArrayList(); // candidate.getExperience().getWorkExperiences().stream().map(CandidateExperienceWork::getRole).collect(Collectors.toList())
         List<String> skills = Lists.newArrayList(); // new ArrayList<>(candidate.getExperience().getSkills())
@@ -41,7 +48,6 @@ public class JobsAdapter extends Adapter {
         return JobQueryDto.builder()
                 .title(title)
                 .city(city)
-                .country(country)
                 .candidate(JobQueryDto.CandidateDto.builder()
                         .name(candidate.getName())
                         .email(candidate.getEmail())
