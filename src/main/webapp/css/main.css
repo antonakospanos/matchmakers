@@ -1868,6 +1868,9 @@ md-toolbar.menu-width:not(.md-menu-toolbar) {
   font-family: American Typewriter, serif;
   font-style: normal;
 }
+.timeline-list li:before {
+  border: 2px solid #00756a;
+}
 
 .timeline-list li:nth-child(1):before {
   animation-delay: 0.2s;
