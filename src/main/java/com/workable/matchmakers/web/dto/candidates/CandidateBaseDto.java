@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * CandidateBaseDto
  */
-@JsonPropertyOrder({ "password", "name", "email", "cellphone", "linkedInUrl", "facebookUrl", "education", "experience", "objective" })
+@JsonPropertyOrder({ "password", "name", "email", "cellphone", "linkedInUrl", "facebookUrl", "cvUrl", "cvName", "education", "experience", "objective" })
 @Getter
 @Setter
 public class CandidateBaseDto {
@@ -46,6 +46,8 @@ public class CandidateBaseDto {
 	@ApiModelProperty(example = "https://s3.amazonaws.com/workable-tmp/antonakospanos")
 	@Pattern(regexp=RegexValidator.CV_URL_VALIDATOR, flags = Pattern.Flag.CASE_INSENSITIVE, message="Invalid CV URL!")
 	private String cvUrl;
+
+	private String cvName;
 
 	private List<EducationDto> education;
 

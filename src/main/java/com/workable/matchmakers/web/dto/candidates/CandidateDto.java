@@ -95,6 +95,9 @@ public class CandidateDto extends CandidateBaseDto implements Dto<Candidate> {
 		setFacebookUrl(candidate.getFacebookUrl());
 		setCvUrl(candidate.getCvUrl());
 
+		if (candidate.getCv() != null) {
+			setCvName(candidate.getCv().getName());
+		}
 		if (candidate.getEducation() != null) {
 			List<EducationDto> educations =
 					candidate.getEducation()
