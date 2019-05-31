@@ -173,8 +173,7 @@
         function successCallback(response) {
           response.data.forEach(e => {
             //e.match = e.match - Math.floor(Math.random() * 10 + 1);
-            e.skills = ["Java", "C#"];
-            //e.match = 100;
+            //e.skills = ["Java", "C#"];
           });
           $scope.model = {
             data: response.data.map(d => ctrl.mapProgressModel(d))
