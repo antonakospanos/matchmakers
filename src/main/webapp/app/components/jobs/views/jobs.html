@@ -17,7 +17,7 @@
       ng-style="hoverActive? {'border-width':'2px','border-color': ctrl.decideColor(item)} : {}"
     >
       <button
-        class="md-button-toggle md-button md-ink-ripple review-item-button"
+        class="job-button md-button-toggle md-button md-ink-ripple review-item-button"
         type="button"
         ng-click="toggled = !toggled"
         aria-controls="docs-menu-{{ item.title }}"
@@ -32,18 +32,30 @@
           </div>
 
           <span flex class="flex"></span>
+
           <div
             class="row job-percentage float-right"
             ng-style="{background: ctrl.decideColor(item)}"
           >
             {{ item.match }}%
           </div>
+
           <span
             aria-hidden="true"
             class="md-toggle-icon"
             ng-class="{'toggled' : toggled}"
           >
             <md-icon md-svg-icon="md-toggle-arrow"></md-icon>
+          </span>
+        </div>
+        <div class="skills row pull-left">
+          <span
+            ng-repeat="skill in item.skills"
+            class="float-right"
+            ng-style="{'border-color': ctrl.decideColor(item),
+                             color: ctrl.decideColor(item)}"
+          >
+            {{ skill }}
           </span>
         </div>
       </button>

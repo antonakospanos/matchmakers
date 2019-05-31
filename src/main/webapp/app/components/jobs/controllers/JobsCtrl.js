@@ -173,6 +173,7 @@
         function successCallback(response) {
           response.data.forEach(e => {
             e.match = e.match - Math.floor(Math.random() * 10 + 1);
+            e.skills = ["Java", "C#", "Senior", "Programming", "Development"];
           });
           $scope.model = { data: response.data };
           $scope.loading = false;

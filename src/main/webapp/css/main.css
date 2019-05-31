@@ -213,7 +213,7 @@ legend.bordered {
   color: #333 !important;
 }
 
-.paging_full_numbers span.fg-button:hover {
+/* .paging_full_numbers span.fg-button:hover {
   color: white !important;
   border: 1px solid #111;
   background-color: #585858;
@@ -229,7 +229,7 @@ legend.bordered {
   background: -ms-linear-gradient(top, #585858 0%, #111 100%);
   background: -o-linear-gradient(top, #585858 0%, #111 100%);
   background: linear-gradient(to bottom, #585858 0%, #111 100%);
-}
+} */
 
 .paging_full_numbers span.fg-button {
   border: 1px solid transparent;
@@ -284,6 +284,7 @@ btn-file {
   background-color: rgba(255, 255, 255, 0.5) !important;
   color: rgb(97, 97, 99);
 }
+
 .form-login h2 {
   color: rgb(97, 97, 99);
   text-align: center;
@@ -1381,6 +1382,10 @@ md-menu.menu-flows {
   text-transform: none;
 }
 
+.md-button:hover {
+  background: transparent !important;
+}
+
 /* Jobs CSS */
 
 .job {
@@ -1388,6 +1393,11 @@ md-menu.menu-flows {
   margin-left: 0 !important;
   margin-right: 0 !important;
   width: 100% !important;
+}
+
+.job .md-button {
+  width: 99% !important;
+  height: 85px !important;
 }
 
 .modal.in .modal-dialog {
@@ -1439,6 +1449,20 @@ md-menu.menu-flows {
 
 img.job-image {
   margin-right: 25px;
+}
+
+.skills {
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.skills span {
+  margin-right: 4px;
+  font-size: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  padding: 3px;
 }
 
 .btn-primary:hover,
