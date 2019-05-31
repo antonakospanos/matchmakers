@@ -1671,7 +1671,7 @@ div.form-nested-content > sf-decorator.ng-scope > md-content.ng-scope > span {
 
 .review-item-container:focus-within,
 .review-item-container:hover {
-  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2)
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
 }
 
 .review-item-button {
@@ -1779,14 +1779,154 @@ md-toolbar.menu-width:not(.md-menu-toolbar) {
 /************
  * Defaults
  ************/
-button,
-select,
-html,
-textarea,
-input,
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu,
-    "Helvetica Neue", sans-serif;
+
+.timeline-list {
+  padding-bottom: 0;
+  position: relative;
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.timeline-list:before {
+  content: "";
+  border-left: 5px solid transparent;
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  transform-origin: 0 0;
+  animation: scaleHorizontal 3s 1s ease both 1;
+  width: 100%;
+  display: block;
+  background-color: #00756a;
+  animation: reveal 2s 0s ease both 1;
+}
+
+.timeline-list-hide {
+  display: none;
+}
+
+.timeline-list li {
+  margin: 0 0 32px 0;
+  padding: 0 2%;
+  position: relative;
+
+  width: 33%;
+  display: inline-block;
+}
+
+.timeline-list li:first-child {
+  left: -16%;
+}
+
+.timeline-list li:last-child {
+  right: -16%;
+}
+
+@media (min-width: 960px) {
+  .timeline-list li:before {
+    content: "";
+    position: absolute;
+    top: -41px;
+    left: calc(50% - 12px);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    animation: revealScaleUp 0.75s 0s ease both 1;
+  }
+}
+.timeline-list {
+  padding-left: 0;
+
+  margin-top: 32px;
+  padding-top: 30px;
+}
+.timeline-list li .content {
+  animation: revealFromLeft 0.5s 0s ease both 1;
+  text-align: center;
+}
+
+.handwritten {
+  font-size: 35px;
+  line-height: 1.1;
+  font-family: American Typewriter, serif;
   font-style: normal;
   font-weight: 500;
+}
+
+.handwritten-2 {
+  font-size: 25px;
+  font-family: American Typewriter, serif;
+  font-style: normal;
+}
+
+.timeline-list li:nth-child(1):before {
+  animation-delay: 0.2s;
+}
+.timeline-list li:nth-child(1) .content {
+  animation-delay: 0.2s;
+}
+.timeline-list li:nth-child(2):before {
+  animation-delay: 1s;
+}
+.timeline-list li:nth-child(2) .content {
+  animation-delay: 1.2s;
+}
+.timeline-list li:nth-child(3):before {
+  animation-delay: 1.8s;
+}
+.timeline-list li:nth-child(3) .content {
+  animation-delay: 2.1s;
+}
+
+@keyframes revealFromLeft {
+  0% {
+    transform: translateX(-1em);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes reveal {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    transform: scaleX(0.5);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@keyframes scaleVertical {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes revealScaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

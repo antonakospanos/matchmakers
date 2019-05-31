@@ -73,7 +73,7 @@
     >
       <div class="md-toolbar-tools main-width">
         <!-- Home Page Logo -->
-        <md-button ui-sref="jobs" ng-click="reloadState()" title="Homepage">
+        <md-button ui-sref="landing" ng-click="goToInitial()" title="Homepage">
           <img src="images/logo.png" height="g" width="100" />
         </md-button>
 
@@ -121,7 +121,6 @@
       </div>
       <!--<md-ink-bar class="md-primary" style="top: 100px; width: 100%; background-color: #e91e63;"></md-ink-bar>-->
     </md-toolbar>
-
     <div class="main-panel" ui-view></div>
 
     <div id="toaster"></div>

@@ -22,8 +22,20 @@
   config.$inject = ["$stateProvider", "$urlRouterProvider"];
   function config($stateProvider, $urlRouterProvider) {
     // Matching Jobs Review (homepage)
-    $stateProvider.state("jobs", {
+    $stateProvider.state("landing", {
       url: "/",
+      templateUrl: "app/components/landing/views/landing.html"
+      // controller: "JobsCtrl",
+      // params: {
+      //     publisher: {
+      //         id: undefined,
+      //         name: undefined
+      //     }
+      // }
+    });
+
+    $stateProvider.state("jobs", {
+      url: "/jobs",
       templateUrl: "app/components/jobs/views/jobs.html"
       // controller: "JobsCtrl",
       // params: {
@@ -58,7 +70,7 @@
     });
 
     // Homepage
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("landing");
   }
 
   /**
@@ -277,6 +289,10 @@
       // Reload state
       $scope.reloadState = function() {
         $state.go($state.current, {}, { reload: true });
+      };
+
+      $scope.goToInitial = function() {
+        $state.go("/");
       };
 
       $scope.scrollTop = function() {

@@ -173,7 +173,9 @@
         function successCallback(response) {
           response.data.forEach(e => {
             e.match = e.match - Math.floor(Math.random() * 10 + 1);
-            e.skills = ["Java", "C#", "Senior", "Programming", "Development"];
+            if (e.skills && e.skills.length > 5) {
+              //e.skills.slice(5);
+            }
           });
           $scope.model = { data: response.data.map(d => ctrl.mapProgressModel(d)) };
           $scope.loading = false;
@@ -212,12 +214,8 @@
       );
     };
 
-    ctrl.enrichCode = function(code) {
-      return text
-        .replace("<p>", "")
-        .replace("</p>", "")
-        .replace("<li>", "")
-        .replace("</li>", "");
+    ctrl.isAuthenticated = function() {
+      return !$http.defaults.headers.common.Authorization;
     };
 
     /**

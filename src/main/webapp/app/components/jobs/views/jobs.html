@@ -9,6 +9,7 @@
           : "No Jobs Found. :("
       }}
     </div>
+
     <div
       ng-repeat="item in model.data"
       class="job panel panel-default control-panel config-control-panel config-panel-margin review-panel review-item-container"
@@ -31,19 +32,22 @@
           </div>
 
           <span flex class="flex"></span>
-            <div ng-model="item" class="job-match-progress" round-progress
-              max="100"
-              bgcolor="#eaeaea"
-              radius="100"
-              stroke="20"
-              semi="false"
-              rounded="true"
-              clockwise="true"
-              responsive="true"
-              duration="800"
-              animation="easeInOutQuart"
-              animation-delay="0">
-          </div>
+          <div
+            ng-model="item"
+            class="job-match-progress"
+            round-progress
+            max="100"
+            bgcolor="#eaeaea"
+            radius="100"
+            stroke="20"
+            semi="false"
+            rounded="true"
+            clockwise="true"
+            responsive="true"
+            duration="800"
+            animation="easeInOutQuart"
+            animation-delay="0"
+          ></div>
 
           <span
             aria-hidden="true"
@@ -85,14 +89,14 @@
                 ng-hide="ctrl.hideVotingButtons()"
                 id="voting-buttons"
               >
-              <button
-                ng-hide="ctrl.hideApplyButton(item)"
-                type="button"
-                class="pull-right btn btn-primary review-control-button btn-cta"
-                ng-click="ctrl.apply(item);"
-              >
-                Apply
-              </button>
+                <button
+                  ng-hide="ctrl.hideApplyButton(item)"
+                  type="button"
+                  class="pull-right btn btn-primary review-control-button btn-cta"
+                  ng-click="ctrl.apply(item);"
+                >
+                  Apply
+                </button>
                 <button
                   type="button"
                   class="pull-right btn btn-default review-control-button btn-primary"

@@ -10,19 +10,20 @@
       "$http",
       "$state",
       ProfileCtrl
-    ]).directive('chooseFile', function() {
+    ])
+    .directive("chooseFile", function() {
       return {
-        link: function (scope, elem, attrs) {
-          var button = elem.find('button');
-          var inputDisplay = elem.find('input.input-display');
-          var input = angular.element(elem[0].querySelector('input#fileInput'));
-          button.bind('click', function() {
+        link: function(scope, elem, attrs) {
+          var button = elem.find("button");
+          var inputDisplay = elem.find("input.input-display");
+          var input = angular.element(elem[0].querySelector("input#fileInput"));
+          button.bind("click", function() {
             input[0].click();
           });
-          inputDisplay.bind('click', function() {
+          inputDisplay.bind("click", function() {
             input[0].click();
           });
-          input.bind('change', function(e) {
+          input.bind("change", function(e) {
             scope.$apply(function() {
               var files = e.target.files;
               if (files[0]) {
@@ -36,7 +37,14 @@
       };
     });
 
-  function ProfileCtrl(UploadService, CandidateService, $rootScope, $scope, $http, $state) {
+  function ProfileCtrl(
+    UploadService,
+    CandidateService,
+    $rootScope,
+    $scope,
+    $http,
+    $state
+  ) {
     var ctrl = this;
     ctrl.profileUrl =
       $rootScope.backend_protocol +
@@ -53,12 +61,23 @@
       $scope.user = $rootScope.globals.currentUser || {};
       $scope.objective = {};
       $scope.initialModel = angular.copy($scope.candidate);
-      CandidateService.Read($scope.user.token).then(function setObjective(response) {
-        console.log(response)
-        var {roles, locationsSecondary, locationsPrimary} = response.data.objective || {roles: [], locationsSecondary: [], locationsPrimary: []};
-        $scope.objective = {role: roles[0], locationsSecondary: locationsSecondary[0], locationsPrimary: locationsPrimary[0]};
+      CandidateService.Read($scope.user.token).then(function setObjective(
+        response
+      ) {
+        console.log(response);
+        var { roles, locationsSecondary, locationsPrimary } = response.data
+          .objective || {
+          roles: [],
+          locationsSecondary: [],
+          locationsPrimary: []
+        };
+        $scope.objective = {
+          role: roles[0],
+          locationsSecondary: locationsSecondary[0],
+          locationsPrimary: locationsPrimary[0]
+        };
         $scope.fileName = response.data.cvName || undefined;
-      })
+      });
     };
 
     ctrl.getFormCtrl = function() {
@@ -78,9 +97,11 @@
       return false;
     };
 
-
     ctrl.cvChanged = function(cvInput) {
-      UploadService.UploadResumeFile($rootScope.globals.currentUser.token, cvInput.files[0])
+      UploadService.UploadResumeFile(
+        $rootScope.globals.currentUser.token,
+        cvInput.files[0]
+      )
         .then(function(response) {
           console.log(response);
           return response;
@@ -93,14 +114,10 @@
         .then(
           function successCallback(response) {
             // Reload footer's img to switch from alert to check-mark!
-            $scope.createToast(
-              response.data.description
-            );
+            $scope.createToast(response.data.description);
           },
           function errorCallback(response) {
-            $scope.createToast(
-              response.data.description
-            );
+            $scope.createToast(response.data.description);
           }
         );
     };
@@ -119,23 +136,14 @@
         function successCallback(response) {
           $state.go("jobs");
           // Reload footer's img to switch from alert to check-mark!
-          $scope.createToast(
-             response.data.description
-          );
-          if ($rootScope.jobs === 0) {
-            location.reload();
-          } else {
-            $scope.scrollTop();
-          }
+          $scope.createToast(response.data.description);
+          $scope.scrollTop();
         },
         function errorCallback(response) {
-          $scope.createToast(
-             response.data.description
-          );
+          $scope.createToast(response.data.description);
+          $state.go("jobs");
         }
       );
     };
   }
 })();
-
-
