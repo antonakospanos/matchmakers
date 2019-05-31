@@ -28,9 +28,8 @@
     function login() {
       AuthenticationService.Login(ctrl.email, ctrl.password).then(
         function successCallback(response) {
-          console.log(response);
           if (response.data && response.data.id !== undefined) {
-            AuthenticationService.Authorize(ctrl.email, response.data.id);
+            AuthenticationService.Authorize(ctrl.email, response.data.id, response.data.name);
             $scope.loggedIn();
             $rootScope.createToast(
               "User '" + ctrl.email + "' logged in successfully"

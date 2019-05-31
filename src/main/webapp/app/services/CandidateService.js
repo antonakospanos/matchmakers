@@ -43,7 +43,6 @@
     }
 
     function Update({ token, ...candidateData }) {
-      debugger;
       var config = {
         headers: {
           "Content-Type": "application/json;charset=utf-8;"

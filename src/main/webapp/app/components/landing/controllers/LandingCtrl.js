@@ -23,7 +23,6 @@
     ctrl.register = register;
 
     function register() {
-        debugger;
       UserService.Create($scope.user).then(function(response) {
         $rootScope.createToast(
             response.data.description

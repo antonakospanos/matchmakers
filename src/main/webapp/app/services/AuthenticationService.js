@@ -15,7 +15,6 @@
         return service;
 
         function Authorize(email, accessToken, name) {
-            debugger;
             $rootScope.globals = {
                 currentUser: {
                     name: name,

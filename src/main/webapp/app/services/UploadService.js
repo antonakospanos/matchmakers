@@ -65,7 +65,6 @@
         })
         .then(
           function successCallback(response) {
-            debugger
             return response;
           },
           function errorCallback(response) {
