@@ -45,7 +45,7 @@
     ctrl.init = function() {
       $scope.loading = Boolean($rootScope.globals.currentUser);
       $scope.lastItemUrl = undefined;
-      ctrl.listJobsMock();
+      ctrl.listJobs();
     };
 
     ctrl.getLoading = function() {
