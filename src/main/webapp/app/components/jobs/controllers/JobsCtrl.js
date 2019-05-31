@@ -47,7 +47,7 @@
     };
 
     ctrl.getLoading = function() {
-      return $scope.loading;
+      return $scope.loading && $scope.model.data.length == 0;
     };
 
     // Sorting states
