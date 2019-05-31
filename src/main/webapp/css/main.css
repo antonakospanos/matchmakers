@@ -740,6 +740,10 @@ section {
   border-color: #27ae60;
 }
 
+.md-button.md-fab {
+  background-color: white !important;
+}
+
 .btn-cta {
   height: 35px;
   padding-left: 16px;
@@ -749,6 +753,8 @@ section {
   background-color: #00756a !important;
   color: white;
 }
+
+
 
 .btn-cta:hover,
 .btn-cta:active,
