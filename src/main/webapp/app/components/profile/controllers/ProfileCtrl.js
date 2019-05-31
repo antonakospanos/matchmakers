@@ -55,7 +55,7 @@
 
 
     ctrl.cvChanged = function(cvInput) {
-      UploadService.UploadResumeFile({userToken: $rootScope.globals.currentUser.token, file: cvInput.files[0]})
+      UploadService.UploadResumeFile($rootScope.globals.currentUser.token, cvInput.files[0])
         .then(function(response) {
           console.log(response);
           return response;
