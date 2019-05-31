@@ -18,20 +18,29 @@
 				</md-input-container>
 
 				<md-input-container>
-					<label>Email</label>
+					
 					<input name="email" type="email" ng-model="user.email">
 					<div ng-messages="profileForm.email.$error">
 						<div ng-message="required">This is required</div>
 					</div>
 				</md-input-container>
 
-				<md-input-container>
-					<label for="cv">Upload your Curriculum</label>
-					<input type="file" name="cv" id="cv" class="form-control" onchange="angular.element(this).scope().ctrl.cvChanged(this)" ng-model="cv" required />
-					<div ng-messages="profileForm.cv.$error">
-						<div ng-message="required">Our service couldn't part the CV. Upload a valid file</div>
+
+				<choose-file layout="row">
+					<input id="fileInput" name="cv" type="file" class="ng-hide" onchange="angular.element(this).scope().ctrl.cvChanged(this)">
+					<md-input-container flex class="md-block">
+						<label><div class="hint">Upload your Curriculum</div></label>
+						<input type="text" class="input-display" ng-model="fileName" readonly>
+						<div ng-messages="profileForm.cv.$error">
+								<div ng-message="required">Our service couldn't parse the CV. Upload a valid file</div>
+							</div>
+					</md-input-container>
+					<div>
+						<md-button id="uploadButton" class="md-fab md-mini">
+							<md-icon md-svg-icon="md-attach-file" class="material-icons">attach_file</md-icon>
+						</md-button>
 					</div>
-				</md-input-container>
+				</choose-file>
 
 				<md-input-container>
 					<label for="role">Looking for</label>
@@ -44,21 +53,6 @@
 						required
 					/>
 					<div ng-messages="profileForm.role.$error">
-						<div ng-message="required">This is required</div>
-					</div>
-				</md-input-container>
-
-				<md-input-container>
-					<label for="country">Country</label>
-					<input
-						type="text"
-						name="country"
-						id="country"
-						class="form-control"
-						ng-model="objective.locationsPrimary"
-						required
-					/>
-					<div ng-messages="profileForm.country.$error">
 						<div ng-message="required">This is required</div>
 					</div>
 				</md-input-container>

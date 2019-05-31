@@ -10,7 +10,31 @@
       "$http",
       "$state",
       ProfileCtrl
-    ]);
+    ]).directive('chooseFile', function() {
+      return {
+        link: function (scope, elem, attrs) {
+          var button = elem.find('button');
+          var inputDisplay = elem.find('input.input-display');
+          var input = angular.element(elem[0].querySelector('input#fileInput'));
+          button.bind('click', function() {
+            input[0].click();
+          });
+          inputDisplay.bind('click', function() {
+            input[0].click();
+          });
+          input.bind('change', function(e) {
+            scope.$apply(function() {
+              var files = e.target.files;
+              if (files[0]) {
+                scope.fileName = files[0].name;
+              } else {
+                scope.fileName = null;
+              }
+            });
+          });
+        }
+      };
+    });
 
   function ProfileCtrl(UploadService, CandidateService, $rootScope, $scope, $http, $state) {
     var ctrl = this;
@@ -33,6 +57,7 @@
         console.log(response)
         var {roles, locationsSecondary, locationsPrimary} = response.data.objective || {roles: [], locationsSecondary: [], locationsPrimary: []};
         $scope.objective = {role: roles[0], locationsSecondary: locationsSecondary[0], locationsPrimary: locationsPrimary[0]};
+        $scope.fileName = response.data.cvName || undefined;
       })
     };
 
@@ -112,3 +137,5 @@
     };
   }
 })();
+
+
