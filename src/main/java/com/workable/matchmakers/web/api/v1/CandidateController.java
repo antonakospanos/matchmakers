@@ -312,7 +312,7 @@ public class CandidateController extends MatchmakersBaseController {
 		candidate.setCvUrl(cvUrl);
 		candidate.setCv(new Blob(request.getOriginalFilename(), request.getContentType(), request.getBytes()));
 		candidateRepository.save(candidate);
-		//		candidateAdapter.extractCV(candidate);
+		candidateAdapter.extractCV(candidate);
 		//		profileDbAdapter.wait(candidate);
 
 		UriComponents uriComponents =	uriBuilder.path("/{id}/cv").buildAndExpand(id);
