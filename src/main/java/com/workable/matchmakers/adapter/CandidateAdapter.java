@@ -6,8 +6,9 @@ import com.workable.matchmakers.adapter.dto.CvExtractResponseDto;
 import com.workable.matchmakers.adapter.dto.CvFoundResponseDto;
 import com.workable.matchmakers.dao.model.Candidate;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;
 import java.util.Objects;
@@ -22,9 +23,10 @@ public class CandidateAdapter extends Adapter {
     }
 
     public boolean found(Candidate candidate) {
-        Map<String, String> params = Maps.newHashMap();
-        params.put("email", candidate.getEmail());
-        ResponseEntity<CvFoundResponseDto> response =  rest.getForEntity( atsUrl + "/matchmakers/candidates", CvFoundResponseDto.class, params);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(atsUrl + "/matchmakers/candidates").queryParam("email", candidate.getEmail());
+        HttpEntity<CvFoundResponseDto> response = rest.exchange(builder.toUriString(), HttpMethod.GET, new HttpEntity<>(headers), CvFoundResponseDto.class);
 
         if (response.getBody() != null && candidate.getEmail().equalsIgnoreCase(response.getBody().getEmail())) {
             return true;
