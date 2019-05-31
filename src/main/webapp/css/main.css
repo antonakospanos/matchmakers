@@ -1518,13 +1518,13 @@ md-menu.menu-flows {
 .job-match-value {
   position: relative;
   display: inline-block;
-  right: calc(-50%);
-  top: calc(-14% - 20px);
+  right: calc(-51%);
+  top: calc(-35%);
   font-size: 20px;
   line-height: 100%;
-  width: 40px;
+  width: 80px;
   text-align: center;
-  height: 0;
+  height: 20px;
 }
 
 .job-match-progress {
