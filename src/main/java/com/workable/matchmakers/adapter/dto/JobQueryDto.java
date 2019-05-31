@@ -19,6 +19,7 @@ public class JobQueryDto {
     public static class CandidateDto {
         String name;
         String email;
+        String raw_resume;
         List<String> education;
         List<String> experience;
         List<String> skills;

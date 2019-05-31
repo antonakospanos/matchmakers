@@ -3,6 +3,8 @@ package com.workable.matchmakers.web.dto.jobs;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
 public class JobDto {
@@ -16,6 +18,7 @@ public class JobDto {
     String description;
     Integer match;
     Publisher publisher;
+    List<String> skills;
 
     @Data
     @Builder
