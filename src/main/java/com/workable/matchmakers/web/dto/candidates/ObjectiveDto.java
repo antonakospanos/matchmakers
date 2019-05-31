@@ -78,7 +78,7 @@ public class ObjectiveDto implements Dto<CandidateObjective> {
     @Override
     public CandidateObjective toEntity(CandidateObjective entity) {
         entity.setRoles(this.getRoles());
-        if (this.getLocationsSecondary() != null) {
+        if (this.getLocationsPrimary() != null) {
             entity.setCountry(this.getLocationsPrimary().stream().findFirst().orElse(null));
         }
         if (this.getLocationsSecondary() != null) {
