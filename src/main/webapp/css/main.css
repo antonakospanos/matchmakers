@@ -1526,11 +1526,19 @@ md-menu.menu-flows {
   display: inline-block;
   right: calc(-51%);
   top: calc(-35%);
-  font-size: 20px;
+  font-size: 16px;
   line-height: 100%;
   width: 80px;
   text-align: center;
-  height: 20px;
+  height: 16px;
+  font-weight: 900;
+  color: #6e6e6e;
+}
+.job-match-value:after {
+  content: "%";
+  font-size: 14px;
+  font-weight: 100;
+  color: #8e8e8e;
 }
 
 .job-match-progress {

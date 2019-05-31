@@ -395,7 +395,7 @@ angular.module('angular-svg-round-progressbar').directive('roundProgress', ['$wi
                     r:            backgroundSize >= 0 ? backgroundSize : 0
                 }).css({
                     stroke:       service.resolveColor(options.bgcolor),
-                    strokeWidth:  stroke
+                    strokeWidth:  (stroke/4)
                 });
             };
 
