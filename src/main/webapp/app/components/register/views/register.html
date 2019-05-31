@@ -1,68 +1,37 @@
 <div ng-controller="RegisterCtrl as ctrl" class="col-md-6 col-md-offset-3">
-  <h2>Register</h2>
-  <form name="form" ng-submit="ctrl.register()" role="form">
-    <div
-      class="form-group"
-      ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }"
-    >
-      <label for="name">Name</label>
-      <input
-        type="text"
-        name="name"
-        id="name"
-        class="form-control"
-        ng-model="user.name"
-        required
-      />
-      <span
-        ng-show="form.name.$dirty && form.name.$error.required"
-        class="help-block"
-        >Name is required</span
-      >
-    </div>
-    <div
-      class="form-group"
-      ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }"
-    >
-      <label for="email">Email</label>
-      <input
-        type="text"
-        name="email"
-        id="email"
-        class="form-control"
-        ng-model="user.email"
-        required
-      />
-      <span
-        ng-show="form.email.$dirty && form.email.$error.required"
-        class="help-block"
-        >Email is required</span
-      >
-    </div>
-    <div
-      class="form-group"
-      ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }"
-    >
-      <label for="password">Password</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        class="form-control"
-        ng-model="user.password"
-        required
-      />
-      <span
-        ng-show="form.password.$dirty && form.password.$error.required"
-        class="help-block"
-        >Password is required</span
-      >
-    </div>
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">
-        Register
-      </button>
-      <a href="#!/login" class="btn btn-link">Cancel</a>
-    </div>
+  <form name="form" ng-submit="ctrl.register()" role="form" class="panel-body form-group margin-row">
+    <md-content layout="column" class="md-padding">
+      <h3>Register</h3>
+      <md-input-container>
+        <label for="name">Name</label>
+        <input id="name" required="" name="name" ng-model="user.name">
+        <div ng-messages="form.name.$error">
+          <div ng-message="required">This is required</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label for="email">Email</label>
+        <input if="email" name="email" type="email" ng-model="user.email" required>
+        <div ng-messages="form.email.$error">
+          <div ng-message="required">This is required</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" ng-model="user.password" required>
+        <div ng-messages="form.password.$error">
+          <div ng-message="required">Password is required</div>
+        </div>
+      </md-input-container>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn-cta pull-right">
+          Register
+        </button>
+        <a href="#!/login" class="btn btn-link pull-right">Cancel</a>
+      </div>
+    </md-content>
   </form>
 </div>
