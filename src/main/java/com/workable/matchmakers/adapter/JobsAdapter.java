@@ -4,12 +4,17 @@ import com.google.common.collect.Lists;
 import com.workable.matchmakers.adapter.dto.JobApplyDto;
 import com.workable.matchmakers.adapter.dto.JobQueryDto;
 import com.workable.matchmakers.dao.model.Candidate;
+import com.workable.matchmakers.dao.model.CandidateEducation;
+import com.workable.matchmakers.dao.model.CandidateExperienceWork;
 import com.workable.matchmakers.web.dto.jobs.JobDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -35,15 +40,23 @@ public class JobsAdapter extends Adapter {
         if (candidate.getCandidateObjective() != null && candidate.getCandidateObjective().getRoles() != null) {
             title = candidate.getCandidateObjective().getRoles().stream().findFirst().orElse(null);
         }
-
         String city = "";
         if (candidate.getCandidateObjective() != null) {
             city= candidate.getCandidateObjective().getCity();
         }
-
-        List<String> education = Lists.newArrayList(); // candidate.getEducation().stream().map(CandidateEducation::getUniversity).collect(Collectors.toList())
-        List<String> experience = Lists.newArrayList(); // candidate.getExperience().getWorkExperiences().stream().map(CandidateExperienceWork::getRole).collect(Collectors.toList())
-        List<String> skills = Lists.newArrayList(); // new ArrayList<>(candidate.getExperience().getSkills())
+        List<String> education = Lists.newArrayList();
+        if (candidate.getEducation() != null) {
+            education = candidate.getEducation().stream().map(CandidateEducation::getUniversity).filter(Objects::nonNull).collect(Collectors.toList());
+        }
+        List<String> experience = Lists.newArrayList();
+        if (candidate.getExperience() != null && candidate.getExperience().getWorkExperiences() != null) {
+            experience = candidate.getExperience().getWorkExperiences().stream().map(CandidateExperienceWork::getRole).filter(Objects::nonNull).collect(Collectors.toList());
+        }
+        List<String> skills = Lists.newArrayList();
+        if (candidate.getExperience() != null && candidate.getExperience().getSkills() != null) {
+            skills = new ArrayList<>(candidate.getExperience().getSkills());
+        }
+        String cvText = candidate.getCvText();
 
         return JobQueryDto.builder()
                 .title(title)
@@ -54,6 +67,7 @@ public class JobsAdapter extends Adapter {
                         .education(education)
                         .experience(experience)
                         .experience(skills)
+                        .raw_resume(cvText)
                         .build())
                 .build();
     }

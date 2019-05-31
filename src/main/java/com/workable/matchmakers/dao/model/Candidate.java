@@ -29,6 +29,8 @@ public class Candidate extends User {
 
 	private String cvUrl;
 
+	private String cvText;
+
 	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL , fetch = FetchType.LAZY, orphanRemoval = true)
 	private Set<CandidateEducation> education;
 
