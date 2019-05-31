@@ -172,8 +172,10 @@
       }).then(
         function successCallback(response) {
           response.data.forEach(e => {
-            //e.match = e.match - Math.floor(Math.random() * 10 + 1);
-            //e.skills = ["Java", "C#"];
+            // e.match = 100 - Math.floor(Math.random() * 40 + 1);
+            if (e.skills && e.skills.length > 5) {
+              e.skills.slice(5);
+            }
           });
           $scope.model = {
             data: response.data.map(d => ctrl.mapProgressModel(d))
@@ -447,7 +449,7 @@
     ctrl.mapProgressModel = function(job) {
       return {
         ...job,
-        current: job.match,
+        current: Number(job.match),
         total: 100,
         color: ctrl.decideColor(job),
         duration: Number(job.match) * 8

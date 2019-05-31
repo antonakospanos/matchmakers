@@ -1511,11 +1511,29 @@ md-menu.menu-flows {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu,
     "Helvetica Neue", sans-serif;
 }
+
+.job-match {
+}
+
+.job-match-value {
+  position: relative;
+  display: inline-block;
+  right: calc(-50%);
+  top: calc(-14% - 20px);
+  font-size: 20px;
+  line-height: 100%;
+  width: 40px;
+  text-align: center;
+  height: 0;
+}
+
 .job-match-progress {
   width: 100%;
   position: relative;
+  display: inline-block;
   padding-bottom: unset !important;
   width: 80px !important;
+  height: 80px !important;
 }
 
 .span-applied {

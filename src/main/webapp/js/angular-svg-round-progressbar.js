@@ -491,7 +491,7 @@ angular.module('angular-svg-round-progressbar').directive('roundProgress', ['$wi
                 'semi',
                 'offset'
             ].filter(optionIsSpecified), function(newValue, oldValue){
-                renderState(service.toNumber(newValue[0] || options.current), service.toNumber(oldValue[0]  || options.current));
+                renderState(service.toNumber(newValue[0] || options.match), service.toNumber(oldValue[0]  || options.match));
             });
 
             function optionIsSpecified(name) {

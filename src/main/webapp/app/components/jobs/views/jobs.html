@@ -32,22 +32,26 @@
           </div>
 
           <span flex class="flex"></span>
-          <div
-            ng-model="item"
-            class="job-match-progress"
-            round-progress
-            max="100"
-            bgcolor="#eaeaea"
-            radius="100"
-            stroke="20"
-            semi="false"
-            rounded="true"
-            clockwise="true"
-            responsive="true"
-            duration="800"
-            animation="easeInOutQuart"
-            animation-delay="0"
-          ></div>
+
+          <div class="job-match">
+            <span class="job-match-value">{{item.match}}</span>
+            <div
+              ng-model="item"
+              class="job-match-progress"
+              round-progress
+              max="100"
+              bgcolor="#eaeaea"
+              radius="100"
+              stroke="20"
+              semi="false"
+              rounded="true"
+              clockwise="true"
+              responsive="true"
+              duration="800"
+              animation="easeInOutQuart"
+              animation-delay="0"
+            ></div>
+          </div>
 
           <span
             aria-hidden="true"
@@ -85,7 +89,7 @@
                 on {{ item.publisher.date | date: "d LLLL yyyy, HH:mm" }}
               </div>
               <div
-                ng-init="ctrl.findVote(item)"
+
                 ng-hide="ctrl.hideVotingButtons()"
                 id="voting-buttons"
               >
