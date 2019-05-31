@@ -754,8 +754,6 @@ section {
   color: white;
 }
 
-
-
 .btn-cta:hover,
 .btn-cta:active,
 .btn-cta:focus {
@@ -1791,8 +1789,8 @@ md-toolbar.menu-width:not(.md-menu-toolbar) {
   width: 80%;
   max-width: 900px;
   margin: 0 auto;
-  top: 400px;
-  left: 20%;
+  top: 600px;
+  left: 25%;
   position: absolute;
 }
 
@@ -1945,8 +1943,8 @@ md-toolbar.menu-width:not(.md-menu-toolbar) {
 }
 
 .main-register {
-  top: 700px;
-  left: 45%;
+  top: 800px;
+  left: 43%;
   position: absolute;
   animation: revealScaleUp 0.75s 0s ease both 1;
   animation-delay: 3s;
