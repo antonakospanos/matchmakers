@@ -723,10 +723,13 @@ section {
     Side bar Style Start
 */
 
+.md-button {
+  font-size: 14px !important;
+}
 .btn-primary {
-  color: #00756a !important;
+  color: #00756a ;
   background-color: white;
-  border-color: #00756a !important;
+  border-color: #00756a;
 }
 
 .btn-primary:hover,
@@ -735,6 +738,30 @@ section {
   background-color: #eee;
   color: #00756a;
   border-color: #27ae60;
+}
+
+
+.btn-cta {
+  height: 35px;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: background-color 0.3s linear;
+  font-weight: 600;
+  background-color: #00756a !important;
+  color: white;
+}
+
+.btn-cta:hover,
+.btn-cta:active,
+.btn-cta:focus {
+  background-color: #005c53 !important;
+  border-color: #00756a;
+  color: white;
+}
+
+
+.btn-cta:active {
+  border-color: #01433d;
 }
 
 .nav-tabs > li.active > a,
