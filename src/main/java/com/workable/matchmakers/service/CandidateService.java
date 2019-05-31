@@ -42,11 +42,6 @@ public class CandidateService {
 	@Autowired
 	MailService mailService;
 
-	@Autowired
-	CandidateAdapter candidateAdapter;
-
-	@Autowired
-	ProfileDbAdapter profileDbAdapter;
 
 	@Transactional
 	public Candidate create(CandidateBaseDto candidateBaseDto) {
@@ -95,11 +90,6 @@ public class CandidateService {
  		Candidate updatedCandidate = candidateDto.toEntity(cleanedCandidate);
 
 		candidateRepository.save(updatedCandidate);
-
-		if (updatedCandidate.getCv() != null || StringUtils.isNotBlank(updatedCandidate.getCvUrl())) {
-			candidateAdapter.upload(candidate);
-			profileDbAdapter.wait(candidate);
-		}
 	}
 
 	@Transactional

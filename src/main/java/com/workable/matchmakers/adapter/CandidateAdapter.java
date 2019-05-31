@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class CandidateAdapter extends AtsAdapter {
+public class CandidateAdapter extends Adapter {
 
-    public String upload(Candidate candidate) {
+    public String extractCV(Candidate candidate) {
         ResponseEntity<CvUploadResponseDto> correlation =  rest.postForEntity( atsUrl + "/matchmakers/sourcing_flow", toDto(candidate), CvUploadResponseDto.class);
         return correlation.getBody().getCorrelation_id();
     }

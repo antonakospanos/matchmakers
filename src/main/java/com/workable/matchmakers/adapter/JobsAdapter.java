@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @Slf4j
-public class JobsAdapter extends AtsAdapter {
+public class JobsAdapter extends Adapter {
 
     public List<JobDto> list(Candidate candidate) {
         ResponseEntity<Object> jobs =  rest.postForEntity( atsUrl + "/matchmakers/matching_jobs", toJobQueryDto(candidate), Object.class);

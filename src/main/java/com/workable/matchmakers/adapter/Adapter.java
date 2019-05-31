@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-public class AtsAdapter {
+public class Adapter {
 
     @Autowired
     protected RestTemplate rest;

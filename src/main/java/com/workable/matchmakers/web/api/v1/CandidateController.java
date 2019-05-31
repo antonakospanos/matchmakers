@@ -1,5 +1,8 @@
 package com.workable.matchmakers.web.api.v1;
 
+import com.workable.matchmakers.adapter.CandidateAdapter;
+import com.workable.matchmakers.adapter.FileUploadAdapter;
+import com.workable.matchmakers.adapter.ProfileDbAdapter;
 import io.swagger.annotations.*;
 import javassist.NotFoundException;
 import com.workable.matchmakers.dao.model.Blob;
@@ -21,6 +24,7 @@ import com.workable.matchmakers.web.enums.Result;
 import com.workable.matchmakers.web.support.ControllerUtils;
 import com.workable.matchmakers.web.validator.BlobValidator;
 import com.workable.matchmakers.web.validator.PatchValidator;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -54,6 +58,15 @@ public class CandidateController extends MatchmakersBaseController {
 
 	@Autowired
 	BlobValidator validator;
+
+	@Autowired
+	FileUploadAdapter fileUploadAdapter;
+
+	@Autowired
+	CandidateAdapter candidateAdapter;
+
+	@Autowired
+	ProfileDbAdapter profileDbAdapter;
 
 	@RequestMapping(value = "", produces = {"application/json"}, consumes = {"application/json"},	method = RequestMethod.POST)
 	@ApiOperation(value = "Creates the candidate", response = CreateResponse.class)
@@ -291,11 +304,16 @@ public class CandidateController extends MatchmakersBaseController {
 			@ApiResponse(code = 500, message = "server error")})
 	public ResponseEntity<ResponseBase> createCV(UriComponentsBuilder uriBuilder, @PathVariable UUID id, @RequestParam(value="file") MultipartFile request) throws IOException {
 		service.validateCandidate(id);
-//		validator.validateCV(request);
+		validator.validateCV(request);
 
 		Candidate candidate = service.find(id);
+
+		String cvUrl = fileUploadAdapter.toCvUrl(request);
+		candidate.setCvUrl(cvUrl);
 		candidate.setCv(new Blob(request.getOriginalFilename(), request.getContentType(), request.getBytes()));
 		candidateRepository.save(candidate);
+		//		candidateAdapter.extractCV(candidate);
+		//		profileDbAdapter.wait(candidate);
 
 		UriComponents uriComponents =	uriBuilder.path("/{id}/cv").buildAndExpand(id);
 		ResponseBase responseBase = ResponseBase.Builder().build(Result.SUCCESS);
