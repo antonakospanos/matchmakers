@@ -1788,10 +1788,12 @@ md-toolbar.menu-width:not(.md-menu-toolbar) {
 
 .timeline-list {
   padding-bottom: 0;
-  position: relative;
   width: 80%;
   max-width: 900px;
   margin: 0 auto;
+  top: 400px;
+  left: 20%;
+  position: absolute;
 }
 
 .timeline-list:before {
@@ -1861,12 +1863,14 @@ md-toolbar.menu-width:not(.md-menu-toolbar) {
   font-family: American Typewriter, serif;
   font-style: normal;
   font-weight: 500;
+  color: white;
 }
 
 .handwritten-2 {
   font-size: 25px;
   font-family: American Typewriter, serif;
   font-style: normal;
+  color: white;
 }
 .timeline-list li:before {
   border: 2px solid #00756a;
@@ -1938,4 +1942,12 @@ md-toolbar.menu-width:not(.md-menu-toolbar) {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+.main-register {
+  top: 700px;
+  left: 45%;
+  position: absolute;
+  animation: revealScaleUp 0.75s 0s ease both 1;
+  animation-delay: 3s;
 }
