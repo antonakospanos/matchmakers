@@ -28,7 +28,7 @@
 				<choose-file layout="row">
 					<input id="fileInput" name="cv" type="file" class="ng-hide" onchange="angular.element(this).scope().ctrl.cvChanged(this)">
 					<md-input-container flex class="md-block">
-						<label><div class="hint">Upload your Curriculum</div></label>
+						<label><div class="hint">Upload your Resume</div></label>
 						<input type="text" class="input-display" ng-model="fileName" readonly>
 						<div ng-messages="profileForm.cv.$error">
 								<div ng-message="required">Our service couldn't parse the CV. Upload a valid file</div>
