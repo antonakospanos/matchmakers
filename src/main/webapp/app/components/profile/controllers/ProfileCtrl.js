@@ -127,7 +127,6 @@
         ...$scope.user,
         objective: {
           roles: [$scope.objective.role],
-          locationsPrimary: [$scope.objective.locationsPrimary],
           locationsSecondary: [$scope.objective.locationsSecondary]
         }
       };
