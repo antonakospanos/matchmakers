@@ -5,9 +5,14 @@
         model.data.length > 0
           ? "Matching Jobs"
           : loading
-          ? "Loading..."
+          ? ""
           : "No Jobs Found. :("
       }}
+    </div>
+    <div class="spinner" ng-hide="!ctrl.getLoading()">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
     </div>
 
     <div
@@ -34,7 +39,7 @@
           <span flex class="flex"></span>
 
           <div class="job-match">
-            <span class="job-match-value">{{item.match}}</span>
+            <span class="job-match-value">{{ item.match }}</span>
             <div
               ng-model="item"
               class="job-match-progress"
@@ -88,11 +93,7 @@
                 >
                 on {{ item.publisher.date | date: "d LLLL yyyy, HH:mm" }}
               </div>
-              <div
-
-                ng-hide="ctrl.hideVotingButtons()"
-                id="voting-buttons"
-              >
+              <div ng-hide="ctrl.hideVotingButtons()" id="voting-buttons">
                 <button
                   ng-hide="ctrl.hideApplyButton(item)"
                   type="button"
