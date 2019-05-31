@@ -150,7 +150,8 @@
         </div>
         <div class="modal-body">
           <iframe
-            src="{{ ctrl.trustSrcurl(lastItem.jobUrl) }}"
+            ng-model="lastItemUrl"
+            ng-src="{{lastItemUrl}}"
             width="100%"
             height="960"
             frameborder="0"

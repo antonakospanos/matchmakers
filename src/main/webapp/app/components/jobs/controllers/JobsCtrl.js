@@ -8,10 +8,11 @@
       "$http",
       "$state",
       "$sce",
+      '$timeout',
       JobsCtrl
     ]);
 
-  function JobsCtrl($rootScope, $scope, $http, $state, $sce) {
+  function JobsCtrl($rootScope, $scope, $http, $state, $sce, $timeout) {
     var ctrl = this;
     var matchingUrl =
       $rootScope.backend_protocol +
@@ -43,6 +44,7 @@
     // Initialization
     ctrl.init = function() {
       $scope.loading = Boolean($rootScope.globals.currentUser);
+      $scope.lastItemUrl = undefined;
       ctrl.listJobsMock();
     };
 
@@ -312,11 +314,11 @@
           }
         : {};
       $scope.model = { data: [] };
-      window.setTimeout(() => {
+      $timeout(function() {
         $scope.model = {
           data: response.data.map(d => ctrl.mapProgressModel(d))
         };
-      }, 1000);
+      }, 2500);
     };
 
     /**
@@ -415,6 +417,7 @@
     ctrl.applyLastItem = function(item) {
       // TODO
       $scope.lastItem = item;
+      $scope.lastItemUrl = ctrl.trustSrcurl(item.jobUrl);
     };
 
     /**
