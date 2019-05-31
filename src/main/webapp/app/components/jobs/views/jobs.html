@@ -49,12 +49,7 @@
           </span>
         </div>
         <div class="skills row pull-left">
-          <span
-            ng-repeat="skill in item.skills"
-            class="float-right"
-            ng-style="{'border-color': ctrl.decideColor(item),
-                             color: ctrl.decideColor(item)}"
-          >
+          <span ng-repeat="skill in item.skills" class="float-right">
             {{ skill }}
           </span>
         </div>

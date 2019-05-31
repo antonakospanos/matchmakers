@@ -1462,6 +1462,8 @@ img.job-image {
   border-width: 1px;
   border-style: solid;
   border-radius: 10px;
+  border-color: #555;
+  color: #555;
   padding: 3px;
 }
 
