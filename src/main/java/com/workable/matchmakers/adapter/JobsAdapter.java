@@ -21,9 +21,11 @@ import java.util.stream.Collectors;
 public class JobsAdapter extends Adapter {
 
     public List<JobDto> list(Candidate candidate) {
-        ResponseEntity<Object> jobs = rest.postForEntity(atsUrl + "/matchmakers/matching_jobs", toJobQueryDto(candidate), Object.class);
+        ResponseEntity<Object> response = rest.postForEntity(atsUrl + "/matchmakers/matching_jobs", toJobQueryDto(candidate), Object.class);
+        List<JobDto> jobs = (List<JobDto>) response.getBody();
+        log.info("Jobs for " + candidate.getEmail() + ": " + jobs);
 
-        return (List<JobDto>) jobs.getBody();
+        return jobs;
     }
 
     public void apply(Candidate candidate, String account, String jobId) {
