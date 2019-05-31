@@ -31,10 +31,10 @@ public class JobService {
 
     private boolean cvFound(Candidate candidate, AtomicInteger retries) throws InterruptedException {
         if (!candidateAdapter.found(candidate) && retries.intValue() < 10) {
-            return cvFound(candidate, retries);
-        } else {
             Thread.sleep(500);
             retries.incrementAndGet();
+            return cvFound(candidate, retries);
+        } else {
             return true;
         }
     }
