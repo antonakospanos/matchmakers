@@ -130,7 +130,6 @@ public class CandidateDto extends CandidateBaseDto implements Dto<Candidate> {
 		candidate.setCellphone(this.getCellphone());
 		candidate.setLinkedInUrl(this.getLinkedInUrl());
 		candidate.setFacebookUrl(this.getFacebookUrl());
-		candidate.setCvUrl(this.getCvUrl());
 
 		if (this.getEducation() != null) {
 			Set<CandidateEducation> educations =
