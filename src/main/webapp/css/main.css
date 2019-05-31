@@ -1159,7 +1159,7 @@ div.dataTables_filter {
 }
 
 .pageTitle {
-  font-size: 46px;
+  font-size: 40px;
   font-weight: 300;
   font-style: normal;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu,
@@ -1350,7 +1350,7 @@ md-tabs md-ink-bar {
 }
 
 .md-button-presentation {
-  padding: 32px 16px 16px 16px !important;
+  padding: 16px !important;
   position: relative;
   cursor: pointer;
   min-height: 36px;
@@ -1385,6 +1385,10 @@ md-tabs md-ink-bar {
     background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
     background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.md-button-presentation > .flex {
+  align-items: center;
 }
 
 md-icon.md-small {
@@ -1488,7 +1492,7 @@ md-menu.menu-flows {
 .job-info h4 {
   line-height: 0;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 20px;
   padding-top: 5px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu,
     "Helvetica Neue", sans-serif;
@@ -1513,6 +1517,8 @@ md-menu.menu-flows {
 }
 
 .job-match {
+  display: flex;
+  align-items: center;
 }
 
 .job-match-value {
