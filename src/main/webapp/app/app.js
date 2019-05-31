@@ -10,7 +10,8 @@
       "ngMaterial",
       "ui.sortable",
       "ngMessages",
-      "md.time.picker"
+      "md.time.picker",
+      "angular-svg-round-progressbar"
     ])
     .config(config)
     .run(run);

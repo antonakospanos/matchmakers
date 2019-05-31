@@ -11,13 +11,12 @@
     </div>
     <div
       ng-repeat="item in model.data"
-      class="job panel panel-default control-panel config-control-panel config-panel-margin md-whiteframe-6dp review-panel review-item-container"
+      class="job panel panel-default control-panel config-control-panel config-panel-margin review-panel review-item-container"
       ng-mouseover="hoverActive = true"
       ng-mouseleave="hoverActive = false"
-      ng-style="hoverActive? {'border-width':'2px','border-color': ctrl.decideColor(item)} : {}"
     >
       <button
-        class="job-button md-button-toggle md-button md-ink-ripple review-item-button"
+        class="md-button-toggle md-button-presentation md-ink-ripple review-item-button"
         type="button"
         ng-click="toggled = !toggled"
         aria-controls="docs-menu-{{ item.title }}"
@@ -32,12 +31,18 @@
           </div>
 
           <span flex class="flex"></span>
-
-          <div
-            class="row job-percentage float-right"
-            ng-style="{background: ctrl.decideColor(item)}"
-          >
-            {{ item.match }}%
+            <div ng-model="item" class="job-match-progress" round-progress
+              max="100"
+              bgcolor="#eaeaea"
+              radius="100"
+              stroke="20"
+              semi="false"
+              rounded="true"
+              clockwise="true"
+              responsive="true"
+              duration="800"
+              animation="easeInOutQuart"
+              animation-delay="0">
           </div>
 
           <span
