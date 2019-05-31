@@ -1789,9 +1789,9 @@ md-toolbar.menu-width:not(.md-menu-toolbar) {
   width: 80%;
   max-width: 900px;
   margin: 0 auto;
-  top: 600px;
-  left: 25%;
-  position: absolute;
+  top: 550px;
+  position: relative;
+  left: 0;
 }
 
 .timeline-list:before {
@@ -1940,12 +1940,4 @@ md-toolbar.menu-width:not(.md-menu-toolbar) {
     opacity: 1;
     transform: scale(1);
   }
-}
-
-.main-register {
-  top: 800px;
-  left: 43%;
-  position: absolute;
-  animation: revealScaleUp 0.75s 0s ease both 1;
-  animation-delay: 3s;
 }
