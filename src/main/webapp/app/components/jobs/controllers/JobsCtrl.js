@@ -311,9 +311,12 @@
             ]
           }
         : {};
-      $scope.model = {
-        data: response.data.map(d => ctrl.mapProgressModel(d))
-      };
+      $scope.model = { data: [] };
+      window.setTimeout(() => {
+        $scope.model = {
+          data: response.data.map(d => ctrl.mapProgressModel(d))
+        };
+      }, 1000);
     };
 
     /**
