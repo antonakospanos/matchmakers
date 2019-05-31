@@ -3,6 +3,7 @@
   angular
     .module("Matchmakers")
     .controller("ProfileCtrl", [
+      "UploadService",
       "CandidateService",
       "$rootScope",
       "$scope",
@@ -11,7 +12,7 @@
       ProfileCtrl
     ]);
 
-  function ProfileCtrl(CandidateService, $rootScope, $scope, $http, $state) {
+  function ProfileCtrl(UploadService, CandidateService, $rootScope, $scope, $http, $state) {
     var ctrl = this;
     ctrl.profileUrl =
       $rootScope.backend_protocol +
@@ -30,7 +31,7 @@
       $scope.initialModel = angular.copy($scope.candidate);
       CandidateService.Read($scope.user.token).then(function setObjective(response) {
         console.log(response)
-        var {roles, locationsSecondary, locationsPrimary} = response.data || {roles: [], locationsSecondary: [], locationsPrimary: []};
+        var {roles, locationsSecondary, locationsPrimary} = response.data.objective || {roles: [], locationsSecondary: [], locationsPrimary: []};
         $scope.objective = {role: roles[0], locationsSecondary: locationsSecondary[0], locationsPrimary: locationsPrimary[0]};
       })
     };
@@ -50,6 +51,33 @@
       }
 
       return false;
+    };
+
+
+    ctrl.cvChanged = function(cvInput) {
+      UploadService.UploadResumeFile($rootScope.globals.currentUser.token, cvInput.files[0])
+        .then(function(response) {
+          console.log(response);
+          return response;
+          return null;
+          return UploadService.SendUploadedCV({
+            user: $rootScope.globals.currentUser.token,
+            url: response.data
+          });
+        })
+        .then(
+          function successCallback(response) {
+            // Reload footer's img to switch from alert to check-mark!
+            $scope.createToast(
+              response.data.description
+            );
+          },
+          function errorCallback(response) {
+            $scope.createToast(
+              response.data.description
+            );
+          }
+        );
     };
 
     ctrl.add = function() {

@@ -289,7 +289,7 @@ public class CandidateController extends MatchmakersBaseController {
 			@ApiResponse(code = 201, message = "The CV is created!", response = ResponseBase.class),
 			@ApiResponse(code = 400, message = "The request is invalid!"),
 			@ApiResponse(code = 500, message = "server error")})
-	public ResponseEntity<ResponseBase> createCV(UriComponentsBuilder uriBuilder, @PathVariable UUID id, @Valid @RequestBody MultipartFile request) throws IOException {
+	public ResponseEntity<ResponseBase> createCV(UriComponentsBuilder uriBuilder, @PathVariable UUID id, @RequestParam(value="file") MultipartFile request) throws IOException {
 		service.validateCandidate(id);
 //		validator.validateCV(request);
 
