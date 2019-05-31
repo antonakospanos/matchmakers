@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class JobsAdapter extends Adapter {
 
     public List<JobDto> list(Candidate candidate) {
-        ResponseEntity<Object> jobs =  rest.postForEntity( atsUrl + "/matchmakers/matching_jobs", toJobQueryDto(candidate), Object.class);
+        ResponseEntity<Object> jobs = rest.postForEntity(atsUrl + "/matchmakers/matching_jobs", toJobQueryDto(candidate), Object.class);
 
         return (List<JobDto>) jobs.getBody();
     }
@@ -41,8 +41,12 @@ public class JobsAdapter extends Adapter {
             title = candidate.getCandidateObjective().getRoles().stream().findFirst().orElse(null);
         }
         String city = "";
-        if (candidate.getCandidateObjective() != null) {
-            city= candidate.getCandidateObjective().getCity();
+        if (candidate.getCandidateObjective() != null && candidate.getCandidateObjective().getCity() != null) {
+            city = candidate.getCandidateObjective().getCity();
+        }
+        String country = "";
+        if (candidate.getCandidateObjective() != null && candidate.getCandidateObjective().getCountry() != null) {
+            country = candidate.getCandidateObjective().getCountry();
         }
         List<String> education = Lists.newArrayList();
         if (candidate.getEducation() != null) {
@@ -56,17 +60,21 @@ public class JobsAdapter extends Adapter {
         if (candidate.getExperience() != null && candidate.getExperience().getSkills() != null) {
             skills = new ArrayList<>(candidate.getExperience().getSkills());
         }
-        String cvText = candidate.getCvText();
+        String cvText = "";
+        if (candidate.getCvText() != null) {
+            cvText = candidate.getCvText();
+        }
 
         return JobQueryDto.builder()
                 .title(title)
                 .city(city)
+                .country(country)
                 .candidate(JobQueryDto.CandidateDto.builder()
                         .name(candidate.getName())
                         .email(candidate.getEmail())
                         .education(education)
                         .experience(experience)
-                        .experience(skills)
+                        .skills(skills)
                         .raw_resume(cvText)
                         .build())
                 .build();
