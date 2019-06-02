@@ -1,5 +1,5 @@
 backend_protocol: http
-# backend_ip: matchmakers.site
-backend_ip: 54.93.42.70
+# backend_ip: 54.93.42.70
+backend_ip: matchmakers.site 
 backend_port: 80
 backend_context_path: api
