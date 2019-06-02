@@ -20,7 +20,7 @@ spring:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: create # create | update | validate | create-drop
+      ddl-auto: none # create | update | validate | create-drop
     properties:
       net.sf.ehcache.configurationResourceName: matchmakers-ehcache.xml
       hibernate:
