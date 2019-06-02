@@ -8,7 +8,7 @@
       "$http",
       "$state",
       "$sce",
-      '$timeout',
+      "$timeout",
       JobsCtrl
     ]);
 
@@ -46,6 +46,13 @@
       $scope.loading = Boolean($rootScope.globals.currentUser);
       $scope.lastItemUrl = undefined;
       ctrl.listJobs();
+    };
+
+    ctrl.slice = function(word) {
+      if (word.length > 35) {
+        return word.slice(0, 35) + "...";
+      }
+      return word;
     };
 
     ctrl.getLoading = function() {
@@ -237,7 +244,8 @@
                 logo:
                   "https://workable-staging-workablestg5.s3.amazonaws.com/uploads/account/logo/591149101/small_logo",
                 company: "Lenovo",
-                title: "QA Automation Engineer",
+                title:
+                  "QA Automation Engineer QA Automation Engineer QA Automation Engineer QA Automation Engineer",
                 description:
                   "<p>We are looking for a Quality Assurance (QA) engineer to develop and execute exploratory and automated tests to ensure product quality. QA engineer responsibilities include designing and implementing tests, debugging and defining corrective actions. You will also review system requirements and track quality assurance metrics (e.g. defect densities and open defect counts.) The QA technician role plays an important part in our company’s product development process. Our ideal candidate will be responsible for conducting tests before product launches to ensure software runs smoothly and meets client needs, while being cost-effective. If you hold an engineering background and enjoy providing end-to-end solutions to software quality problems, we’d like to meet you. Ultimately, you should monitor all stages of software development to identify and resolve system malfunctions to meet quality standards.<strong>Responsibilities</strong></p><ul> <li>Review requirements, specifications and technical design documents to provide timely and meaningful feedback</li> <li>Create detailed, comprehensive and well-structured test plans and test cases</li> <li>Perform thorough regression testing when bugs are resolved</li> <li>Design, develop and execute automation scripts using open source tools</li> <li>Estimate, prioritize, plan and coordinate testing activities</li> <li>Liaise with internal teams (e.g. developers and product managers) to identify system requirements</li> <li>Investigate the causes of non-conforming software and train users to implement solutions</li> </ul>",
                 jobUrl: "https://lenovo.workablestg5.com/jobs/1073526216",

@@ -32,7 +32,7 @@
         <div flex layout="row" class="ng-binding ng-scope layout-row flex">
           <img class="job-image" src="{{ item.logo }}" width="50" height="50" />
           <div class="job-info">
-            <h4 class="title">{{ item.title }}</h4>
+            <h4 class="title">{{ ctrl.slice(item.title) }}</h4>
             <div class="company">{{ item.company }}</div>
           </div>
 
@@ -151,7 +151,7 @@
         <div class="modal-body">
           <iframe
             ng-model="lastItemUrl"
-            ng-src="{{lastItemUrl}}"
+            ng-src="{{ lastItemUrl }}"
             width="100%"
             height="960"
             frameborder="0"
