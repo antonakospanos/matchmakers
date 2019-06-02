@@ -4,7 +4,7 @@ server:
     contextPath: "/"
   port: 8443
   http:
-    port: 8080
+    port: 80
 endpoints:
   jmx:
     domain: matchmakers
@@ -20,7 +20,7 @@ spring:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: create-drop # create | update | validate | create-drop
+      ddl-auto: create # create | update | validate | create-drop
     properties:
       net.sf.ehcache.configurationResourceName: matchmakers-ehcache.xml
       hibernate:
