@@ -24,6 +24,7 @@
     <!-- enable these for debugging -->
     <!--<logger name="org.springframework" level="debug"/>-->
     <!--<logger name="org.hibernate.SQL" level="debug"/>-->
+    <logger name="org.flywaydb" level="debug"/>
 
     <logger name="com.workable.matchmakers" level="debug" additivity="false">
         <appender-ref ref="console"/>
