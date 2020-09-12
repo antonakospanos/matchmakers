@@ -13,33 +13,11 @@
     return service;
 
     function GetUrl(candidate) {
-      return (
-        $rootScope.backend_protocol +
-        "://" +
-        $rootScope.backend_ip +
-        ":" +
-        $rootScope.backend_port +
-        "/" +
-        $rootScope.backend_context_path +
-        "/candidates/" +
-        candidate
-      );
+      return ($rootScope.backend_api + "/candidates/" + candidate);
     }
 
     function GetResumeUrl(candidateToken) {
-      return (
-        $rootScope.backend_protocol +
-        "://" +
-        $rootScope.backend_ip +
-        ":" +
-        $rootScope.backend_port +
-        "/" +
-        $rootScope.backend_context_path +
-        "/candidates" +
-        "/" +
-        candidateToken +
-        "/cv"
-      );
+      return ($rootScope.backend_api + "/candidates" + "/" + candidateToken + "/cv");
     }
 
     function Update({ token, ...candidateData }) {

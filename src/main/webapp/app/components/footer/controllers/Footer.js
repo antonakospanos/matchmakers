@@ -30,15 +30,7 @@
     };
 
     function refreshJobs() {
-      var jobsUrl =
-        $rootScope.backend_protocol +
-        "://" +
-        $rootScope.backend_ip +
-        ":" +
-        $rootScope.backend_port +
-        "/" +
-        $rootScope.backend_context_path +
-        "/jobs";
+      var jobsUrl = $rootScope.backend_api + "/jobs";
 
       // Lookup for /jobs
       $http.get(jobsUrl).then(

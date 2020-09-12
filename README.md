@@ -53,3 +53,10 @@ or simply execute to run all containers:
 ```
 docker-compose up -d
 ```
+##### Application Deployment
+
+Use heroku to deploy the `develop` branch to `https://matchmakers.herokuapp.com` as follows:
+```
+git remote add heroku https://git.heroku.com/matchmakers.git
+git push heroku develop:master
+```

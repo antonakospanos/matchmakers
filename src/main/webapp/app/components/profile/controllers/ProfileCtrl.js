@@ -46,15 +46,7 @@
     $state
   ) {
     var ctrl = this;
-    ctrl.profileUrl =
-      $rootScope.backend_protocol +
-      "://" +
-      $rootScope.backend_ip +
-      ":" +
-      $rootScope.backend_port +
-      "/" +
-      $rootScope.backend_context_path +
-      "/candidates";
+    ctrl.profileUrl = $rootScope.backend_api + "/candidates";
 
     ctrl.init = function() {
       $scope.candidate = {};

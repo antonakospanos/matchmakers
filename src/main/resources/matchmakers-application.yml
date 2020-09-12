@@ -1,8 +1,8 @@
 server:
-  # Configuration of Spring Boot embedded Tomcat server (java -jar matchmakers.war)
+  # Configuration of Spring Boot embedded Tomcat server (java -jar matchmakers.jar)
   servlet:
-    contextPath: "/"
-  port: 8443
+    contextPath: ""
+  port: "${PORT:8443}"
   http:
     port: 8080
 endpoints:
@@ -20,11 +20,11 @@ spring:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: create-drop # create | update | validate | create-drop
+      ddl-auto: update # create | update | validate | create-drop
     properties:
       net.sf.ehcache.configurationResourceName: matchmakers-ehcache.xml
       hibernate:
-        default_schema: matchmakers
+        default_schema: public
         show_sql: false
         generate_statistics: false
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -35,19 +35,19 @@ spring:
           use_second_level_cache: true
           region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   datasource:
-    url: "jdbc:postgresql://db:5432/matchmakers?currentSchema=matchmakers"
-    username: matchmakers
-    password: matchmakers
+    url: "${DB_URL:jdbc:postgresql://db:5432/matchmakers}"
+    username: "${DB_USERNAME:matchmakers}"
+    password: "${DB_PASSWORD:matchmakers}"
     driver-class-name: org.postgresql.Driver
 flyway:
-  enabled: true
+  enabled: false
   table: DB_MIGRATION_HISTORY
   sqlMigrationSuffix: .sql
-  schemas: matchmakers
+  schemas: public
 application:
   url:
-    frontend: "http://localhost:8080"
-    backend: "http://localhost:8080/api"
+    frontend: "${URL_FRONTEND:https://matchmakers.herokuapp.com}"
+    backend: "${URL_BACKEND:https://matchmakers.herokuapp.com/api}"
     ats: "https://www.workablestg5.com"
   roles:
     admin:

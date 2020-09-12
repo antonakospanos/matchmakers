@@ -2,6 +2,7 @@ package com.workable.matchmakers.adapter;
 
 import com.workable.matchmakers.configuration.MailConfiguration;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.simplejavamail.email.Email;
 import org.simplejavamail.email.EmailBuilder;
 import org.simplejavamail.email.EmailPopulatingBuilder;
@@ -9,30 +10,26 @@ import org.simplejavamail.mailer.Mailer;
 import org.simplejavamail.mailer.MailerBuilder;
 import org.simplejavamail.mailer.config.TransportStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 @Component
 @Slf4j
 public class MailAdapter {
 
     private Mailer mailer;
-
     private byte[] logo;
-
     private String admins;
+    private ResourceLoader resourceLoader;
 
     @Autowired
-    MailAdapter(MailConfiguration mailConfiguration) throws URISyntaxException, IOException {
+    MailAdapter(MailConfiguration mailConfiguration, ResourceLoader resourceLoader) {
         String host = mailConfiguration.getFrom().getHost();
         int port = mailConfiguration.getFrom().getPort();
         String username = mailConfiguration.getFrom().getUsername();
         String password = mailConfiguration.getFrom().getPassword();
 
+        this.admins = mailConfiguration.getTo().getAdmins();
         this.mailer = MailerBuilder
                 .withSMTPServer(host, port, username, password)
                 .withTransportStrategy(TransportStrategy.SMTP_TLS)
@@ -40,9 +37,16 @@ public class MailAdapter {
                 .clearEmailAddressCriteria()
                 // .withDebugLogging(true)
                 .buildMailer();
+        this.resourceLoader = resourceLoader;
+        loadLogo();
+    }
 
-        this.logo = Files.readAllBytes(Paths.get(this.getClass().getClassLoader().getResource("img/workable.png").toURI()));
-        this.admins = mailConfiguration.getTo().getAdmins();
+    private void loadLogo() {
+        try {
+            this.logo = IOUtils.toByteArray(resourceLoader.getResource("classpath:img/workable.png").getInputStream());
+        } catch (Exception e) {
+            log.warn("Could not load email logo cause: " + e);
+        }
     }
 
     public void send(String from, String to, String cc, String bcc, String subject, String body) {
@@ -56,6 +60,9 @@ public class MailAdapter {
         if (bcc != null) {
             emailBuilder = emailBuilder.bcc(bcc);
         }
+        if (this.logo != null) {
+            emailBuilder = emailBuilder.withEmbeddedImage("Workable", this.logo, "image/png");
+        }
 
         try {
             Email email =  emailBuilder
@@ -63,8 +70,6 @@ public class MailAdapter {
                     .withSubject(subject)
                     .withHTMLText(body)
                     // .withPlainText("Please view this email in a modern email client!")
-                    .withEmbeddedImage("Workable", logo, "image/png")
-                    //.withAttachment("Workable", logo, "image/png")
                     .buildEmail();
 
             mailer.sendMail(email);

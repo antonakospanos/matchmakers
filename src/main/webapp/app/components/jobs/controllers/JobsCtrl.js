@@ -14,24 +14,8 @@
 
   function JobsCtrl($rootScope, $scope, $http, $state, $sce, $timeout) {
     var ctrl = this;
-    var matchingUrl =
-      $rootScope.backend_protocol +
-      "://" +
-      $rootScope.backend_ip +
-      ":" +
-      $rootScope.backend_port +
-      "/" +
-      $rootScope.backend_context_path +
-      "/jobs";
-    var applyUrl =
-      $rootScope.backend_protocol +
-      "://" +
-      $rootScope.backend_ip +
-      ":" +
-      $rootScope.backend_port +
-      "/" +
-      $rootScope.backend_context_path +
-      "/jobs";
+    var matchingUrl = $rootScope.backend_api + "/jobs";
+    var applyUrl = $rootScope.backend_api + "/jobs";
 
     if (
       $state.params.publisher !== undefined &&
